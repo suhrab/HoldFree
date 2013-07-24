@@ -16,10 +16,15 @@
             </tr>
             </thead>
             <tbody>
+            {foreach from=$faq_list item=faq}
             <tr>
-                <td>Row 1</td>
-                <td>Row 2</td>
+                <td><a href="/index.php?module=faq&action=edit_form&dashboard=1&id={$faq.id}">{$faq.question}</a></td>
+                <td class="tableActs">
+                    <a href="/index.php?module=faq&action=edit_form&dashboard=1&id={$faq.id}" class="tablectrl_small bDefault tipS" title="Редактировать"><span class="iconb" data-icon="&#xe1db;"></span></a>
+                    <a href="/index.php?module=faq&action=delete&dashboard=1&id={$faq.id}" class="tablectrl_small bDefault tipS removeButton" title="Удалить" data-id="{$faq.id}"><span class="iconb" data-icon="&#xe136;"></span></a>
+                </td>
             </tr>
+            {/foreach}
             </tbody>
         </table>
     </div>
