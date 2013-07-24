@@ -26,22 +26,22 @@
             {/if}
             <ul class="menu">
                 {if isset($_user.id)}
-                    <li><i class="data"></i> <a href="{$_url}/?module=user&action=profile&id={$_user.id}">Личные данные</a></li>
-                    {if $_user.group == 1}<li><i class="doc"></i> <a href="{$_url}/?module=dashboard&dashboard=1">Панель Управления</a></li>{/if}
-                    <li><i class="doc"></i> <a href="{$_url}/?module=user&action=signout">Выход</a></li>
+                    <li><i class="data"></i> <a href="{$_url}/?module=user&action=profile&id={$_user.id}">{"Личные данные"|gettext}</a></li>
+                    {if $_user.group == 1}<li><i class="doc"></i> <a href="{$_url}/?module=dashboard&dashboard=1">{"Панель Управления"|gettext}</a></li>{/if}
+                    <li><i class="doc"></i> <a href="{$_url}/?module=user&action=signout">{"Выход"|gettext}</a></li>
                     <!--li><i class="mail"></i> <a href="javascript:;" id="signin">Сообщения <strong>(5)</strong></a></li-->
                 {else}
-                    <li><i class="data"></i> <a href="javascript:;" id="signin">Авторизация</a></li>
-                    <li><i class="account"></i> <a href="javascript:;" id="signup">Регистрация</a></li>
+                    <li><i class="data"></i> <a href="javascript:;" id="signin">{"Авторизация"|gettext}</a></li>
+                    <li><i class="account"></i> <a href="javascript:;" id="signup">{"Регистрация"|gettext}</a></li>
                 {/if}
             </ul>
             <ul class="language_bar">
-                <li><a href="#" class="fr">FR</a></li>
-                <li><a href="#" class="ch">CH</a></li>
-                <li><a href="#" class="in">IN</a></li>
-                <li><a href="#" class="en">EN</a></li>
-                <li><a href="#" class="ru active">RU</a></li>
-                <li><a href="#" class="es">ES</a></li>
+                <li><a href="/?module=language_change&l=fr" class="fr {if $language == 'fr'}active{/if}">FR</a></li>
+                <li><a href="/?module=language_change&l=zh" class="ch {if $language == 'zh'}active{/if}">CH</a></li>
+                <li><a href="/?module=language_change&l=hi" class="in {if $language == 'hi'}active{/if}">IN</a></li>
+                <li><a href="/?module=language_change&l=en" class="en {if $language == 'en'}active{/if}">EN</a></li>
+                <li><a href="/?module=language_change&l=ru" class="ru {if $language == 'ru'}active{/if}">RU</a></li>
+                <li><a href="/?module=language_change&l=es" class="es {if $language == 'es'}active{/if}">ES</a></li>
             </ul>
         </div>
 
@@ -59,36 +59,36 @@
                 <li><a href="#" class="vkontakte"></a></li>
             </ul>
             <ul class="menu">
-                <li><i class="phone"></i> <a href="javascript:;" id="feedback">Обратная связь</a></li>
-                <li><i class="info"></i> <a href="#">Информация</a></li>
-                <li><i class="doc"></i> <a href="#">Соглашение</a></li>
-                <li><i class="comment"></i> <a href="{$_url}/index.php?module=faq">FAQ</a></li>
-                <li><i class="tool"></i> <a href="javascript:;" id="error">Нашли ошибку?</a></li>
+                <li><i class="phone"></i> <a href="javascript:;" id="feedback">{"Обратная связь"|gettext}</a></li>
+                <li><i class="info"></i> <a href="#">{"Информация"|gettext}</a></li>
+                <li><i class="doc"></i> <a href="#">{"Соглашение"|gettext}</a></li>
+                <li><i class="comment"></i> <a href="{$_url}/index.php?module=faq">{"FAQ"|gettext}</a></li>
+                <li><i class="tool"></i> <a href="javascript:;" id="error">{"Нашли ошибку?"|gettext}</a></li>
             </ul>
         </div>
     </div>
 
-    <div class="dialog dialog-signup" title="Регистрация">
+    <div class="dialog dialog-signup" title="{"Регистрация"|gettext}">
         <div class="place-holder-message"></div>
         <form action="index.php?module=user&action=signup" method="post" id="formSignUp">
-            <input type="text" name="first_name" class="input-text" placeholder="Введите Ваше имя" />
-            <input type="text" name="email" class="input-text" placeholder="Введите Ваш email" />
-            <input type="password" name="password" class="input-text" placeholder="Пароль" />
+            <input type="text" name="first_name" class="input-text" placeholder="{"Введите Ваше имя"|gettext}" />
+            <input type="text" name="email" class="input-text" placeholder="{"Введите Ваш email"|gettext}" />
+            <input type="password" name="password" class="input-text" placeholder="{"Пароль"|gettext}" />
 
             <select name="country" class="select2">
-            <option value="0">Выберите страну</option>
+            <option value="0">{"Выберите страну"|gettext}</option>
             {foreach from=$countries item=country}
                 <option value="{$country.id}">{$country.name}</option>
             {/foreach}
             </select>
 
             <div class="captcha-wrapper">
-                <input name="captcha" type="text" class="input-text input-text-small" placeholder="Введите код" />
+                <input name="captcha" type="text" class="input-text input-text-small" placeholder="{"Введите код"|gettext}" />
                 <img src="{$_url}/class/kcaptcha/" width="160" height="46" title="Captha" class="captcha" />
             </div>
 
             <div class="line"></div>
-            <input type="submit" value="Зарегистрироваться" class="submit" />
+            <input type="submit" value="{"Зарегистрироваться"|gettext}" class="submit" />
             <div class="line"></div>
 
             <ul class="social_bar">
@@ -99,14 +99,14 @@
         </form>
     </div>
 
-    <div class="dialog dialog-signin" title="Авторизация">
+    <div class="dialog dialog-signin" title="{"Авторизация"|gettext}">
         <div class="place-holder-message"></div>
         <form action="index.php?module=user&action=signin" method="post" id="formSignIn">
-            <input type="text" name="email" class="input-text" placeholder="Введите Ваш email" />
-            <input type="password" name="password" class="input-text" placeholder="Пароль" />
+            <input type="text" name="email" class="input-text" placeholder="{"Введите Ваш email"|gettext}" />
+            <input type="password" name="password" class="input-text" placeholder="{"Пароль"|gettext}" />
 
             <div class="line"></div>
-            <input type="submit" value="Войти" class="submit" />
+            <input type="submit" value="{"Войти"|gettext}" class="submit" />
             <div class="line"></div>
 
             <ul class="social_bar">
@@ -117,43 +117,43 @@
         </form>
     </div>
 
-    <div class="dialog dialog-feedback" title="Обратная связь">
+    <div class="dialog dialog-feedback" title="{"Обратная связь"|gettext}">
         <div class="place-holder-message"></div>
         <form action="index.php?module=feedback&action=send" method="post" id="formFeedback">
-            <input name="first_name" type="text" class="input-text" placeholder="Введите Ваше имя" />
-            <input name="email" type="text" class="input-text" placeholder="Введите Ваш email" />
+            <input name="first_name" type="text" class="input-text" placeholder="{"Введите Ваше имя"|gettext}" />
+            <input name="email" type="text" class="input-text" placeholder="{"Введите Ваш email"|gettext}" />
 
             <select name="topic" class="select2">
-                <option value="1">Техническая поддержка</option>
-                <option value="2">Правообладатель</option>
-                <option value="3">Пресса</option>
+                <option value="1">{"Техническая поддержка"|gettext}</option>
+                <option value="2">{"Правообладатель"|gettext}</option>
+                <option value="3">{"Пресса"|gettext}</option>
             </select>
 
-            <textarea name="message" class="input-textarea" placeholder="Ваше сообщение"></textarea>
+            <textarea name="message" class="input-textarea" placeholder="{"Ваше сообщение"|gettext}"></textarea>
 
             <div class="captcha-wrapper">
-                <input name="captcha" type="text" class="input-text input-text-small" placeholder="Введите код" />
+                <input name="captcha" type="text" class="input-text input-text-small" placeholder="{"Введите код"|gettext}" />
                 <img src="{$_url}/class/kcaptcha/" width="160" height="46" title="Captha" class="captcha" />
             </div>
 
             <div class="line"></div>
-            <input type="submit" value="Отправить" class="submit" />
+            <input type="submit" value="{"Отправить"|gettext}" class="submit" />
         </form>
     </div>
 
-    <div class="dialog dialog-error" title="Заметили ошибку?">
+    <div class="dialog dialog-error" title="{"Заметили ошибку?"|gettext}">
         <div class="place-holder-message"></div>
         <form action="index.php?module=feedback&action=send" method="post" id="formError">
-            <input name="email" type="text" class="input-text" placeholder="Введите Ваш email" />
-            <textarea  name="message" class="input-textarea" placeholder="Сообщение об ошибке"></textarea>
+            <input name="email" type="text" class="input-text" placeholder="{"Введите Ваш email"|gettext}" />
+            <textarea  name="message" class="input-textarea" placeholder="{"Сообщение об ошибке"|gettext}"></textarea>
 
             <div class="captcha-wrapper">
-                <input name="captcha" type="text" class="input-text input-text-small" placeholder="Введите код" />
+                <input name="captcha" type="text" class="input-text input-text-small" placeholder="{"Введите код"|gettext}" />
                 <img src="{$_url}/class/kcaptcha/" width="160" height="46" title="Captha" class="captcha" />
             </div>
 
             <div class="line"></div>
-            <input type="submit" value="Отправить" class="submit" />
+            <input type="submit" value="{"Отправить"|gettext}" class="submit" />
             <input type="hidden" name="topic" value="4" />
         </form>
     </div>

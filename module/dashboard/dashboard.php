@@ -3,7 +3,7 @@
 if (!defined('CHECK')) {
     exit;
 }
-
+/*
 require_once DIR_CLASS . 'google-api-php-client/Google_Client.php';
 require_once DIR_CLASS . 'google-api-php-client/contrib/Google_AnalyticsService.php';
 
@@ -24,7 +24,7 @@ if (isset($_GET['code']))
     $_SESSION['token'] = $client->getAccessToken();
     header('Location: index.php?module=dashboard&dashboard=1');
 }
-
+*/
 
 $sth = $pdo->prepare('SELECT u.first_name, u.last_name, u.id, l.time, l.os, l.browser, l.engine FROM hf_user_log l LEFT JOIN hf_user u ON l.uid = u.id ORDER BY l.time LIMIT 15');
 $sth->execute();

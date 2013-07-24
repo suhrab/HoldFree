@@ -472,7 +472,7 @@ class User
         $browser_data = get_browser(null, true);
         $browser = $browser_data['browser'] . ' ' . $browser_data['version'];
         $os = $browser_data['platform'];
-        $engine = $browser_data['renderingengine_name'];
+        $engine = isset($browser_data['renderingengine_name']) ? $browser_data['renderingengine_name'] : '';
         $sec_in_hour = 3600;
 
         $sth = $this->pdo->prepare('SELECT last_signin FROM hf_user WHERE id = :uid');
@@ -547,4 +547,16 @@ class User
      * @var null|\PasswordLib\PasswordLib
      */
     private $passwordLib = null;
+
+    /**
+     * @return string|bool
+     *
+     * Возвращает двухзначный код страны или false если ip адрес не найден
+     */
+    public function get_geoip_country(){
+        if(!isset($_SESSION['GEOIP_COUNTRY']))
+            $_SESSION['GEOIP_COUNTRY'] = @geoip_country_code_by_name($_SERVER['REMOTE_ADDR']);
+
+        return $_SESSION['GEOIP_COUNTRY'];
+    }
 }
