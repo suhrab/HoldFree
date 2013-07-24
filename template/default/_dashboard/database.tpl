@@ -71,15 +71,9 @@
                             <label>Выберите резервную копию базы данных:</label>
                         </div>
                         <div class="grid9">
-                            <select name="select2" >
+                            <select name="file" >
                                 <option value="opt1">Выберите, пожалуйста</option>
-                                <option value="opt2">Option 2</option>
-                                <option value="opt3">Option 3</option>
-                                <option value="opt4">Option 4</option>
-                                <option value="opt5">Option 5</option>
-                                <option value="opt6">Option 6</option>
-                                <option value="opt7">Option 7</option>
-                                <option value="opt8">Option 8</option>
+                                {foreach from=$file_list item=file}<option value="{$file}">{$file}</option>{/foreach}
                             </select>
                         </div>
                         <div class="clear"></div>

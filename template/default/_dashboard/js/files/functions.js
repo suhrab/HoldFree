@@ -992,9 +992,15 @@ $(function() {
     $("#dbOptimize").on("submit", function() {
         var formData = $(this).serialize();
         var btnSubmit = $(this).find('.formSubmit');
+
         btnSubmit.button('loading');
+
         $.post('/index.php?module=database&dashboard=1&is_ajax=1', formData, function(response) {
             if (response.success == "true") {
+                $.jGrowl('Операция успешно завершена', {
+                    header: 'База данных',
+                    position: 'bottom-right'
+                });
                 btnSubmit.button('reset');
             }
         }, 'json');
@@ -1010,6 +1016,10 @@ $(function() {
         $.post('/index.php?module=database&dashboard=1&is_ajax=1', formData, function(response) {
             if (response.success == "true") {
                 btnSubmit.button('reset');
+                $.jGrowl('Сохранение резервной копии успешно завершено', {
+                    header: 'База данных',
+                    position: 'bottom-right'
+                });
             }
         }, 'json');
         return false;
@@ -1023,6 +1033,10 @@ $(function() {
 
         $.post('/index.php?module=database&dashboard=1&is_ajax=1', formData, function(response) {
             if (response.success == "true") {
+                $.jGrowl('База данных успешно восстановлена', {
+                    header: 'База данных',
+                    position: 'bottom-right'
+                });
                 btnSubmit.button('reset');
             }
         }, 'json');
