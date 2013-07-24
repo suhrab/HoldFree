@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-23 23:45:41
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-24 13:59:32
          compiled from "/Users/Gee/Sites/Holdfree/template/default/profile.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:202108294551cee07a527ea5-28453458%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '15e34177ab80cd4e47f5fbce4df1e9a4df3ae8dc' => 
     array (
       0 => '/Users/Gee/Sites/Holdfree/template/default/index.tpl',
-      1 => 1374598670,
+      1 => 1374651584,
       2 => 'file',
     ),
   ),
@@ -308,9 +308,9 @@ $_smarty_tpl->tpl_vars['country']->_loop = true;
             <div class="line"></div>
 
             <ul class="social_bar">
-                <li><a href="#" class="google"></a></li>
-                <li><a href="#" class="facebook"></a></li>
-                <li><a href="#" class="vkontakte"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Google" class="google"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Facebook" class="facebook"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Vkontakte" class="vkontakte"></a></li>
             </ul>
         </form>
     </div>

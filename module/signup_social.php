@@ -24,6 +24,13 @@ try
 
             if(empty($user_found)) {
                 $user_found = $_user->signUp($user_profile['firstName'], $user_profile['emailVerified'], 0, '', $user_profile['lastName']);
+
+                if ($user_profile['photoURL']) {
+                    $photo = file_get_contents($user_profile['photoURL']);
+                    file_put_contents(DIR_UPLOAD . '/avatar/avatar-' . $_user->getId() . '.jpg', $photo);
+                    file_put_contents(DIR_UPLOAD . '/avatar/_thumb/avatar-' . $_user->getId() . '.jpg', $photo);
+                    $_user->setAvatar('avatar-' . $_user->getId() . '.jpg');
+                }
             }
             else {
                 $_user->signIn($user_profile['emailVerified']);
@@ -35,32 +42,27 @@ try
 }
 catch(Exception $e)
 {
-    // In case we have errors 6 or 7, then we have to use Hybrid_Provider_Adapter::logout() to
-    // let hybridauth forget all about the user so we can try to authenticate again.
-
-    // Display the recived error,
-    // to know more please refer to Exceptions handling section on the userguide
-    $error = '';
+    $hybrid_auth_error = '';
     switch($e->getCode()){
-    case 0 : $error = _("Неопознанная ошибка"); break;
-    case 1 : $error = _("Ошибка конфигурации Hybridauth"); break;
-    case 2 : $error = _("Провайдер не правильно настроен"); break;
-    case 3 : $error = _("Неизвестный или отключенный провайдер авторизации"); break;
-    case 4 : $error = _("Отсутствуют учетные данные приложения в провайдере"); break;
-    case 5 : $error = _("Ошибка авторизации.Пользователь отменил аутентификации или провайдер авторизации отказал в соединении"); break;
+    case 0 : $hybrid_auth_error = _("Неопознанная ошибка"); break;
+    case 1 : $hybrid_auth_error = _("Ошибка конфигурации Hybridauth"); break;
+    case 2 : $hybrid_auth_error = _("Провайдер не правильно настроен"); break;
+    case 3 : $hybrid_auth_error = _("Неизвестный или отключенный провайдер авторизации"); break;
+    case 4 : $hybrid_auth_error = _("Отсутствуют учетные данные приложения в провайдере"); break;
+    case 5 : $hybrid_auth_error = _("Ошибка авторизации.Пользователь отменил аутентификации или провайдер авторизации отказал в соединении"); break;
     case 6 :
-        $error = _("Запрос пользователя у провайдера не удался. Скорее всего, пользователь не подключен к провайдеру или нужно попробовать еще раз");
+        $hybrid_auth_error = _("Запрос пользователя у провайдера не удался. Скорее всего, пользователь не подключен к провайдеру или нужно попробовать еще раз");
         $adapter->logout();
         break;
     case 7 :
-        $error = _("Пользователь не подключен к провайдеру авторизации");
+        $hybrid_auth_error = _("Пользователь не подключен к провайдеру авторизации");
         $adapter->logout();
         break;
-    case 8: $error = _('Провайдер авторизации не поддерживает эту функцию'); break;
+    case 8: $hybrid_auth_error = _('Провайдер авторизации не поддерживает эту функцию'); break;
     }
 
-    if(!empty($error))
-        throw new ExceptionImproved($error);
+    if(!empty($hybrid_auth_error))
+        throw new Exception($hybrid_auth_error);
     throw $e;
 }
 

@@ -420,6 +420,21 @@ class User
         $sth = null;
     }
 
+    public function setAvatar($file_name)
+    {
+        if (!$this->isLogged()) {
+            throw new \ExceptionImproved('Данная операция требует авторизации');
+        }
+
+        $uid = $this->getId();
+
+        $sth = $this->pdo->prepare('UPDATE hf_user SET avatar = :file_name WHERE id = :uid LIMIT 1');
+        $sth->bindParam(':file_name', $file_name);
+        $sth->bindParam(':uid', $uid);
+        $sth->execute();
+        $sth = null;
+    }
+
     /**
      * Обновление даты последней авторизации/активности пользователя
      *
