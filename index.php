@@ -87,6 +87,7 @@ catch (Exception $exception)
 
         $smarty->assign('error', $error);
         $smarty->assign('meta_title', $error['title']);
+//        die($error['message']);
         $smarty->display('error.tpl');
     }
 }

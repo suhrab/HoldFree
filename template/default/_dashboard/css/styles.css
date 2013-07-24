@@ -1552,6 +1552,7 @@ ul.ruler li:last-child { width: 34%; }
 textarea { height: auto; }
 .formRow  [class*="grid"] > label { float: left; display: block; padding-top: 1px; }
 .formRow label > span { margin-top: -2px; padding: 0; }
+.formRow label > span.note { line-height: 14px; }
 .formRow label > img { float: left; margin: 5px 10px 0 0; }
 
 .sliderSpecs > label { font-size: 11px; margin-right: 10px; }
