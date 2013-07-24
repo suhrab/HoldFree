@@ -987,6 +987,49 @@ $(function() {
         }
     });
 
+
+    //===== MODULE: DATABASE =====//
+    $("#dbOptimize").on("submit", function() {
+        var formData = $(this).serialize();
+        var btnSubmit = $(this).find('.formSubmit');
+        btnSubmit.button('loading');
+        $.post('/index.php?module=database&dashboard=1&is_ajax=1', formData, function(response) {
+            if (response.success == "true") {
+                btnSubmit.button('reset');
+            }
+        }, 'json');
+        return false;
+    });
+
+    $("#dbDump").on("submit", function() {
+        var formData = $(this).serialize();
+        var btnSubmit = $(this).find('.formSubmit');
+
+        btnSubmit.button('loading');
+
+        $.post('/index.php?module=database&dashboard=1&is_ajax=1', formData, function(response) {
+            if (response.success == "true") {
+                btnSubmit.button('reset');
+            }
+        }, 'json');
+        return false;
+    });
+
+    $("#dbLoad").on("submit", function() {
+        var formData = $(this).serialize();
+        var btnSubmit = $(this).find('.formSubmit');
+
+        btnSubmit.button('loading');
+
+        $.post('/index.php?module=database&dashboard=1&is_ajax=1', formData, function(response) {
+            if (response.success == "true") {
+                btnSubmit.button('reset');
+            }
+        }, 'json');
+        return false;
+    });
+
+
     $.ajaxSetup({
         dataType: 'post',
         error: function(data) {
