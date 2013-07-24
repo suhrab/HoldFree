@@ -2,7 +2,7 @@
 
 {block name="pageTitle"}<span class="icon-settings"></span>Управление базой данных{/block}
 
-{block name="breadcrumbs"}<li><a href="/?module=dashboard&dashboard=1">Панель управления</a></li><li class="current"><a href="/?module=option&dashboard=1">Настройки</a></li>{/block}
+{block name="breadcrumbs"}<li><a href="/?module=dashboard&dashboard=1">Панель управления</a></li><li class="current"><a href="/?module=database&dashboard=1">Управление базой данных</a></li>{/block}
 
 {block name="content"}
     <div class="fluid">
@@ -71,7 +71,7 @@
                             <label>Выберите резервную копию базы данных:</label>
                         </div>
                         <div class="grid9">
-                            <select name="file" >
+                            <select name="file" id="fileList">
                                 <option value="opt1">Выберите, пожалуйста</option>
                                 {foreach from=$file_list item=file}<option value="{$file}">{$file}</option>{/foreach}
                             </select>

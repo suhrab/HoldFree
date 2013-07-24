@@ -82,7 +82,8 @@ CMD;
     ob_end_clean();
 
     if($return_code == 0) {
-        die('{"success": "true", "filepath": "'. $backup_filepath .'"}');
+        $file = pathinfo($backup_filepath, PATHINFO_BASENAME);
+        die('{"success": "true", "file": "'. $file .'"}');
     }
     else {
         throw new Exception('Ошибка mysqlcheck: ' . $mysqlcheck_output);

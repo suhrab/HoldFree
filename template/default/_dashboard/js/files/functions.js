@@ -1016,6 +1016,7 @@ $(function() {
         $.post('/index.php?module=database&dashboard=1&is_ajax=1', formData, function(response) {
             if (response.success == "true") {
                 btnSubmit.button('reset');
+                $("#fileList").append("<option value=" + response.file + ">" + response.file + "</option>");
                 $.jGrowl('Сохранение резервной копии успешно завершено', {
                     header: 'База данных',
                     position: 'bottom-right'
