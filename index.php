@@ -21,8 +21,8 @@ try
         throw new ExceptionImproved($config['offline_reason'], 'Сайт на реконструкции!');
     }
 
-    if (isset($_SESSION['hash'])) {
-        $_user->signInByHash($_SESSION['hash']);
+    if (isset($_COOKIE['hash'])) {
+        $_user->signInByHash($_COOKIE['hash']);
     }
 
     // Извлекаем список стран для диалога регистрации

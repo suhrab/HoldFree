@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-20 14:34:01
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-24 10:53:33
          compiled from "/Users/Gee/Sites/Holdfree/template/default/error.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:176027451cf772c2f0c72-41470274%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '15e34177ab80cd4e47f5fbce4df1e9a4df3ae8dc' => 
     array (
       0 => '/Users/Gee/Sites/Holdfree/template/default/index.tpl',
-      1 => 1374309200,
+      1 => 1374641347,
       2 => 'file',
     ),
   ),
@@ -30,6 +30,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'meta_keywords' => 0,
     'meta_charset' => 0,
     '_template' => 0,
+    'social_user_profile' => 0,
     '_url' => 0,
     '_user' => 0,
     'countries' => 0,
@@ -63,6 +64,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 /js/select2/select2.min.js" type="text/javascript"></script>
     <script src="<?php echo $_smarty_tpl->tpl_vars['_template']->value;?>
 /js/default.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var socialUserProfile = <?php if (isset($_smarty_tpl->tpl_vars['social_user_profile']->value)){?><?php echo json_encode($_smarty_tpl->tpl_vars['social_user_profile']->value);?>
+<?php }else{ ?>false<?php }?>;
+        $(function() {
+            if (socialUserProfile) {
+                $("#formSignUp input[name=first_name]").val(socialUserProfile.firstName);
+                $("#formSignUp input[name=email]").val(socialUserProfile.emailVerified);
+                $("#formSignUp input[name=country]").val(socialUserProfile.country);
+                $("#signup").trigger('click');
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="page">
@@ -170,9 +183,9 @@ $_smarty_tpl->tpl_vars['country']->_loop = true;
             <div class="line"></div>
 
             <ul class="social_bar">
-                <li><a href="#" class="google"></a></li>
-                <li><a href="#" class="facebook"></a></li>
-                <li><a href="#" class="vkontakte"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Google" class="google"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Facebook" class="facebook"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Vkontakte" class="vkontakte"></a></li>
             </ul>
         </form>
     </div>
@@ -188,9 +201,9 @@ $_smarty_tpl->tpl_vars['country']->_loop = true;
             <div class="line"></div>
 
             <ul class="social_bar">
-                <li><a href="#" class="google"></a></li>
-                <li><a href="#" class="facebook"></a></li>
-                <li><a href="#" class="vkontakte"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Google" class="google"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Facebook" class="facebook"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Vkontakte" class="vkontakte"></a></li>
             </ul>
         </form>
     </div>

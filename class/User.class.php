@@ -2,14 +2,6 @@
 
 namespace User;
 
-/**
- * Created by JetBrains PhpStorm.
- * User: Gee
- * Date: 6/25/13
- * Time: 8:03 PM
- * To change this template use File | Settings | File Templates.
- */
-
 
 class User
 {
@@ -34,11 +26,10 @@ class User
      * @throws ExceptionImproved
      * @return int идентификационный номер добавленого объявления
      */
-    public function signUp($first_name, $email, $country, $password = '', $last_name = '')
+    public function signUp($first_name, $email, $country = 0, $password = '', $last_name = '')
     {
         $email      = filter_var($email, FILTER_VALIDATE_EMAIL);
         $country    = filter_var($country, FILTER_SANITIZE_NUMBER_INT);
-        $password   = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $first_name = filter_var($first_name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $last_name  = filter_var($last_name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $reg_date   = time();
@@ -51,16 +42,11 @@ class User
             throw new \ExceptionImproved('Введите Ваш email, пожалуйста');
         }
 
-        if (!$country) {
-            throw new \ExceptionImproved('Укажите Вашу страну, пожалуйста');
-        }
-
-        if (!$country) {
-            throw new \ExceptionImproved('Укажите Вашу страну, пожалуйста');
-        }
-
         if ($password) {
             $hash = $this->passwordLib->createPasswordHash($password);
+        }
+        else {
+            $hash = '';
         }
 
         $sth = $this->pdo->prepare('INSERT INTO hf_user SET email = :email, country = :country, password = :password, first_name = :first_name, last_name = :last_name, reg_date = :reg_date');
@@ -86,17 +72,12 @@ class User
      * @return bool
      * @throws ExceptionImproved
      */
-    public function signIn($email, $password)
+    public function signIn($email, $password = '')
     {
         $email = filter_var($email, FILTER_VALIDATE_EMAIL);
-        $password = trim($password);
 
         if (!$email) {
             throw new \ExceptionImproved('Введите Ваш email, пожалуйста');
-        }
-
-        if (!$password) {
-            throw new \ExceptionImproved('Введите Ваш пароль, пожалуйста');
         }
 
         $user_data = $this->getByEmail($email);
@@ -105,7 +86,7 @@ class User
             throw new \ExceptionImproved('Не верный email или пароль');
         }
 
-        if (!$this->passwordLib->verifyPasswordHash($password, $user_data['password'])) {
+        if ($password && !$this->passwordLib->verifyPasswordHash($password, $user_data['password'])) {
             throw new \ExceptionImproved('Не верный email или пароль');
         }
 
@@ -121,11 +102,13 @@ class User
         $this->avatar = $user_data['avatar'];
         $this->group = (int) $user_data['group'];
 
-        $_SESSION['hash'] = $this->passwordLib->createPasswordHash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
+
+        $hash = $this->passwordLib->createPasswordHash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . uniqid());
+        setcookie('hash', $hash, time() + (60 * 60 * 24 * 365));
 
         $sth = $this->pdo->prepare('UPDATE hf_user SET hash = :hash WHERE id = :id LIMIT 1');
         $sth->bindParam(':id', $this->id);
-        $sth->bindParam(':hash', $_SESSION['hash']);
+        $sth->bindParam(':hash', $hash);
         $sth->execute();
         $sth = null;
 
@@ -142,7 +125,7 @@ class User
     public function signOut()
     {
         if ($this->isLogged()) {
-            unset($_SESSION['hash']);
+            setcookie('hash', '', time() - 3600);
         }
 
         return true;
@@ -165,6 +148,8 @@ class User
         $sth = $this->pdo->prepare('SELECT * FROM hf_user WHERE hash = :hash LIMIT 1');
         $sth->bindParam(':hash', $hash);
         $sth->execute();
+
+
 
         if (!$sth->rowCount()) {
             return false;

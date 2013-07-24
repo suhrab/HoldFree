@@ -13,6 +13,17 @@
     <script src="{$_template}/js/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
     <script src="{$_template}/js/select2/select2.min.js" type="text/javascript"></script>
     <script src="{$_template}/js/default.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var socialUserProfile = {if isset($social_user_profile)}{$social_user_profile|json_encode}{else}false{/if};
+        $(function() {
+            if (socialUserProfile) {
+                $("#formSignUp input[name=first_name]").val(socialUserProfile.firstName);
+                $("#formSignUp input[name=email]").val(socialUserProfile.emailVerified);
+                $("#formSignUp input[name=country]").val(socialUserProfile.country);
+                $("#signup").trigger('click');
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="page">
@@ -92,9 +103,9 @@
             <div class="line"></div>
 
             <ul class="social_bar">
-                <li><a href="#" class="google"></a></li>
-                <li><a href="#" class="facebook"></a></li>
-                <li><a href="#" class="vkontakte"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Google" class="google"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Facebook" class="facebook"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Vkontakte" class="vkontakte"></a></li>
             </ul>
         </form>
     </div>
@@ -110,9 +121,9 @@
             <div class="line"></div>
 
             <ul class="social_bar">
-                <li><a href="#" class="google"></a></li>
-                <li><a href="#" class="facebook"></a></li>
-                <li><a href="#" class="vkontakte"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Google" class="google"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Facebook" class="facebook"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Vkontakte" class="vkontakte"></a></li>
             </ul>
         </form>
     </div>

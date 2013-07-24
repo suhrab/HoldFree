@@ -56,52 +56,6 @@ $(function(){
         newDirDialog.dialog('open');
     });
 
-    $.contextMenu({
-        selector: '.dir',
-        items: {
-            "edit": {
-                name: "Переименовать",
-                icon: "rename",
-                callback: function(key, option) {
-                    var dirId = option.$trigger.attr("data-id");
-                    var dirName = option.$trigger.text();
-                    $('#formDirRename').find('input:eq(0)').val(dirName);
-                    $('#dir_id').val(dirId);
-                    renameDirDialog.dialog('open');
-                    $('#dir_' + dirId).contextMenu("hide");
-                    return false;
-                }
-            },
-            "sep1": "---------",
-            "delete": {
-                name: "Удалить",
-                icon: "delete",
-                callback: function(key, option)
-                {
-                    var dirId = option.$trigger.attr("data-id");
-
-                    $.post('index.php?module=dir&action=delete&is_ajax=1', {"id": dirId}, function(response)
-                    {
-                        if (response.error) {
-                            $('.dialog-error .place-holder-message').html('<div class="error-message">'+ response.message +'</div>');
-                        }
-
-                        if(response.success) {
-                            $('#dir_' + dirId).contextMenu("hide");
-                            $("#row_dir_" + dirId).slideUp();
-                        }
-
-                    }, 'json');
-
-                    return false;
-                }
-            }
-        }
-    });
-
-
-    $('.dir').disableSelection();
-
 
     /* ===== Форма регистрации ===== */
     $('#formSignUp').on('submit', function()

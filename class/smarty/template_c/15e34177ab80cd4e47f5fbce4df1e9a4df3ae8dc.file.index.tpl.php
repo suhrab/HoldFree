@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-03 18:48:36
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-23 22:59:04
          compiled from "/Users/Gee/Sites/Holdfree/template/default/index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:120379408351cd56506ee503-71889574%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '15e34177ab80cd4e47f5fbce4df1e9a4df3ae8dc' => 
     array (
       0 => '/Users/Gee/Sites/Holdfree/template/default/index.tpl',
-      1 => 1372855714,
+      1 => 1374598670,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'meta_title' => 0,
     'meta_description' => 0,
     'meta_keywords' => 0,
+    'meta_charset' => 0,
     '_template' => 0,
+    'social_user_profile' => 0,
     '_url' => 0,
     '_user' => 0,
     'countries' => 0,
@@ -39,7 +41,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 " />
     <meta name="keywords" content="<?php echo $_smarty_tpl->tpl_vars['meta_keywords']->value;?>
 " />
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    <meta charset="<?php echo $_smarty_tpl->tpl_vars['meta_charset']->value;?>
+">
+    <!--link href='http://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'-->
     <link href="<?php echo $_smarty_tpl->tpl_vars['_template']->value;?>
 /js/jquery-ui/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $_smarty_tpl->tpl_vars['_template']->value;?>
@@ -54,11 +58,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 /js/select2/select2.min.js" type="text/javascript"></script>
     <script src="<?php echo $_smarty_tpl->tpl_vars['_template']->value;?>
 /js/default.js" type="text/javascript"></script>
-
-    <link href="<?php echo $_smarty_tpl->tpl_vars['_template']->value;?>
-/js/jqueryui-editable/css/jqueryui-editable.css" rel="stylesheet">
-    <script src="<?php echo $_smarty_tpl->tpl_vars['_template']->value;?>
-/js/jqueryui-editable/js/jqueryui-editable.min.js"></script>
+    <script type="text/javascript">
+        var socialUserProfile = <?php if (isset($_smarty_tpl->tpl_vars['social_user_profile']->value)){?><?php echo json_encode($_smarty_tpl->tpl_vars['social_user_profile']->value);?>
+<?php }else{ ?>false<?php }?>;
+        $(function() {
+            if (socialUserProfile) {
+                $("#formSignUp input[name=first_name]").val(socialUserProfile.firstName);
+                $("#formSignUp input[name=email]").val(socialUserProfile.emailVerified);
+                $("#formSignUp input[name=country]").val(socialUserProfile.country);
+                $("#signup").trigger('click');
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="page">
@@ -70,7 +81,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <li class="avatar" style="background: url('<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 /upload/avatar/_thumb/<?php echo $_smarty_tpl->tpl_vars['_user']->value['avatar'];?>
 ') no-repeat;"></li>
-                    <li>Ivan Lukash</li>
+                    <li><?php echo $_smarty_tpl->tpl_vars['_user']->value['first_name'];?>
+</li>
                 </ul>
             <?php }?>
             <ul class="menu">
@@ -78,10 +90,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <li><i class="data"></i> <a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
 /?module=user&action=profile&id=<?php echo $_smarty_tpl->tpl_vars['_user']->value['id'];?>
 ">Личные данные</a></li>
+                    <?php if ($_smarty_tpl->tpl_vars['_user']->value['group']==1){?><li><i class="doc"></i> <a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
+/?module=dashboard&dashboard=1">Панель Управления</a></li><?php }?>
                     <li><i class="doc"></i> <a href="<?php echo $_smarty_tpl->tpl_vars['_url']->value;?>
-/?module=user&action=profile&id=<?php echo $_smarty_tpl->tpl_vars['_user']->value['id'];?>
-">Менеджер видео</a></li>
-                    <li><i class="mail"></i> <a href="javascript:;" id="signin">Сообщения <strong>(5)</strong></a></li>
+/?module=user&action=signout">Выход</a></li>
+                    <!--li><i class="mail"></i> <a href="javascript:;" id="signin">Сообщения <strong>(5)</strong></a></li-->
                 <?php }else{ ?>
                     <li><i class="data"></i> <a href="javascript:;" id="signin">Авторизация</a></li>
                     <li><i class="account"></i> <a href="javascript:;" id="signup">Регистрация</a></li>
@@ -125,8 +138,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <div class="dialog dialog-signup" title="Регистрация">
         <div class="place-holder-message"></div>
         <form action="index.php?module=user&action=signup" method="post" id="formSignUp">
-            <input type="text" name="email" class="input-text" placeholder="Введите Ваш email"></input>
-            <input type="password" name="password" class="input-text" placeholder="Пароль"></input>
+            <input type="text" name="first_name" class="input-text" placeholder="Введите Ваше имя" />
+            <input type="text" name="email" class="input-text" placeholder="Введите Ваш email" />
+            <input type="password" name="password" class="input-text" placeholder="Пароль" />
 
             <select name="country" class="select2">
             <option value="0">Выберите страну</option>
@@ -148,13 +162,13 @@ $_smarty_tpl->tpl_vars['country']->_loop = true;
             </div>
 
             <div class="line"></div>
-            <input type="submit" value="Зарегистрироваться" class="submit"></input>
+            <input type="submit" value="Зарегистрироваться" class="submit" />
             <div class="line"></div>
 
             <ul class="social_bar">
-                <li><a href="#" class="google"></a></li>
-                <li><a href="#" class="facebook"></a></li>
-                <li><a href="#" class="vkontakte"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Google" class="google"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Facebook" class="facebook"></a></li>
+                <li><a href="/index.php?module=signup_social&provider=Vkontakte" class="vkontakte"></a></li>
             </ul>
         </form>
     </div>
@@ -198,7 +212,7 @@ $_smarty_tpl->tpl_vars['country']->_loop = true;
             </div>
 
             <div class="line"></div>
-            <input type="submit" value="Отправить" class="submit"></input>
+            <input type="submit" value="Отправить" class="submit" />
         </form>
     </div>
 
