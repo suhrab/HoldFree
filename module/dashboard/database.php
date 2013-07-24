@@ -22,7 +22,10 @@ CMD;
     ob_end_clean();
 
     if($return_code == 0) {
-        die('{"success": "true"}');
+        echo json_encode(array(
+            'success' => 'true'
+        ));
+        die;
     }
     else {
         throw new Exception('Ошибка mysqlcheck: ' . $mysqlcheck_output);
@@ -45,7 +48,10 @@ CMD;
     ob_end_clean();
 
     if($return_code == 0) {
-        die('{"success": "true"}');
+        echo json_encode(array(
+            'success' => 'true'
+        ));
+        die;
     }
     else {
         throw new Exception('Ошибка mysqlcheck: ' . $mysqlcheck_output);
@@ -82,8 +88,11 @@ CMD;
     ob_end_clean();
 
     if($return_code == 0) {
-        $file = pathinfo($backup_filepath, PATHINFO_BASENAME);
-        die('{"success": "true", "file": "'. $file .'"}');
+        echo json_encode(array(
+            'success' => 'true',
+            'filepath' => $backup_filepath
+        ));
+        die;
     }
     else {
         throw new Exception('Ошибка mysqlcheck: ' . $mysqlcheck_output);
@@ -123,7 +132,10 @@ CMD;
     ob_end_clean();
 
     if($return_code == 0) {
-        die('{"success": "true"}');
+        echo json_encode(array(
+            'success' => 'true'
+        ));
+        die;
     }
     else {
         throw new Exception('Ошибка команды: ' . $command_output);
@@ -131,7 +143,10 @@ CMD;
 }
 
 if ($is_ajax) {
-    die('{"success": "true"}');
+    echo json_encode(array(
+        'success' => 'true'
+    ));
+    die;
 }
 
 $dir = new DirectoryIterator(DIR_ROOT . 'backup');
