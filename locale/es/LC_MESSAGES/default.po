@@ -1,0 +1,242 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: HoldFree\n"
+"POT-Creation-Date: 2013-07-23 18:57+0600\n"
+"PO-Revision-Date: 2013-07-23 19:01+0600\n"
+"Last-Translator: Anton Anisimov <masterpersi@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ES\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-Basepath: d:\\gitRepos\\HoldFree\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:86
+#: d:\TMP\poedit_smarty_temp.php:17 d:\TMP\poedit_smarty_temp.php:72
+msgid "Личные данные"
+msgstr "Datos personales"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:89
+#: d:\TMP\poedit_smarty_temp.php:18
+msgid "Панель Управления"
+msgstr "Panel de control"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:92
+#: d:\TMP\poedit_smarty_temp.php:19
+msgid "Выход"
+msgstr "Salida"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:96
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:348
+#: d:\TMP\poedit_smarty_temp.php:20 d:\TMP\poedit_smarty_temp.php:34
+msgid "Авторизация"
+msgstr "Autorización"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:98
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:303
+#: d:\TMP\poedit_smarty_temp.php:21 d:\TMP\poedit_smarty_temp.php:27
+msgid "Регистрация"
+msgstr "Registro"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:288
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:370
+#: d:\TMP\poedit_smarty_temp.php:22 d:\TMP\poedit_smarty_temp.php:38
+msgid "Обратная связь"
+msgstr "Feedback"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:290
+#: d:\TMP\poedit_smarty_temp.php:23
+msgid "Информация"
+msgstr "Info"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:292
+#: d:\TMP\poedit_smarty_temp.php:24
+msgid "Соглашение"
+msgstr "Acuerdo"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:295
+#: d:\TMP\poedit_smarty_temp.php:25
+msgid "FAQ"
+msgstr "Preguntas más frecuentes"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:297
+#: d:\TMP\poedit_smarty_temp.php:26
+msgid "Нашли ошибку?"
+msgstr "¿Encontré un bug?"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:307
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:374
+#: d:\TMP\poedit_smarty_temp.php:28 d:\TMP\poedit_smarty_temp.php:39
+#: d:\TMP\poedit_smarty_temp.php:82
+msgid "Введите Ваше имя"
+msgstr "Introduzca su nombre de"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:309
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:352
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:376
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:408
+#: d:\TMP\poedit_smarty_temp.php:29 d:\TMP\poedit_smarty_temp.php:35
+#: d:\TMP\poedit_smarty_temp.php:40 d:\TMP\poedit_smarty_temp.php:48
+#: d:\TMP\poedit_smarty_temp.php:85
+msgid "Введите Ваш email"
+msgstr "Introduce tu email"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:311
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:354
+#: d:\TMP\poedit_smarty_temp.php:30 d:\TMP\poedit_smarty_temp.php:36
+msgid "Пароль"
+msgstr "Contraseña"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:315
+#: d:\TMP\poedit_smarty_temp.php:31 d:\TMP\poedit_smarty_temp.php:84
+msgid "Выберите страну"
+msgstr "Seleccione un país"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:329
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:392
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:414
+#: d:\TMP\poedit_smarty_temp.php:32 d:\TMP\poedit_smarty_temp.php:45
+#: d:\TMP\poedit_smarty_temp.php:50
+msgid "Введите код"
+msgstr "Introduzca el código"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:336
+#: d:\TMP\poedit_smarty_temp.php:33
+msgid "Зарегистрироваться"
+msgstr "Registro"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:358
+#: d:\TMP\poedit_smarty_temp.php:37
+msgid "Войти"
+msgstr "Inicio de sesión"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:380
+#: d:\TMP\poedit_smarty_temp.php:41
+msgid "Техническая поддержка"
+msgstr "Soporte técnico"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:382
+#: d:\TMP\poedit_smarty_temp.php:42
+msgid "Правообладатель"
+msgstr "El titular del derecho"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:384
+#: d:\TMP\poedit_smarty_temp.php:43
+msgid "Пресса"
+msgstr "Prensa"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:388
+#: d:\TMP\poedit_smarty_temp.php:44
+msgid "Ваше сообщение"
+msgstr "Tu mensaje"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:399
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:421
+#: d:\TMP\poedit_smarty_temp.php:46 d:\TMP\poedit_smarty_temp.php:51
+msgid "Отправить"
+msgstr "Enviar"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:404
+#: d:\TMP\poedit_smarty_temp.php:47
+msgid "Заметили ошибку?"
+msgstr "¿Encontraste un error?"
+
+#: class/smarty/template_c/ef0d2b8db0b8d8bed8c5335e4243148090dd40cc.file.manager.tpl.php:410
+#: d:\TMP\poedit_smarty_temp.php:49
+msgid "Сообщение об ошибке"
+msgstr "Mensaje de error"
+
+#: d:\TMP\poedit_smarty_temp.php:52 d:\TMP\poedit_smarty_temp.php:57
+msgid "Сообщения"
+msgstr "Mensajes"
+
+#: d:\TMP\poedit_smarty_temp.php:53 d:\TMP\poedit_smarty_temp.php:58
+msgid "Написать сообщение"
+msgstr "Escribir un mensaje"
+
+#: d:\TMP\poedit_smarty_temp.php:54 d:\TMP\poedit_smarty_temp.php:63
+#: d:\TMP\poedit_smarty_temp.php:65 d:\TMP\poedit_smarty_temp.php:67
+#: d:\TMP\poedit_smarty_temp.php:69
+msgid "Администрация"
+msgstr "Administración"
+
+#: d:\TMP\poedit_smarty_temp.php:55
+msgid "Ответить"
+msgstr "Respuesta"
+
+#: d:\TMP\poedit_smarty_temp.php:56
+msgid "Удалить это сообщение"
+msgstr "Borrar este mensaje"
+
+#: d:\TMP\poedit_smarty_temp.php:59
+msgid "Удалить"
+msgstr "Borrar"
+
+#: d:\TMP\poedit_smarty_temp.php:60
+msgid "Отправитель"
+msgstr "El remitente"
+
+#: d:\TMP\poedit_smarty_temp.php:61
+msgid "Сообщение"
+msgstr "Mensaje"
+
+#: d:\TMP\poedit_smarty_temp.php:62
+msgid "Дата"
+msgstr "Fecha"
+
+#: d:\TMP\poedit_smarty_temp.php:64 d:\TMP\poedit_smarty_temp.php:66
+#: d:\TMP\poedit_smarty_temp.php:68 d:\TMP\poedit_smarty_temp.php:70
+msgid "Ваш файл был удален"
+msgstr "El archivo fue eliminado"
+
+#: d:\TMP\poedit_smarty_temp.php:71
+msgid ""
+"Профиль успешно обновлен, через пару мгновений страница будет обновлена."
+msgstr ""
+"Perfil actualizado satisfactoriamente dentro de un par de segundos, se "
+"actualizará la página."
+
+#: d:\TMP\poedit_smarty_temp.php:73 d:\TMP\poedit_smarty_temp.php:81
+msgid "Редактировать профиль"
+msgstr "Editar perfil"
+
+#: d:\TMP\poedit_smarty_temp.php:74
+msgid "Имя"
+msgstr "El nombre"
+
+#: d:\TMP\poedit_smarty_temp.php:75
+msgid "Фамилия"
+msgstr "Apellido"
+
+#: d:\TMP\poedit_smarty_temp.php:76
+msgid "Страна"
+msgstr "País"
+
+#: d:\TMP\poedit_smarty_temp.php:77
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: d:\TMP\poedit_smarty_temp.php:78
+msgid "Файлов"
+msgstr "Archivos"
+
+#: d:\TMP\poedit_smarty_temp.php:79
+msgid "Дата регистрации"
+msgstr "Fecha de registro"
+
+#: d:\TMP\poedit_smarty_temp.php:80
+msgid "Последнее посещение"
+msgstr "Última visita"
+
+#: d:\TMP\poedit_smarty_temp.php:83
+msgid "Введите Вашу фимилию"
+msgstr "Ingrese su apellido"
+
+#: d:\TMP\poedit_smarty_temp.php:86
+msgid "Сохранить"
+msgstr "Salvar"
