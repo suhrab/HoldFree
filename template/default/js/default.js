@@ -25,6 +25,7 @@ $(function(){
 
     var newDirDialog = $('.dialog-dir').dialog(dialogOptionBlue);
     var renameDirDialog = $('.dialog-dir-rename').dialog(dialogOptionBlue);
+    var createPmDialog = $('.dialog-pm-create').dialog(dialogOption);
 
     $('#signup').click(function() {
         signUpDialog.dialog('open');
@@ -41,6 +42,42 @@ $(function(){
     $('#error').click(function() {
         errorDialog.dialog('open');
     });
+
+    $('#pm_new_message_button, #pm_reply_button').click(function(){
+        $('.dialog-pm-create .place-holder-message').html('')
+        $('#pm-create-submit').show()
+        createPmDialog.dialog('open')
+        if($('#pm-create-subject').val() != '')
+            $('#pm-create-message').focus()
+    })
+    $('#pm-create-submit').click(function(){
+        var to_ids = []
+        to_ids.push($('#pm-create-toid').val())
+        console.log(to_ids)
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: '/?module=pm_ajax&is_ajax=1',
+            data:{
+                action: 'create',
+                pm_to: to_ids.join(','),
+                pm_subject: $('#pm-create-subject').val(),
+                pm_text: $('#pm-create-message').val()
+            },
+            success: function(d){
+                console.log(d)
+                if('success' in d){
+                    $('#pm-create-submit').hide()
+                    $('.dialog-pm-create .place-holder-message').html('<div class="success-message">Сообщение отправлено</div>');
+                }
+                else if('error' in d){
+                    $('.dialog-pm-create .place-holder-message').html('<div class="error-message">'+d['message']+'</div>');
+                }
+            }
+        })
+    })
 
 
 
