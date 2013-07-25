@@ -19,6 +19,7 @@ if ($action == 'update')
     $data['max_allowed_file_size_user'] = intval($_POST['max_allowed_file_size_user']);
     $data['file_keep_guest'] = intval($_POST['file_keep_guest']);
     $data['file_keep_user'] = intval($_POST['file_keep_user']);
+    $data['email_filter'] = htmlentities($_POST['email_filter']);
 
     foreach ($data as $k => $v) {
         $sth = $pdo->prepare('UPDATE hf_config SET `value` = :value WHERE `key` = :key LIMIT 1');

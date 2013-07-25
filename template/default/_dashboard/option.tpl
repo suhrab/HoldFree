@@ -62,11 +62,18 @@
                     </div>
                     <div class="formRow">
                         <div class="grid3"><label>Как долго хранить файлы гостей:<span class="note">Укажите количество дней. 0 - бесконечно.</span></label></div>
-                        <div class="grid9"><input type="text" class="required" name="file_keep_guest" value="{$config.file_keep_guest}"></div><div class="clear"></div>
+                        <div class="grid9"><input type="text" class="required" name="file_keep_guest" value="{$config.file_keep_guest}"></div>
+                        <div class="clear"></div>
                     </div>
                     <div class="formRow">
                         <div class="grid3"><label>Как долго хранить файлы пользователей:<span class="note">Укажите количество дней. 0 - бесконечно.</span></label></div>
-                        <div class="grid9"><input type="text" class="required" name="file_keep_user" value="{$config.file_keep_user}"></div><div class="clear"></div>
+                        <div class="grid9"><input type="text" class="required" name="file_keep_user" value="{$config.file_keep_user}"></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                        <div class="grid3"><label>Фильтр почтовых провайдеров:<span class="note">Укажите email провайдера. Например: mail.ru</span></label></div>
+                        <div class="grid9"><input type="text" name="email_filter" class="tags" id="tags" value="{$config.email_filter}"></div>
+                        <div class="clear"></div>
                     </div>
 
                     <div class="formRow"><input type="submit" value="Сохранить" class="buttonM bBlack formSubmit"><div class="clear"></div></div>

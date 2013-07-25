@@ -23,6 +23,14 @@ try
             $user_found = $_user->getByEmail($user_profile['emailVerified']);
 
             if(empty($user_found)) {
+                if ($config['email_filter']) {
+                    preg_match('/(.+)@(.+)/i', $user_profile['emailVerified'], $matches);
+
+                    if (in_array($matches[2], $config['email_filter'])) {
+                        throw new Exception('Регистрация через почтовый провайдер '. $matches[2] .' запрещена!', 100);
+                    }
+                }
+
                 $user_found = $_user->signUp($user_profile['firstName'], $user_profile['emailVerified'], 0, '', $user_profile['lastName']);
 
                 if ($user_profile['photoURL']) {
@@ -59,6 +67,7 @@ catch(Exception $e)
         $adapter->logout();
         break;
     case 8: $hybrid_auth_error = _('Провайдер авторизации не поддерживает эту функцию'); break;
+    case 100: $hybrid_auth_error = _($e->getMessage()); break;
     }
 
     if(!empty($hybrid_auth_error))
