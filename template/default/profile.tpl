@@ -51,7 +51,13 @@
     <div class="content page-profile">
         <h2>{"Личные данные"|gettext}</h2>
 
-        {if isset($_user.id)}<a href="javascript:;" class="button" id="edit-profile">{"Редактировать профиль"|gettext}</a>{/if}
+        {if isset($_user.id) && isset($smarty.get.id) && $_user.id == $smarty.get.id}
+            <a href="javascript:;" class="button" id="edit-profile">{"Редактировать профиль"|gettext}</a>
+            <a href="/?module=user_pm_inbox" class="button">{"Входящие сообщения"|gettext}</a>
+            <a href="/?module=user_pm_outbox" class="button">{"Исходящие сообщения"|gettext}</a>
+        {/if}
+
+        {if isset($smarty.get.id) && is_numeric($smarty.get.id) && $smarty.get.id != $_user.id}<a href="javascript:" class="button" id="pm_new_message_button" data-toid="{$smarty.get.id}">{"Написать сообщение"|gettext}</a>{/if}
 
         <div class="profile">
             <div class="col-avatar" style="background: url('{$_url}/upload/avatar/{$user_data.avatar}') no-repeat;"></div>
@@ -101,4 +107,13 @@
         </form>
     </div>
     {/if}
+    <div class="dialog dialog-pm-create" title="{"Написать сообщение"|gettext}">
+        <div class="place-holder-message"></div>
+        <input type="text" class="input-text" value="{"Кому"|gettext}: {$user_data.first_name} {$user_data.last_name}" disabled="disabled"/>
+        <input name="email" type="text" class="input-text" placeholder="{"Заголовок сообщения"|gettext}" id="pm-create-subject" />
+        <textarea  name="message" class="input-textarea" placeholder="{"Текст сообщения"|gettext}" id="pm-create-message"></textarea>
+        <input type="hidden" value="{$user_data.id}" id="pm-create-toid" />
+        <div class="line"></div>
+        <input type="button" value="{"Отправить"|gettext}" class="submit" id="pm-create-submit" />
+    </div>
 {/block}
