@@ -150,7 +150,7 @@
 <div id="sidebar">
     <div class="mainNav">
         <div class="user">
-            <a title="" class="leftUserDrop"><img src="{$_url}/upload/avatar/_thumb/{$_user.avatar}" width="72" height="72" alt="" /><span><strong>3</strong></span></a><span>{$_user.first_name}</span>
+            <a title="" class="leftUserDrop"><img src="{$_url}/upload/avatar/{$_user.avatar}" width="72" height="72" alt="" /><span><strong>3</strong></span></a><span>{$_user.first_name}</span>
             <ul class="leftUser">
                 <li><a href="#" title="" class="sProfile">My profile</a></li>
                 <li><a href="#" title="" class="sMessages">Messages</a></li>

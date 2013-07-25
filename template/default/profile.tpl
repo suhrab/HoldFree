@@ -103,7 +103,7 @@
             <ul class="col-value">
                 <li>{$user_data.first_name|default:"---"}</li>
                 <li>{$user_data.last_name|default:"---"}</li>
-                <li>{$user_data.country}</li>
+                <li>{$user_data.country_name}</li>
                 <li><a href="mailto:{$user_data.email}">{$user_data.email}</a></li>
                 <li>{$user_data.files}</li>
             </ul>

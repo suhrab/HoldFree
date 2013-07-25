@@ -205,7 +205,7 @@ class User
     {
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
-        $sth = $this->pdo->prepare('SELECT * FROM hf_user WHERE id = :id LIMIT 1');
+        $sth = $this->pdo->prepare('SELECT u.*, c.name country_name FROM hf_user u LEFT JOIN hf_country c ON u.country = c.id WHERE u.id = :id LIMIT 1');
         $id ? $sth->bindParam(':id', $id) : $sth->bindParam(':id', $this->id);
         $sth->execute();
 

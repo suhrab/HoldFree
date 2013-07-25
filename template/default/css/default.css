@@ -447,6 +447,7 @@ h2 {
     float: left;
 }
 .page-profile .profile .col-value {
+    width: 400px;
     color: #ffffff;
     font-weight: normal;
     margin-left: 50px;
