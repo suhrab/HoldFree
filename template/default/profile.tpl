@@ -2,10 +2,40 @@
 
 {block name="content"}
     {if isset($_user.id)}
-    <script type="text/javascript">
+    <script type="text/javascript" src="{$_dashboard}/js/plugins/uploader/plupload.js"></script>
+    <script type="text/javascript" src="{$_dashboard}/js/plugins/uploader/plupload.html4.js"></script>
+    <script type="text/javascript" src="{$_dashboard}/js/plugins/uploader/plupload.html5.js"></script>
+
+        <script type="text/javascript" src="{$_template}/js/plupload/plupload.js"></script>
+        <script type="text/javascript" src="{$_template}/js/plupload/plupload.flash.js"></script>
+        <script type="text/javascript" src="{$_template}/js/plupload/plupload.html4.js"></script>
+        <script type="text/javascript" src="{$_template}/js/plupload/plupload.html5.js"></script>
+
+        <script type="text/javascript">
         var profileUpdatedMessage = "{"Профиль успешно обновлен, через пару мгновений страница будет обновлена."|gettext}";
         $(document).ready(function()
         {
+            var uploader = new plupload.Uploader({
+                runtimes            : 'html5,flash,html4',
+                browse_button       : 'photo',
+                max_file_size       : '3mb',
+                url                 : '/index.php?module=user&action=upload_photo&is_ajax=1',
+                flash_swf_url       : '{$_template}/js/plupload/plupload.flash.swf',
+                filters             : [ { title : "Image files", extensions : "jpg,gif,png" } ],
+                multi_selection     : false,
+                multipart_params    : { "uid" : "{$_user['id']}" }
+            });
+
+            uploader.init();
+
+            uploader.bind('FilesAdded', function(up, files) {
+                uploader.start();
+            });
+
+            uploader.bind('UploadComplete', function(up, files) {
+                location.reload();
+            });
+
             var dialogOption = {
                 autoOpen    : false,
                 width       : 480,
@@ -60,7 +90,7 @@
         {if isset($smarty.get.id) && is_numeric($smarty.get.id) && $smarty.get.id != $_user.id}<a href="javascript:" class="button" id="pm_new_message_button" data-toid="{$smarty.get.id}">{"Написать сообщение"|gettext}</a>{/if}
 
         <div class="profile">
-            <div class="col-avatar" style="background: url('{$_url}/upload/avatar/{$user_data.avatar}') no-repeat;"></div>
+            <div class="col-avatar" id="photo" style="background: url('{$_url}/upload/avatar/{$user_data.avatar}') no-repeat;"></div>
 
             <ul class="col-title">
                 <li>{"Имя"|gettext}:</li>
@@ -88,7 +118,7 @@
     {if isset($_user.id)}
     <div class="dialog dialog-edit-profile" title="{"Редактировать профиль"|gettext}">
         <div class="place-holder-message"></div>
-        <form action="index.php?modeule=user&action=edit" method="post" id="formEditProfile">
+        <form action="index.php?module=user&action=edit" method="post" id="formEditProfile">
             <input name="first_name" type="text" class="input-text" placeholder="{"Введите Ваше имя"|gettext}" value="{$user_data.first_name}" />
             <input name="last_name" type="text" class="input-text" placeholder="{"Введите Вашу фимилию"|gettext}" value="{$user_data.last_name}" />
 

@@ -472,6 +472,9 @@ h2 {
     color: #989e9f;
     font-weight: normal;
 }
+.page-profile #photo:hover {
+    cursor: pointer;
+}
 
 
 /* ===== PAGE MESSAGES ===== */
