@@ -4,5 +4,6 @@
 /class/smarty/template_c/*
 upload/avatar/*.jpg
 upload/avatar/_thumb/*.jpg
+upload/chart/*
 !backup/.keep
 backup/*

@@ -9,7 +9,7 @@
             <li>
                 <a href="javascript:;" class="question">{$faq.question}</a>
                 <div>
-                    {$faq.answer}
+                    {$faq.answer|nl2br}
                 </div>
             </li>
             {/foreach}

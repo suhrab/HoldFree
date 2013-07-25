@@ -6,7 +6,16 @@
 
 {block name="content"}
     <div class="widget">
-        <div class="whead"><h6>FAQ</h6><div class="clear"></div></div>
+        <div class="whead">
+            <h6>FAQ</h6>
+            <div class="titleOpt">
+                <a href="#" data-toggle="dropdown"><span class="icos-cog3"></span><span class="clear"></span></a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="/index.php?module=faq&action=add_form&dashboard=1"><span class="icos-add"></span>Добавить вопрос-ответ</a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
 
         <table cellpadding="0" cellspacing="0" width="100%" class="tDefault">
             <thead>
@@ -21,7 +30,7 @@
                 <td><a href="/index.php?module=faq&action=edit_form&dashboard=1&id={$faq.id}">{$faq.question}</a></td>
                 <td class="tableActs">
                     <a href="/index.php?module=faq&action=edit_form&dashboard=1&id={$faq.id}" class="tablectrl_small bDefault tipS" title="Редактировать"><span class="iconb" data-icon="&#xe1db;"></span></a>
-                    <a href="/index.php?module=faq&action=delete&dashboard=1&id={$faq.id}" class="tablectrl_small bDefault tipS removeButton" title="Удалить" data-id="{$faq.id}"><span class="iconb" data-icon="&#xe136;"></span></a>
+                    <a href="/index.php?module=faq&action=delete&dashboard=1&id={$faq.id}" class="tablectrl_small bDefault tipS" title="Удалить"><span class="iconb" data-icon="&#xe136;"></span></a>
                 </td>
             </tr>
             {/foreach}

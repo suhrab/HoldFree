@@ -32,14 +32,41 @@ elseif ($action == 'update')
     header('Location: /index.php?module=faq&dashboard=1');
     exit;
 }
+elseif ($action == 'delete') {
+    $qid = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT) : 0;
+    $sth = $pdo->prepare('DELETE FROM hf_faq WHERE id = :qid LIMIT 1');
+    $sth->bindParam(':qid', $qid);
+    $sth->execute();
 
-$faq_list = [];
+    header('Location: /index.php?module=faq&dashboard=1');
+    exit;
+}
+elseif ($action == 'add_form') {
+    $smarty->display('_dashboard/faq_add_form.tpl');
+}
+elseif ($action == 'insert') {
+    $question = htmlentities($_POST['question']);
+    $answer = htmlentities($_POST['answer']);
 
-$qh = $pdo->query('SELECT id, question, answer FROM hf_faq');
+    $sth = $pdo->prepare('INSERT INTO hf_faq SET question = :question, answer = :answer');
+    $sth->bindParam(':question', $question);
+    $sth->bindParam(':answer', $answer);
+    $sth->execute();
 
-while ($row = $qh->fetch()) {
-    $faq_list[] = $row;
+    header('Location: /index.php?module=faq&dashboard=1');
+    exit;
+}
+else {
+    $faq_list = [];
+
+    $qh = $pdo->query('SELECT id, question, answer FROM hf_faq');
+
+    while ($row = $qh->fetch()) {
+        $faq_list[] = $row;
+    }
+
+    $smarty->assign('faq_list', $faq_list);
+    $smarty->display('_dashboard/faq_list.tpl');
 }
 
-$smarty->assign('faq_list', $faq_list);
-$smarty->display('_dashboard/faq_list.tpl');
+exit;
