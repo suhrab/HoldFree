@@ -35,9 +35,11 @@ $dbh = $pdo->query('SELECT `key`, `value` FROM hf_config');
 
 while ( $row = $dbh->fetch() )
 {
+    if ($row['key'] == 'email_filter') {
+        $row['value'] = explode(',', $row['value']);
+    }
     $config[$row['key']] = $row['value'];
 }
-
 
 // Smarty
 include_once DIR_CLASS . 'smarty/Smarty.class.php';

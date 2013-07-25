@@ -42,6 +42,14 @@ if ($action == 'signup')
         throw new ExceptionImproved('Пользователь с таким email адресом уже зарегестрирован.');
     }
 
+    if ($config['email_filter']) {
+        preg_match('/(.+)@(.+)/i', $email, $matches);
+
+        if (in_array($matches[2], $config['email_filter'])) {
+            throw new Exception('Регистрация через почтовый провайдер '. $matches[2] .' запрещена!');
+        }
+    }
+
     $_user->signUp($first_name, $email, $country, $password);
 
     die('{"success": 1}');

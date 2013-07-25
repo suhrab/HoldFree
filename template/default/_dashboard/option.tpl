@@ -52,6 +52,30 @@
                         </div>
                         <div class="clear"></div>
                     </div>
+                    <div class="formRow">
+                        <div class="grid3"><label>Максимально допустимый размер файла для гостей:<span class="note">Размер файла указывать в Мегабайтах</span></label></div>
+                        <div class="grid9"><input type="text" class="required" name="max_allowed_file_size_guest" value="{$config.max_allowed_file_size_guest}"></div><div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                        <div class="grid3"><label>Максимально допустимый размер файла для зарегестрированных:<span class="note">Размер файла указывать в Мегабайтах</span></label></div>
+                        <div class="grid9"><input type="text" class="required" name="max_allowed_file_size_user" value="{$config.max_allowed_file_size_user}"></div><div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                        <div class="grid3"><label>Как долго хранить файлы гостей:<span class="note">Укажите количество дней. 0 - бесконечно.</span></label></div>
+                        <div class="grid9"><input type="text" class="required" name="file_keep_guest" value="{$config.file_keep_guest}"></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                        <div class="grid3"><label>Как долго хранить файлы пользователей:<span class="note">Укажите количество дней. 0 - бесконечно.</span></label></div>
+                        <div class="grid9"><input type="text" class="required" name="file_keep_user" value="{$config.file_keep_user}"></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formRow">
+                        <div class="grid3"><label>Фильтр почтовых провайдеров:<span class="note">Укажите email провайдера. Например: mail.ru</span></label></div>
+                        <div class="grid9"><input type="text" name="email_filter" class="tags" id="tags" value="{$config.email_filter}"></div>
+                        <div class="clear"></div>
+                    </div>
+
                     <div class="formRow"><input type="submit" value="Сохранить" class="buttonM bBlack formSubmit"><div class="clear"></div></div>
                     <div class="clear"></div>
                 </div>
