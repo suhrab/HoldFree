@@ -139,6 +139,28 @@ elseif ($action == 'edit')
 
     die('{"success": 1}');
 }
+elseif ($action == 'upload_photo')
+{
+    if (!$_user->isLogged()) {
+        throw new ExceptionImproved('Для совершения данной операции необходима авторизация');
+    }
+
+    $uid = isset($_POST['uid']) ? filter_var($_POST['uid'], FILTER_SANITIZE_NUMBER_INT) : 0;
+
+    if ($_user->getId() !== $uid) {
+        throw new ExceptionImproved('Нет :-)');
+    }
+
+    if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
+        require_once DIR_CLASS . 'phpthumb/ThumbLib.inc.php';
+
+        if ($phpThumb = PhpThumbFactory::create($_FILES['file']['tmp_name'])) {
+            $phpThumb->adaptiveResize(150, 150)->save(DIR_UPLOAD . 'avatar/avatar-' . $uid . '.jpg', 'jpg');
+            $phpThumb->adaptiveResize(32, 32)->save(DIR_UPLOAD . 'avatar/_thumb/avatar-' . $uid . '.jpg', 'jpg');
+            $_user->setAvatar('avatar-' . $uid . '.jpg');
+        }
+    }
+}
 elseif ($action == 'signout')
 {
     $_user->signOut();
