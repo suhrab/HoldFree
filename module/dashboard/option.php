@@ -15,6 +15,10 @@ if ($action == 'update')
     $data['site_offline'] = isset($_POST['site_offline']) ? 1 : 0;
     $data['gzip'] = isset($_POST['gzip']) ? 1 : 0;
     $data['offline_reason'] = htmlentities($_POST['offline_reason']);
+    $data['max_allowed_file_size_guest'] = intval($_POST['max_allowed_file_size_guest']);
+    $data['max_allowed_file_size_user'] = intval($_POST['max_allowed_file_size_user']);
+    $data['file_keep_guest'] = intval($_POST['file_keep_guest']);
+    $data['file_keep_user'] = intval($_POST['file_keep_user']);
 
     foreach ($data as $k => $v) {
         $sth = $pdo->prepare('UPDATE hf_config SET `value` = :value WHERE `key` = :key LIMIT 1');
