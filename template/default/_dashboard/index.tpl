@@ -54,7 +54,6 @@
 <script type="text/javascript" src="{$_dashboard}/js/plugins/ui/jquery.tipsy.js"></script>
 <script type="text/javascript" src="{$_dashboard}/js/plugins/ui/jquery.progress.js"></script>
 <script type="text/javascript" src="{$_dashboard}/js/plugins/ui/jquery.timeentry.min.js"></script>
-<script type="text/javascript" src="{$_dashboard}/js/plugins/ui/jquery.colorpicker.js"></script>
 <script type="text/javascript" src="{$_dashboard}/js/plugins/ui/jquery.jgrowl.js"></script>
 <script type="text/javascript" src="{$_dashboard}/js/plugins/ui/jquery.fancybox.js"></script>
 <script type="text/javascript" src="{$_dashboard}/js/plugins/ui/jquery.fileTree.js"></script>
@@ -82,21 +81,8 @@
         <!-- Right top nav -->
         <div class="topNav">
             <ul class="userNav">
-                <li><a title="" class="search"></a></li>
-                <li><a href="#" title="" class="screen"></a></li>
-                <li><a href="#" title="" class="settings"></a></li>
                 <li><a href="{$_url}" title="" class="logout"></a></li>
-                <li class="showTabletP"><a href="#" title="" class="sidebar"></a></li>
             </ul>
-            <a title="" class="iButton"></a>
-            <a title="" class="iTop"></a>
-            <div class="topSearch">
-                <div class="topDropArrow"></div>
-                <form action="">
-                    <input type="text" placeholder="search..." name="topSearch" />
-                    <input type="submit" value="" />
-                </form>
-            </div>
         </div>
         
         <!-- Responsive nav -->
@@ -150,31 +136,7 @@
 <div id="sidebar">
     <div class="mainNav">
         <div class="user">
-            <a title="" class="leftUserDrop"><img src="{$_url}/upload/avatar/{$_user.avatar}" width="72" height="72" alt="" /><span><strong>3</strong></span></a><span>{$_user.first_name}</span>
-            <ul class="leftUser">
-                <li><a href="#" title="" class="sProfile">My profile</a></li>
-                <li><a href="#" title="" class="sMessages">Messages</a></li>
-                <li><a href="#" title="" class="sSettings">Settings</a></li>
-                <li><a href="#" title="" class="sLogout">Logout</a></li>
-            </ul>
-        </div>
-        
-        <!-- Responsive nav -->
-        <div class="altNav">
-            <div class="userSearch">
-                <form action="">
-                    <input type="text" placeholder="search..." name="userSearch" />
-                    <input type="submit" value="" />
-                </form>
-            </div>
-            
-            <!-- User nav -->
-            <ul class="userNav">
-                <li><a href="#" title="" class="profile"></a></li>
-                <li><a href="#" title="" class="messages"></a></li>
-                <li><a href="#" title="" class="settings"></a></li>
-                <li><a href="#" title="" class="logout"></a></li>
-            </ul>
+            <a title="" class="leftUserDrop"><img src="{$_url}/upload/avatar/{$_user.avatar}" width="72" height="72" alt="" /></a><span>{$_user.first_name}</span>
         </div>
         
         <!-- Main nav -->
@@ -184,8 +146,6 @@
             <li><a href="/index.php?module=option&dashboard=1" title="Настройки" {if $smarty.get.module == 'option'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/forms.png" alt="" /><span>Настройки</span></a></li>
             <li><a href="/index.php?module=database&dashboard=1" title="База данных" {if $smarty.get.module == 'database'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/tables.png" alt="" /><span>База данных</span></a></li>
             <li><a href="/index.php?module=faq&dashboard=1" title="FAQ" {if $smarty.get.module == 'faq'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/messages.png" alt="" /><span>FAQ</span></a></li>
-            <li><a href="statistics.html" title=""><img src="{$_dashboard}/images/icons/mainnav/statistics.png" alt="" /><span>Statistics</span></a></li>
-            <li><a href="other_calendar.html" title=""><img src="{$_dashboard}/images/icons/mainnav/other.png" alt="" /><span>Other pages</span></a></li>
         </ul>
     </div>
 </div>
@@ -198,20 +158,6 @@
         <span class="pageTitle">
             {block name="pageTitle"}<span class="icon-screen"></span>Панель управления{/block}
         </span>
-        <ul class="quickStats">
-            <li>
-                <a href="" class="blueImg"><img src="{$_dashboard}/images/icons/quickstats/plus.png" alt="" /></a>
-                <div class="floatR"><strong class="blue">5489</strong><span>visits</span></div>
-            </li>
-            <li>
-                <a href="" class="redImg"><img src="{$_dashboard}/images/icons/quickstats/user.png" alt="" /></a>
-                <div class="floatR"><strong class="blue">4658</strong><span>users</span></div>
-            </li>
-            <li>
-                <a href="" class="greenImg"><img src="{$_dashboard}/images/icons/quickstats/money.png" alt="" /></a>
-                <div class="floatR"><strong class="blue">1289</strong><span>orders</span></div>
-            </li>
-        </ul>
         <div class="clear"></div>
     </div>
     
@@ -223,26 +169,6 @@
                 <li class="current"><a href="/?module=dashboard&dashboard=1">Панель управления</a></li>
             {/block}
             </ul>
-        </div>
-        
-        <div class="breadLinks">
-            <ul>
-                <li><a href="#" title=""><i class="icos-list"></i><span>Orders</span> <strong>(+58)</strong></a></li>
-                <li><a href="#" title=""><i class="icos-check"></i><span>Tasks</span> <strong>(+12)</strong></a></li>
-                <li class="has">
-                    <a title="">
-                        <i class="icos-money3"></i>
-                        <span>Invoices</span>
-                        <span><img src="{$_dashboard}/images/elements/control/hasddArrow.png" alt="" /></span>
-                    </a>
-                    <ul>
-                        <li><a href="#" title=""><span class="icos-add"></span>New invoice</a></li>
-                        <li><a href="#" title=""><span class="icos-archive"></span>History</a></li>
-                        <li><a href="#" title=""><span class="icos-printer"></span>Print invoices</a></li>
-                    </ul>
-                </li>
-            </ul>
-             <div class="clear"></div>
         </div>
     </div>
     
@@ -265,8 +191,6 @@
             </div>
             <div class="body"><div class="chart"></div></div>
         </div>
-
-
         <div class="widget">
         <div class="whead"><h6>Лог пользователей</h6><div class="clear"></div></div>
         <div id="dyn" class="hiddenpars">
@@ -294,231 +218,6 @@
         </tbody>
         </table>
         </div>
-        </div>
-    
-    	<!-- 6 + 6 -->
-        <div class="fluid">
-        
-            <!-- Messages #1 -->
-            <div class="widget grid6">
-                <div class="whead">
-                    <h6>Messages layout #1</h6>
-                    <div class="on_off">
-                        <span class="icon-reload-CW"></span>
-                        <input type="checkbox" id="check1" checked="checked" name="chbox" />
-                    </div>            
-                    <div class="clear"></div>
-                </div>
-                
-                <ul class="messagesOne">
-                    <li class="by_user">
-                        <a href="#" title=""><img src="{$_dashboard}/images/live/face1.png" alt="" /></a>
-                        <div class="messageArea">
-                            <span class="aro"></span>
-                            <div class="infoRow">
-                                <span class="name"><strong>John</strong> says:</span>
-                                <span class="time">3 hours ago</span>
-                                <div class="clear"></div>
-                            </div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci. 
-                            Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
-                        </div>
-                        <div class="clear"></div>
-                    </li>
-                
-                    <li class="divider"><span></span></li>
-                
-                    <li class="by_me">
-                        <a href="#" title=""><img src="{$_dashboard}/images/live/face2.png" alt="" /></a>
-                        <div class="messageArea">
-                            <span class="aro"></span>
-                            <div class="infoRow">
-                                <span class="name"><strong>Eugene</strong> says:</span>
-                                <span class="time">3 hours ago</span>
-                                <div class="clear"></div>
-                            </div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci. 
-                            Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
-                        </div>
-                        <div class="clear"></div>
-                    </li>
-                
-                    <li class="by_me">
-                        <a href="#" title=""><img src="{$_dashboard}/images/live/face2.png" alt="" /></a>
-                        <div class="messageArea">
-                            <span class="aro"></span>
-                            <div class="infoRow">
-                                <span class="name"><strong>Eugene</strong> says:</span>
-                                <span class="time">3 hours ago</span>
-                                <div class="clear"></div>
-                            </div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci. 
-                            Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
-                        </div>
-                        <div class="clear"></div>
-                    </li>
-                    
-                    <li class="divider"><span></span></li>
-                
-                    <li class="by_user">
-                        <a href="#" title=""><img src="{$_dashboard}/images/live/face1.png" alt="" /></a>
-                        <div class="messageArea">
-                            <span class="aro"></span>
-                            <div class="infoRow">
-                                <span class="name"><strong>John</strong> says:</span>
-                                <span class="time">3 hours ago</span>
-                                <div class="clear"></div>
-                            </div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci. 
-                            Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
-                        </div>
-                        <div class="clear"></div>
-                    </li>
-                    
-                    <li class="divider"><span></span></li>
-                
-                    <li class="by_me">
-                        <a href="#" title=""><img src="{$_dashboard}/images/live/face2.png" alt="" /></a>
-                        <div class="messageArea">
-                            <span class="aro"></span>
-                            <div class="infoRow">
-                                <span class="name"><strong>Eugene</strong> says:</span>
-                                <span class="time">3 hours ago</span>
-                                <div class="clear"></div>
-                            </div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel est enim, vel eleifend felis. Ut volutpat, leo eget euismod scelerisque, eros purus lacinia velit, nec rhoncus mi dui eleifend orci. 
-                            Phasellus ut sem urna, id congue libero. Nulla eget arcu vel massa suscipit ultricies ac id velit
-                        </div>
-                        <div class="clear"></div>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Calendar -->
-            <div class="widget grid6">
-                <div class="whead"><h6>Calendar</h6><div class="clear"></div></div>
-                <div id="calendar"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-
-
-        
-        <div class="fluid">
-        	
-            <div class="grid6">
-                <!-- Search widget -->
-                <div class="searchLine">
-                    <form action="">
-                        <input type="text" name="search" class="ac" placeholder="Enter search text..." />
-                       <button type="submit" name="find" value=""><span class="icos-search"></span></button>
-                    </form>
-                </div>
-                
-                <!-- Multiple files uploader -->
-                <div class="widget">    
-                    <div class="whead"><h6>WYSIWYG editor</h6><div class="clear"></div></div>
-                    <textarea id="editor" name="editor" rows="" cols="16">Some cool stuff here</textarea>                    
-                </div>
-            </div>
-            
-            <!-- Media table -->
-          <div class="widget check grid6">
-            <div class="whead">
-                <span class="titleIcon"><input type="checkbox" id="titleCheck" name="titleCheck" /></span>
-                <h6>Media table</h6><div class="clear"></div>
-            </div>
-            <table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
-                <thead>
-                    <tr>
-                        <td><img src="{$_dashboard}/images/elements/other/tableArrows.png" alt="" /></td>
-                        <td width="50">Image</td>
-                        <td class="sortCol"><div>Description<span></span></div></td>
-                        <td width="130" class="sortCol"><div>Date<span></span></div></td>
-                        <td width="120">File info</td>
-                        <td width="100">Actions</td>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td colspan="6">
-                            <div class="itemActions">
-                                <label>Apply action:</label>
-                                <select>
-                                    <option value="">Select action...</option>
-                                    <option value="Edit">Edit</option>
-                                    <option value="Delete">Delete</option>
-                                    <option value="Move">Move somewhere</option>
-                                </select>
-                            </div>
-                            <div class="tPages">
-                                <ul class="pages">
-                                    <li class="prev"><a href="#" title=""><span class="icon-arrow-14"></span></a></li>
-                                    <li><a href="#" title="" class="active">1</a></li>
-                                    <li><a href="#" title="">2</a></li>
-                                    <li><a href="#" title="">3</a></li>
-                                    <li><a href="#" title="">4</a></li>
-                                    <li>...</li>
-                                    <li><a href="#" title="">20</a></li>
-                                    <li class="next"><a href="#" title=""><span class="icon-arrow-17"></span></a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" name="checkRow" /></td>
-                        <td><a href="images/big.png" title="" class="lightbox"><img src="{$_dashboard}/images/live/face3.png" alt="" /></a></td>
-                        <td class="textL"><a href="#" title="">Image1 description</a></td>
-                        <td>Feb 12, 2012. 12:28</td>
-                        <td class="fileInfo"><span><strong>Size:</strong> 215 Kb</span><span><strong>Format:</strong> .jpg</span></td>
-                        <td class="tableActs">
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Edit"><span class="iconb" data-icon="&#xe1db;"></span></a>
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Remove"><span class="iconb" data-icon="&#xe136;"></span></a>
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Options"><span class="iconb" data-icon="&#xe1f7;"></span></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="checkRow" /></td>
-                        <td><a href="images/big.png" title="" class="lightbox"><img src="{$_dashboard}/images/live/face7.png" alt="" /></a></td>
-                        <td class="textL"><a href="#" title="">Image1 description</a></td>
-                        <td>Feb 12, 2012. 12:28</td>
-                        <td class="fileInfo"><span><strong>Size:</strong> 215 Kb</span><span><strong>Format:</strong> .jpg</span></td>
-                        <td class="tableActs">
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Edit"><span class="iconb" data-icon="&#xe1db;"></span></a>
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Remove"><span class="iconb" data-icon="&#xe136;"></span></a>
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Options"><span class="iconb" data-icon="&#xe1f7;"></span></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="checkRow" /></td>
-                        <td><a href="images/big.png" title="" class="lightbox"><img src="{$_dashboard}/images/live/face6.png" alt="" /></a></td>
-                        <td class="textL"><a href="#" title="">Image1 description</a></td>
-                        <td>Feb 12, 2012. 12:28</td>
-                        <td class="fileInfo"><span><strong>Size:</strong> 215 Kb</span><span><strong>Format:</strong> .jpg</span></td>
-                        <td class="tableActs">
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Edit"><span class="iconb" data-icon="&#xe1db;"></span></a>
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Remove"><span class="iconb" data-icon="&#xe136;"></span></a>
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Options"><span class="iconb" data-icon="&#xe1f7;"></span></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="checkRow" /></td>
-                        <td><a href="images/big.png" title="" class="lightbox"><img src="{$_dashboard}/images/live/face5.png" alt="" /></a></td>
-                        <td class="textL"><a href="#" title="">Image1 description</a></td>
-                        <td>Feb 12, 2012. 12:28</td>
-                        <td class="fileInfo"><span><strong>Size:</strong> 215 Kb</span><span><strong>Format:</strong> .jpg</span></td>
-                        <td class="tableActs">
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Edit"><span class="iconb" data-icon="&#xe1db;"></span></a>
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Remove"><span class="iconb" data-icon="&#xe136;"></span></a>
-                            <a href="#" class="tablectrl_small bDefault tipS" title="Options"><span class="iconb" data-icon="&#xe1f7;"></span></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-            
         </div>
     {/block}
     </div>

@@ -1,9 +1,10 @@
 /config.php
 .DS_Store
 .idea/
-/class/smarty/template_c/*
-upload/avatar/*.jpg
-upload/avatar/_thumb/*.jpg
+class/smarty/template_c/*
+upload/avatar/*
+upload/avatar/_thumb/*
+upload/tmp/*
 upload/chart/*
 !backup/.keep
 backup/*

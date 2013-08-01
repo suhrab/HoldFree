@@ -35,9 +35,14 @@ try
 
                 if ($user_profile['photoURL']) {
                     $photo = file_get_contents($user_profile['photoURL']);
-                    file_put_contents(DIR_UPLOAD . '/avatar/avatar-' . $_user->getId() . '.jpg', $photo);
-                    file_put_contents(DIR_UPLOAD . '/avatar/_thumb/avatar-' . $_user->getId() . '.jpg', $photo);
+                    $tmp_name = uniqid();
+                    file_put_contents(DIR_UPLOAD . '/tmp/' . $tmp_name, $photo);
+                    require_once DIR_CLASS . 'phpthumb/ThumbLib.inc.php';
+                    $phpThumb = PhpThumbFactory::create(DIR_UPLOAD . '/tmp/' . $tmp_name);
+                    $phpThumb->adaptiveResize(150, 150)->save(DIR_UPLOAD . 'avatar/avatar-' . $_user->getId() . '.jpg', 'jpg');
+                    $phpThumb->adaptiveResize(32, 32)->save(DIR_UPLOAD . 'avatar/_thumb/avatar-' . $_user->getId() . '.jpg', 'jpg');
                     $_user->setAvatar('avatar-' . $_user->getId() . '.jpg');
+                    unlink(DIR_UPLOAD . '/tmp/' . $tmp_name);
                 }
             }
             else {

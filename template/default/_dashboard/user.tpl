@@ -32,15 +32,6 @@
             <tfoot>
             <tr>
                 <td colspan="8">
-                    <div class="itemActions">
-                        <label>Apply action:</label>
-                        <select>
-                            <option value="">Select action...</option>
-                            <option value="Edit">Edit</option>
-                            <option value="Delete">Delete</option>
-                            <option value="Move">Move somewhere</option>
-                        </select>
-                    </div>
                     <div class="tPages">
                         <ul class="pages">
                             <li class="prev"><a href="#" title=""><span class="icon-arrow-14"></span></a></li>
