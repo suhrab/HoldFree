@@ -49,7 +49,7 @@ class FileManager
 
     public function getFileInfo($file_id)
     {
-        $file_data['file_id'] = $file_id;
+        $file_data['file_id'] = (int) $file_id;
 
         $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE id = :file_id');
         $sth->execute($file_data);
@@ -60,12 +60,33 @@ class FileManager
 
     public function getFilesInfoByUserId($user_id)
     {
-        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id ORDER BY created DESC');
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id AND complete_status = 100 ORDER BY created DESC');
         $sth->bindParam(':user_id', $user_id);
         $sth->execute();
         $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
 
         return $files_info;
+    }
+
+    public function getFilesInfoInProgressByUserId($user_id)
+    {
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id AND complete_status < 100 AND type = "file" ORDER BY created DESC');
+        $sth->bindParam(':user_id', $user_id);
+        $sth->execute();
+        $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
+
+        return $files_info;
+    }
+
+    public function renameFile($file_id, $file_name)
+    {
+        $file_data['file_id'] = (int) $file_id;
+        $file_data['user_defined_name'] = $file_name;
+
+        $sth = $this->pdo->prepare('UPDATE hf_file SET user_defined_name = :user_defined_name WHERE id = :file_id');
+        $sth->execute($file_data);
+
+        return $sth->rowCount();
     }
 
     public function deleteFile($file_id)
