@@ -111,7 +111,7 @@ function sentFileToStorage($file_path, $storage_url)
         $post = array('filename' => '@' . $file_path);
     }
     else {
-        $post = array('file' => new CURLFile($file_path));
+        $post = array('filename' => new CURLFile($file_path));
     }
 
     $storage_url = $storage_url . '/api/uploadFile';
@@ -125,7 +125,7 @@ function sentFileToStorage($file_path, $storage_url)
     curl_close ($ch);
 
     $result = json_decode($result, true);
-
+    
     return $result['fileURL'];
 }
 
