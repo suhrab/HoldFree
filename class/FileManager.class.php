@@ -192,7 +192,7 @@ class FileManager
         $this->moveFile($dir_id, $target_dir_id);
     }
 
-    protected function formatFileSize($file_size) {
+    public static function formatFileSize($file_size) {
         $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
         $power = $file_size > 0 ? floor(log($file_size, 1024)) : 0;
         return number_format($file_size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
