@@ -129,26 +129,6 @@ $(function() {
 	$(".lightbox").fancybox({
 	'padding': 2
 	});
-	
-	
-	//===== Color picker =====//
-	
-	$('#cPicker').ColorPicker({
-		color: '#e62e90',
-		onShow: function (colpkr) {
-			$(colpkr).fadeIn(500);
-			return false;
-		},
-		onHide: function (colpkr) {
-			$(colpkr).fadeOut(500);
-			return false;
-		},
-		onChange: function (hsb, hex, rgb) {
-			$('#cPicker div').css('backgroundColor', '#' + hex);
-		}
-	});
-	
-	$('#flatPicker').ColorPicker({flat: true});
 
 
 	//===== Time picker =====//

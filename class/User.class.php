@@ -461,7 +461,7 @@ class User
 
     private function userLog()
     {
-        if (!$this->id) {
+        if (!$this->getId()) {
             return false;
         }
 

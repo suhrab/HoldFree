@@ -53,9 +53,12 @@ class FileManager
 
         $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE id = :file_id');
         $sth->execute($file_data);
-        $received_file_data = $sth->fetch();
+        $file_info = $sth->fetch();
 
-        return $received_file_data ? $received_file_data : array();
+        $file_info['created'] = date('d.m.y');
+        $file_info['file_size'] = $this->formatFileSize($file_info['file_size']);
+
+        return $file_info ? $file_info : array();
     }
 
     public function getFilesInfoByUserId($user_id)
@@ -68,11 +71,7 @@ class FileManager
         foreach ($files_info as &$file)
         {
             $file['created'] = date('d.m.y');
-
-            if (mb_strlen($file['user_defined_name']) > 40) {
-                $file['user_defined_name'] = mb_substr($file['user_defined_name'], 0, 15) . '...' . mb_substr($file['user_defined_name'], -10, 10);
-            }
-
+            $file['user_defined_name'] = mb_strlen($file['user_defined_name']) > 40 ? mb_substr($file['user_defined_name'], 0, 15) . '...' . mb_substr($file['user_defined_name'], -10, 10) : $file['user_defined_name'];
             $file['file_size'] = $this->formatFileSize($file['file_size']);
         }
 
@@ -85,6 +84,12 @@ class FileManager
         $sth->bindParam(':user_id', $user_id);
         $sth->execute();
         $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
+
+        foreach ($files_info as &$file)
+        {
+            $file['user_defined_name'] = mb_strlen($file['user_defined_name']) > 40 ? mb_substr($file['user_defined_name'], 0, 15) . '...' . mb_substr($file['user_defined_name'], -10, 10) : $file['user_defined_name'];
+            $file['file_size'] = $this->formatFileSize($file['file_size']);
+        }
 
         return $files_info;
     }
@@ -192,10 +197,10 @@ class FileManager
         $this->moveFile($dir_id, $target_dir_id);
     }
 
-    protected function formatFileSize($file_size) {
+    public static function formatFileSize($size) {
         $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-        $power = $file_size > 0 ? floor(log($file_size, 1024)) : 0;
-        return number_format($file_size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
+        $power = $size > 0 ? floor(log($size, 1024)) : 0;
+        return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
     }
 
     public function __destruct()

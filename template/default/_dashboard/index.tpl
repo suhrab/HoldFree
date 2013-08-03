@@ -146,6 +146,7 @@
             <li><a href="/index.php?module=option&dashboard=1" title="Настройки" {if $smarty.get.module == 'option'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/forms.png" alt="" /><span>Настройки</span></a></li>
             <li><a href="/index.php?module=database&dashboard=1" title="База данных" {if $smarty.get.module == 'database'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/tables.png" alt="" /><span>База данных</span></a></li>
             <li><a href="/index.php?module=faq&dashboard=1" title="FAQ" {if $smarty.get.module == 'faq'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/messages.png" alt="" /><span>FAQ</span></a></li>
+            <li><a href="/index.php?module=storage_server&dashboard=1" title="Сервера хранения файлов" {if $smarty.get.module == 'storage_server'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/statistics.png" alt="" /><span>Сервера</span></a></li>
         </ul>
     </div>
 </div>

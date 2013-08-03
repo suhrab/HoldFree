@@ -237,7 +237,7 @@ function convertJob(GearmanJob $job)
             throw new Exception(implode(', ', $convert_errors));
         }
 
-        $file_url = sentFileToStorage($first_command['output_file'], 'http://holdfreestorage.com');
+        $file_url = sentFileToStorage($first_command['output_file'], $payload['storage_server']);
         $files_urls[$first_command['dimension']] = $file_url;
         $sth = $pdo->prepare('UPDATE hf_file SET files = :files_urls, complete_status = 100 WHERE id = :row_id');
         $sth->execute(['files_urls' => json_encode($files_urls), 'row_id' => $payload['row_id']]);
@@ -245,7 +245,7 @@ function convertJob(GearmanJob $job)
         foreach ($commands as $command) {
             $r = convert($command['cmd'], $convert_errors);
 
-            $file_url = sentFileToStorage($command['output_file'], 'http://holdfreestorage.com');
+            $file_url = sentFileToStorage($command['output_file'], $payload['storage_server']);
             $files_urls[$command['dimension']] = $file_url;
             $sth = $pdo->prepare('UPDATE hf_file SET files = :files_urls WHERE id = :row_id');
             $sth->execute(['files_urls' => json_encode($files_urls), 'row_id' => $payload['row_id']]);
