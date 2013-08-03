@@ -125,7 +125,7 @@ function sentFileToStorage($file_path, $storage_url)
     curl_close ($ch);
 
     $result = json_decode($result, true);
-    
+
     return $result['fileURL'];
 }
 

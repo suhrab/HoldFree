@@ -48,29 +48,33 @@
                 for(var key in filesToMonitor){
                     fileIds.push(key)
                 }
-                $.ajax({
-                    type: 'POST',
-                    cache: false,
-                    url: '/?module=file_status&is_ajax=1',
-                    data: {
-                        fileIds: fileIds
-                    },
-                    dataType: 'json',
-                    success: function(r){
-                        $(r).each(function(i, dbFileInfo){
-                            if(!filesToMonitor.hasOwnProperty(dbFileInfo['id']))
-                                return;
-                            var $fileQueueRow = filesToMonitor[dbFileInfo['id']];
-                            if(dbFileInfo['status_message'] != ''){
-                                $fileQueueRow.find(" td.status").text(dbFileInfo['status_message']);
-                            } else {
-                                if(dbFileInfo['complete_status'] != 0){
-                                    $fileQueueRow.find(" td.status").text('Конвертация: ' + dbFileInfo['complete_status'] + ' %');
+                if (fileIds.length) {
+                    $.ajax({
+                        type: 'POST',
+                        cache: false,
+                        url: '/?module=file_status&is_ajax=1',
+                        data: {
+                            fileIds: fileIds
+                        },
+                        dataType: 'json',
+                        success: function(r){
+                            $(r).each(function(i, dbFileInfo){
+                                if(!filesToMonitor.hasOwnProperty(dbFileInfo['id']))
+                                    return;
+                                var $fileQueueRow = filesToMonitor[dbFileInfo['id']];
+                                if(dbFileInfo['status_message'] != ''){
+                                    $fileQueueRow.find(" td.status").text(dbFileInfo['status_message']);
+                                } else {
+                                    if(dbFileInfo['complete_status'] != 0){
+                                        $fileQueueRow.find('td.status').html('<div class="progress-bar"><div class="progress-status-yellow" style="width: 0%"></div></div><div class="progress-text">Конвертация: <i class="progress-percent">0</i>%</div>');
+                                        $fileQueueRow.find('td.status').find("div.progress-status-yellow").css("width", dbFileInfo['complete_status'] + "%");
+                                        $fileQueueRow.find('i.progress-percent').text(dbFileInfo['complete_status']);
+                                    }
                                 }
-                            }
-                        })
-                    }
-                });
+                            })
+                        }
+                    });
+                }
 
                 setTimeout(PollFilesToMonitor, 2*1000);
             }
@@ -112,7 +116,7 @@
             uploader.bind('UploadProgress', function(up, file) {
                 var $fileRow = $('#' + file.id)
                 $fileRow.find(" td.uploadSpeed").text(getBytesWithUnit(up.total.bytesPerSec) + "/s");
-                $fileRow.find(" td.status").text("Загружается");
+                $fileRow.find(" td.status").html('<div class="progress-bar"><div class="progress-status-green" style="width: '+ file.percent +'%"></div></div><div class="progress-text">Загружено: <i class="progress-percent">'+ file.percent +'</i>%</div>');
             });
 
             uploader.bind('Error', function(up, err) {
@@ -126,7 +130,7 @@
                 var $fileRow = $('#' + file.id);
                 AddFileToMonitor(r.id, $fileRow);
                 $fileRow.find(" td.uploadSpeed").text("");
-                $fileRow.find(" td.status").text("В очереди на конвертацию");
+                $fileRow.find(" td.status").html("В очереди на конвертацию");
             });
         });
     </script>
@@ -197,7 +201,28 @@
             </div>
 
             <div class="cleaner"></div>
-
+            <style type="text/css">
+                .progress-bar {
+                    width: 90%;
+                    height: 6px;
+                    border: solid 1px #183e5e;
+                    padding: 1px;
+                    position: relative;
+                }
+                .progress-status-yellow {
+                    background-color: #FFCC00;
+                    height: 6px;
+                }
+                .progress-status-green {
+                    background-color: #006400;
+                    height: 6px;
+                }
+                .progress-text {
+                    width: 90%;
+                    text-align: center;
+                    font-size: 11px;
+                }
+            </style>
             <div class="loading-panel" id="FileQueueContainer">
                 <table width="100%" cellspacing="0" cellpadding="0">
                     <thead>
@@ -212,19 +237,19 @@
                         <tr>
                             <td>Dexter_s1_e1.mp4</td>
                             <td>292 MB</td>
-                            <td>В очереди</td>
-                            <td>742 Kb/s</td>
-                        </tr>
-                        <tr>
-                            <td>Dexter_s1_e1.mp4</td>
-                            <td>292 MB</td>
-                            <td class="dark-blue">В очереди</td>
+                            <td class="dark-blue">
+                                <div class="progress-bar"><div class="progress-status-green" style="width: 46%"></div></div>
+                                <div class="progress-text">Загружено: <i class="progress-percent">46</i>%</div>
+                            </td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Dexter_s1_e1.mp4</td>
                             <td>292 MB</td>
-                            <td class="dark-blue">В очереди</td>
+                            <td class="dark-blue">
+                                <div class="progress-bar"><div class="progress-status-green" style="width: 0%"></div></div>
+                                <div class="progress-text">Загружено: 0%</div>
+                            </td>
                             <td></td>
                         </tr>
                     </tbody>
