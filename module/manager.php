@@ -40,7 +40,6 @@ if ($action == 'upload')
         }
 
         $pdo->commit();
-
     }
 }
 else
