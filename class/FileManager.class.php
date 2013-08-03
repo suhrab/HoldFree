@@ -21,6 +21,7 @@ class FileManager
 
     public function addFile($file_name)
     {
+        $file_data                           = [];
         $file_data['system_defined_name']    = 'system_name';
         $file_data['user_defined_name']      = $file_name;
         $file_data['created']                = time();
