@@ -31,7 +31,7 @@ try
                     }
                 }
 
-                $user_found = $_user->signUp($user_profile['firstName'], $user_profile['emailVerified'], 0, '', $user_profile['lastName']);
+                $user_found = $_user->signUp($user_profile['firstName'], $user_profile['emailVerified'], \User\User::get_countryId_by_code2(\User\User::get_geoip_country()), '', $user_profile['lastName']);
 
                 if ($user_profile['photoURL']) {
                     $photo = file_get_contents($user_profile['photoURL']);

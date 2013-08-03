@@ -38,7 +38,7 @@ $fileIdsCommaSeparated = implode(',', $fileIds);
 
 $selectSql = <<<SQL
 SELECT
-  id, complete_status, status_message
+  id, complete_status, status_message, files, user_defined_name, file_size, created
 FROM
   hf_file
 WHERE
@@ -48,6 +48,8 @@ SQL;
 $selectStmt = $pdo->query($selectSql);
 
 while($row = $selectStmt->fetch(PDO::FETCH_ASSOC)){
+    $row['created'] = date('d.m.Y', $row['created']);
+    $row['file_size'] = FileManager::formatFileSize($row['file_size']);
     $files[] = $row;
 }
 

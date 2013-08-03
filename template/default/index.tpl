@@ -15,6 +15,7 @@
     <script src="{$_template}/js/default.js" type="text/javascript"></script>
     <script type="text/javascript">
         var socialUserProfile = {if isset($social_user_profile)}{$social_user_profile|json_encode}{else}false{/if};
+        var currentCountryId = {$_user.currentCountryId};
         $(function() {
             if (socialUserProfile) {
                 $("#formSignUp input[name=first_name]").val(socialUserProfile.firstName);
@@ -22,6 +23,8 @@
                 $("#formSignUp input[name=country]").val(socialUserProfile.country);
                 $("#signup").trigger('click');
             }
+
+            $('select.country').select2('val', currentCountryId+"")
         });
     </script>
 </head>
@@ -86,7 +89,7 @@
             <input type="text" name="email" class="input-text" placeholder="{"Введите Ваш email"|gettext}" />
             <input type="password" name="password" class="input-text" placeholder="{"Пароль"|gettext}" />
 
-            <select name="country" class="select2">
+            <select name="country" class="select2 country">
             <option value="0">{"Выберите страну"|gettext}</option>
             {foreach from=$countries item=country}
                 <option value="{$country.id}">{$country.name}</option>

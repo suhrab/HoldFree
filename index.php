@@ -1,5 +1,6 @@
 <?php
 session_start();
+//phpinfo();die;
 
 define('CHECK', TRUE);
 
@@ -32,7 +33,7 @@ try
         $countries = $qh->fetchAll();
         $qh = null;
         $smarty->assign('countries', $countries);
-        $smarty->assign('_user', array());
+        $smarty->assign('_user', ['currentCountryId' => $_user->currentCountryId]);
     }
     else {
         $smarty->assign('_user', $_user->get());

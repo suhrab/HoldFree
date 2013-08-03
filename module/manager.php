@@ -46,6 +46,8 @@ else
 {
     $files = $_fileManager->getFilesInfoByUserId($_user->getId());
     $smarty->assign('files', $files);
+
+    $smarty->assign('filesInProgress', $_fileManager->getFilesInfoInProgressByUserId($_user->getId()));
 }
 
 $smarty->display('manager.tpl');

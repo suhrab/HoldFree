@@ -19,29 +19,40 @@
     <script type="text/javascript" src="{$_template}/js/plupload/plupload.html5.js"></script>
 
     <script type="text/javascript">
+
+        function getBytesWithUnit (bytes)
+        {
+            if( isNaN( bytes ) ){ return; }
+            var units = [ ' bytes', ' KB', ' MB', ' GB', ' TB', ' PB', ' EB', ' ZB', ' YB' ];
+            var amountOf2s = Math.floor( Math.log( +bytes )/Math.log(2) );
+            if( amountOf2s < 1 ){
+                amountOf2s = 0;
+            }
+            var i = Math.floor( amountOf2s / 10 );
+            bytes = +bytes / Math.pow( 2, 10*i );
+
+            if( bytes.toString().length > bytes.toFixed(1).toString().length ){
+                bytes = bytes.toFixed(1);
+            }
+            return bytes + units[i];
+        }
+
+        var filesToMonitor = { };
+        function AddFileToMonitor(dbFileId, $fileQueueRow){
+            filesToMonitor[dbFileId] = $fileQueueRow;
+        }
+
+        function RemoveFileFromMonitor(dbFileId){
+            if(filesToMonitor.hasOwnProperty(dbFileId))
+                delete filesToMonitor[dbFileId]
+        }
+
         $(function()
         {
-            function getBytesWithUnit (bytes)
-            {
-                if( isNaN( bytes ) ){ return; }
-                var units = [ ' bytes', ' KB', ' MB', ' GB', ' TB', ' PB', ' EB', ' ZB', ' YB' ];
-                var amountOf2s = Math.floor( Math.log( +bytes )/Math.log(2) );
-                if( amountOf2s < 1 ){
-                    amountOf2s = 0;
-                }
-                var i = Math.floor( amountOf2s / 10 );
-                bytes = +bytes / Math.pow( 2, 10*i );
-
-                if( bytes.toString().length > bytes.toFixed(1).toString().length ){
-                    bytes = bytes.toFixed(1);
-                }
-                return bytes + units[i];
-            }
-
-            var filesToMonitor = { };
-            function AddFileToMonitor(dbFileId, $fileQueueRow){
-                filesToMonitor[dbFileId] = $fileQueueRow;
-            }
+            $('#FileQueue tr.dbRow').each(function(i, el){
+                var dbFileId = $(el).data('id')
+                AddFileToMonitor(dbFileId, $(el))
+            })
 
             function PollFilesToMonitor(){
                 var fileIds = []
@@ -66,17 +77,36 @@
                                     $fileQueueRow.find(" td.status").text(dbFileInfo['status_message']);
                                 } else {
                                     if(dbFileInfo['complete_status'] != 0){
-                                        $fileQueueRow.find('td.status').html('<div class="progress-bar"><div class="progress-status-yellow" style="width: 0%"></div></div><div class="progress-text">КонвертацияЩ: <i class="progress-percent">0</i>%</div>');
+                                        $fileQueueRow.find('td.status').html('<div class="progress-bar"><div class="progress-status-yellow" style="width: 0%"></div></div><div class="progress-text">Конвертация: <i class="progress-percent">0</i>%</div>');
                                         $fileQueueRow.find('td.status').find("div.progress-status-yellow").css("width", dbFileInfo['complete_status'] + "%");
                                         $fileQueueRow.find('i.progress-percent').text(dbFileInfo['complete_status']);
+
+                                        if(dbFileInfo['complete_status'] == 100){
+                                            RemoveFileFromMonitor(dbFileInfo['id'])
+                                            $fileQueueRow.css('opacity', '0.6')
+
+                                            if(0==0){
+                                                var convertedFileUrls = jQuery.parseJSON(dbFileInfo['files'])
+                                                var convertedFileLinks = $('<div></div>')
+                                                for(var size in convertedFileUrls){
+                                                    convertedFileLinks.append('<a href="'+convertedFileUrls[size]+'"><img src="http://holdfree.com/template/default/img/icon_24_chain.png" width="24" height="24" alt="'+size+'" title="'+size+'"></a>')
+                                                    break;
+                                                }
+
+                                                $('<tr><td><a href="#" class="file">'+dbFileInfo['user_defined_name']+'</a></td><td>'+dbFileInfo['file_size']+'</td><td>'+dbFileInfo['created']+'</td><td>'+convertedFileLinks[0].outerHTML+'</td></tr>').appendTo('#fileList')
+                                            }
+                                        }
                                     }
                                 }
                             })
+
+                            setTimeout(PollFilesToMonitor, 2*1000);
+                        },
+                        error: function(jqXHR){
+                            setTimeout(PollFilesToMonitor, 2*1000);
                         }
                     });
                 }
-
-                setTimeout(PollFilesToMonitor, 2*1000);
             }
 
             PollFilesToMonitor();
@@ -105,6 +135,7 @@
             uploader.init();
 
             uploader.bind('FilesAdded', function(up, files) {
+                $('#FileQueueContainer').show()
                 $.each(files, function(i, file) {
                     $('<tr id="'+file.id+'"><td>'+file.name+'</td><td>'+getBytesWithUnit(file.size)+'</td><td class="status">В очереди на загрузку</td><td class="uploadSpeed"></td></tr>').appendTo('#FileQueue');
                 });
@@ -177,7 +208,7 @@
                             <td>Имя</td>
                             <td width="140">Размер</td>
                             <td width="140">Дата</td>
-                            <td width="50">URL</td>
+                            <td>URL</td>
                         </tr>
                     </thead>
                     <tbody id="fileList">
@@ -186,13 +217,22 @@
                             <tr id="row_dir_{$file.id}">
                                 <td colspan="3"><a href="javascript:;" class="dir" id="dir_{$file.id}" data-id="{$file.id}">{$file.user_defined_name}</a></td>
                                 <td><a href="#"><img src="{$_template}/img/icon_24_chain.png" width="24" height="24" alt="URL" /></a></td>
+                                <td>{$file.created}</td>
                             </tr>
                             {elseif $file.type == 'file'}
                                 <tr>
                                     <td><a href="#" class="file">{$file.user_defined_name}</a></td>
                                     <td>{$file.file_size}</td>
                                     <td>{$file.created}</td>
-                                    <td><a href="#"><img src="{$_template}/img/icon_24_chain.png" width="24" height="24" alt="URL" /></a></td>
+
+                                    <td>
+                                        {if !empty($file.files)}
+                                            {assign 'convertedFileUrls' $file.files|json_decode:true}
+                                            {foreach $convertedFileUrls as $size => $convertedFileUrl}
+                                                <a href="{$convertedFileUrl}"><img src="{$_template}/img/icon_24_chain.png" width="24" height="24" alt="{$size}" title="{$size}" /></a>
+                                            {/foreach}
+                                        {/if}
+                                    </td>
                                 </tr>
                             {/if}
                         {/foreach}
@@ -230,7 +270,7 @@
                     font-size: 11px;
                 }
             </style>
-            <div class="loading-panel" id="FileQueueContainer">
+            <div class="loading-panel" id="FileQueueContainer" style="{if empty($filesInProgress)}display:none;{/if}">
                 <table width="100%" cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
@@ -241,6 +281,14 @@
                     </tr>
                     </thead>
                     <tbody id="FileQueue">
+                    {foreach $filesInProgress as $file}
+                        <tr class="dbRow" data-id="{$file.id}">
+                            <td>{$file.user_defined_name}</td>
+                            <td>{$file.file_size}</td>
+                            <td class="status"></td>
+                            <td class="uploadSpeed"></td>
+                        </tr>
+                    {/foreach}
                     </tbody>
                 </table>
             </div>

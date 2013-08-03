@@ -5,6 +5,7 @@ namespace User;
 
 class User
 {
+    public $currentCountryId;
     public function __construct(\PDO $pdo)
     {
         $this->pdo = $pdo;
@@ -13,6 +14,8 @@ class User
         $this->passwordLib = new \PasswordLib\PasswordLib();
 
         $this->updateLastSignIn();
+
+        $this->currentCountryId = self::get_countryId_by_code2(self::get_geoip_country());
     }
 
     /**
@@ -217,6 +220,8 @@ class User
 
         $user_data['reg_date'] = date('d.m.Y, H:i', $user_data['reg_date']);
         $user_data['last_signin'] = date('d.m.Y, H:i', $user_data['last_signin']);
+
+        $user_data['currentCountryId'] = $this->currentCountryId;
 
         return $user_data;
     }
@@ -553,10 +558,32 @@ class User
      *
      * Возвращает двухзначный код страны или false если ip адрес не найден
      */
-    public function get_geoip_country(){
+    public static function get_geoip_country(){
         if(!isset($_SESSION['GEOIP_COUNTRY']))
             $_SESSION['GEOIP_COUNTRY'] = @geoip_country_code_by_name($_SERVER['REMOTE_ADDR']);
 
         return $_SESSION['GEOIP_COUNTRY'];
+    }
+
+    public static function get_countryId_by_code2($code2){
+        global $pdo;
+        $sql = <<<SQL
+SELECT
+  id
+FROM
+  hf_country
+WHERE
+  code = :code
+LIMIT 1
+SQL;
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['code' => $code2]);
+
+        if($stmt->rowCount() == 1){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            return intval($row['id']);
+        } else {
+            return 1;
+        }
     }
 }
