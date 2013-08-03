@@ -8,5 +8,6 @@ upload/tmp/*
 upload/chart/*
 backup/*
 worker/config.php
+worker/tmp/*
 
 !.keep
