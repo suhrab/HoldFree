@@ -71,7 +71,7 @@
                                     $fileQueueRow.find(" td.status").text(dbFileInfo['status_message']);
                                 } else {
                                     if(dbFileInfo['complete_status'] != 0){
-                                        $fileQueueRow.find('td.status').html('<div class="progress-bar"><div class="progress-status-yellow" style="width: 0%"></div></div><div class="progress-text">Конвертация: <i class="progress-percent">0</i>%</div>');
+                                        $fileQueueRow.find('td.status').html('<div class="progress-bar"><div class="progress-status-yellow" style="width: 0%"></div></div><div class="progress-text">КонвертацияЩ: <i class="progress-percent">0</i>%</div>');
                                         $fileQueueRow.find('td.status').find("div.progress-status-yellow").css("width", dbFileInfo['complete_status'] + "%");
                                         $fileQueueRow.find('i.progress-percent').text(dbFileInfo['complete_status']);
 
@@ -200,12 +200,12 @@
                             {/if}
                         {/foreach}
 
-                        <tr>
+                        <!--tr>
                             <td><a href="#" class="file">Dexter_s1_e1.mp4</a></td>
                             <td>347.1 MB</td>
                             <td>17.09.2012, 18:01</td>
                             <td><a href="#"><img src="{$_template}/img/icon_24_chain.png" width="24" height="24" alt="URL" /></a></td>
-                        </tr>
+                        </tr-->
                     </tbody>
                 </table>
             </div>
@@ -244,24 +244,6 @@
                     </tr>
                     </thead>
                     <tbody id="FileQueue">
-                        <tr>
-                            <td>Dexter_s1_e1.mp4</td>
-                            <td>292 MB</td>
-                            <td class="dark-blue">
-                                <div class="progress-bar"><div class="progress-status-green" style="width: 46%"></div></div>
-                                <div class="progress-text">Загружено: <i class="progress-percent">46</i>%</div>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Dexter_s1_e1.mp4</td>
-                            <td>292 MB</td>
-                            <td class="dark-blue">
-                                <div class="progress-bar"><div class="progress-status-green" style="width: 0%"></div></div>
-                                <div class="progress-text">Загружено: 0%</div>
-                            </td>
-                            <td></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
