@@ -62,3 +62,10 @@ $smarty->assign('language', $language);
 // User
 require_once(DIR_CLASS . 'User.class.php');
 $_user = new User\User($pdo);
+
+
+require_once(DIR_CLASS . 'FileManager.class.php');
+$_fileManager = new FileManager($pdo);
+
+echo $_fileManager->addFile('new_file.mp4');
+die;
