@@ -177,11 +177,13 @@
                         </tr>
                     </thead>
                     <tbody id="fileList">
-                        {foreach from=$dir_list item=dir}
-                            <tr id="row_dir_{$dir.id}">
-                                <td colspan="3"><a href="javascript:;" class="dir" id="dir_{$dir.id}" data-id="{$dir.id}">{$dir.name}</a></td>
+                        {foreach from=$files item=file}
+                            {if $file.type == 'dir'}
+                            <tr id="row_dir_{$file.id}">
+                                <td colspan="3"><a href="javascript:;" class="dir" id="dir_{$file.id}" data-id="{$file.id}">{$file.user_defined_name}</a></td>
                                 <td><a href="#"><img src="{$_template}/img/icon_24_chain.png" width="24" height="24" alt="URL" /></a></td>
                             </tr>
+                            {/if}
                         {/foreach}
 
                         <tr>

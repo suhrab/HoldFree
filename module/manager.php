@@ -44,21 +44,8 @@ if ($action == 'upload')
 }
 else
 {
-    $sth = $pdo->prepare('SELECT id, name, files, created FROM hf_dir  WHERE owner = :owner ORDER BY id DESC');
-
-    $owner = $_user->getId();
-
-    $sth->bindParam(':owner', $owner);
-    $sth->execute();
-
-    $dir_list = array();
-
-    while ($row = $sth->fetch()) {
-        $row['created'] = date('d.m.Y', $row['created']);
-        $dir_list[] = $row;
-    }
-
-    $smarty->assign('dir_list', $dir_list);
+    $files = $_fileManager->getFilesInfoByUserId($_user->getId());
+    $smarty->assign('files', $files);
 }
 
 $smarty->display('manager.tpl');
