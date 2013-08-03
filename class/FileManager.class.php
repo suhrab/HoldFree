@@ -19,14 +19,14 @@ class FileManager
         $this->pdo = $pdo;
     }
 
-    public function addFile($file_name)
+    public function addFile($file_name, $user_id)
     {
         $file_data['system_defined_name']    = 'system_name';
         $file_data['user_defined_name']      = $file_name;
         $file_data['created']                = time();
         $file_data['file_size']              = 7480;
         $file_data['parent']                 = 0;
-        $file_data['user_id']                = 16;
+        $file_data['user_id']                = $user_id;
         $file_data['files']                  = '';
         $file_data['complete_status']        = 0;
         $file_data['status_message']         = '';
