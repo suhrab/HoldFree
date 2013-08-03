@@ -197,6 +197,13 @@
                                 <td colspan="3"><a href="javascript:;" class="dir" id="dir_{$file.id}" data-id="{$file.id}">{$file.user_defined_name}</a></td>
                                 <td><a href="#"><img src="{$_template}/img/icon_24_chain.png" width="24" height="24" alt="URL" /></a></td>
                             </tr>
+                            {elseif $file.type == 'file'}
+                                <tr>
+                                    <td><a href="#" class="file">{$file.user_defined_name}</a></td>
+                                    <td>{$file.file_size}</td>
+                                    <td>{$file.created}</td>
+                                    <td><a href="#"><img src="{$_template}/img/icon_24_chain.png" width="24" height="24" alt="URL" /></a></td>
+                                </tr>
                             {/if}
                         {/foreach}
 

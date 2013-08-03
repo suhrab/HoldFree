@@ -65,6 +65,16 @@ class FileManager
         $sth->execute();
         $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
 
+        foreach ($files_info as &$file)
+        {
+            $file['created'] = date('d.m.y');
+
+            if (mb_strlen($file['user_defined_name']) > 40) {
+                $file['user_defined_name'] = mb_substr($file['user_defined_name'], 0, 15) . '...' . mb_substr($file['user_defined_name'], -10, 10);
+            }
+        }
+
+
         return $files_info;
     }
 
