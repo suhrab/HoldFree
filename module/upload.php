@@ -15,7 +15,7 @@ if (!move_uploaded_file($file, $tmp_file)) {
     die('{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Move uploaded file failed!"}, "id" : "id"}');
 }
 
-$dbFileId = $_fileManager->addFile(pathinfo($tmp_file, PATHINFO_BASENAME), $_FILES['file']['name'], $_user->getId());
+$dbFileId = $_fileManager->addFile(pathinfo($tmp_file, PATHINFO_BASENAME), $_FILES['file']['name'], $_user->getId(), $_FILES['file']['size']);
 
 $payload = [
     'source_file_url'   => URL . '/upload/tmp/' .  pathinfo($tmp_file, PATHINFO_BASENAME),

@@ -19,12 +19,12 @@ class FileManager
         $this->pdo = $pdo;
     }
 
-    public function addFile($system_defined_name, $user_defined_name, $user_id)
+    public function addFile($system_defined_name, $user_defined_name, $user_id, $file_size = 0)
     {
         $file_data['system_defined_name']    = $system_defined_name;
         $file_data['user_defined_name']      = $user_defined_name;
         $file_data['created']                = time();
-        $file_data['file_size']              = 7480;
+        $file_data['file_size']              = $file_size;
         $file_data['parent']                 = 0;
         $file_data['user_id']                = $user_id;
         $file_data['files']                  = '';
@@ -72,8 +72,9 @@ class FileManager
             if (mb_strlen($file['user_defined_name']) > 40) {
                 $file['user_defined_name'] = mb_substr($file['user_defined_name'], 0, 15) . '...' . mb_substr($file['user_defined_name'], -10, 10);
             }
-        }
 
+            $file['file_size'] = $this->formatFileSize($file['file_size']);
+        }
 
         return $files_info;
     }
@@ -189,6 +190,12 @@ class FileManager
     public function moveDir($dir_id, $target_dir_id)
     {
         $this->moveFile($dir_id, $target_dir_id);
+    }
+
+    protected function formatFileSize($file_size) {
+        $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        $power = $file_size > 0 ? floor(log($file_size, 1024)) : 0;
+        return number_format($file_size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
     }
 
     public function __destruct()
