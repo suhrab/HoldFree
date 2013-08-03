@@ -1,4 +1,7 @@
 <?php
+
+require_once(__DIR__ . '/config.php');
+
 $worker = new GearmanWorker();
 $worker->addServer('91.213.233.143');
 $worker->addFunction('convert_v1', 'convertJob');
@@ -6,12 +9,6 @@ $worker->addFunction('convert_v1', 'convertJob');
 set_error_handler(function($errno , $errstr ,$errfile, $errline, $errcontext) {
     throw new ErrorException($errstr, $errno, E_ALL | E_STRICT, $errfile, $errline);
 }, $error_types = E_ALL | E_STRICT);
-
-define('DB_USER', 'root');
-define('DB_PASS', '232323');
-define('DB_HOST', '127.0.0.1');
-define('DB_PORT', '8889');
-define('DB_NAME', 'holdfree');
 
 while ($worker->work()) {}
 //$worker->work();

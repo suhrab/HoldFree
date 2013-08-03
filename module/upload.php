@@ -6,46 +6,32 @@ if (!defined('CHECK')) {
 $file = isset($_FILES['file']['tmp_name']) ? $_FILES['file']['tmp_name'] : '';
 
 if (!is_uploaded_file($file)) {
-    throw new Exception('File not uploaded!');
+    die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "File not uploaded!"}, "id" : "id"}');
 }
 
 $tmp_file = tempnam(DIR_UPLOAD . 'tmp', 'tmp');
 
 if (!move_uploaded_file($file, $tmp_file)) {
-    throw new Exception('Move uploaded file failed!');
+    die('{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Move uploaded file failed!"}, "id" : "id"}');
 }
 
-$sth = $pdo->prepare('
-    INSERT INTO
-        hf_file
-    SET
-        user_defined_name = :user_defined_name,
-        files = :files,
-        source_file_url = :source_file_url,
-        added = :added,
-        type = :type,
-        owner = :owner,
-        complete_status = 0,
-        status_message = ""
-');
-
-$file_data['user_defined_name'] = pathinfo($_FILES['file']['name'], PATHINFO_BASENAME);
-$file_data['files'] = '';
-$file_data['source_file_url'] = URL . '/upload/tmp/' .  pathinfo($tmp_file, PATHINFO_BASENAME);
-$file_data['added'] = time();
-$file_data['type'] = 'file';
-$file_data['owner'] = 16;
-
-$sth->execute($file_data);
+$dbFileId = $_fileManager->addFile(pathinfo($tmp_file, PATHINFO_BASENAME), $_user->getId());
 
 $payload = [
-    'source_file_url'   => $file_data['source_file_url'],
-    'row_id'            => $pdo->lastInsertId(),
+    'source_file_url'   => URL . '/upload/tmp/' .  pathinfo($tmp_file, PATHINFO_BASENAME),
+    'row_id'            => $dbFileId,
     'storage_server'    => 'http://holdfreestorage.com',
-    'video_sizes'       => ['480p' => true, '720p' => true]
+    'video_sizes'       => ['480p' => true]
 ];
 
 $gearman_client = new GearmanClient();
 $gearman_client->addServer('91.213.233.143');
 $task = $gearman_client->addTaskBackground('convert_v1', serialize($payload));
 $gearman_client->runTasks();
+
+echo json_encode([
+    'jsonrpc' => '2.0',
+    'result' => 'null',
+    'id' => $dbFileId,
+]);
+die;

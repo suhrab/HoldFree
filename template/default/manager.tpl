@@ -9,6 +9,15 @@
     <script type="text/javascript" src="{$_template}/js/context-menu/jquery.ui.position.js"></script>
     <link type="text/css" href="{$_template}/js/context-menu/jquery.contextMenu.css" rel="stylesheet" />
 
+    <script type="text/javascript" src="{$_dashboard}/js/plugins/uploader/plupload.js"></script>
+    <script type="text/javascript" src="{$_dashboard}/js/plugins/uploader/plupload.html4.js"></script>
+    <script type="text/javascript" src="{$_dashboard}/js/plugins/uploader/plupload.html5.js"></script>
+
+    <script type="text/javascript" src="{$_template}/js/plupload/plupload.js"></script>
+    <script type="text/javascript" src="{$_template}/js/plupload/plupload.flash.js"></script>
+    <script type="text/javascript" src="{$_template}/js/plupload/plupload.html4.js"></script>
+    <script type="text/javascript" src="{$_template}/js/plupload/plupload.html5.js"></script>
+
     <script type="text/javascript">
         $(function()
         {
@@ -27,7 +36,98 @@
                     bytes = bytes.toFixed(1);
                 }
                 return bytes + units[i];
-            };
+            }
+
+            var filesToMonitor = { };
+            function AddFileToMonitor(dbFileId, $fileQueueRow){
+                filesToMonitor[dbFileId] = $fileQueueRow;
+            }
+
+            function PollFilesToMonitor(){
+                var fileIds = []
+                for(var key in filesToMonitor){
+                    fileIds.push(key)
+                }
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: '/?module=file_status&is_ajax=1',
+                    data: {
+                        fileIds: fileIds
+                    },
+                    dataType: 'json',
+                    success: function(r){
+                        $(r).each(function(i, dbFileInfo){
+                            if(!filesToMonitor.hasOwnProperty(dbFileInfo['id']))
+                                return;
+                            var $fileQueueRow = filesToMonitor[dbFileInfo['id']];
+                            if(dbFileInfo['status_message'] != ''){
+                                $fileQueueRow.find(" td.status").text(dbFileInfo['status_message']);
+                            } else {
+                                if(dbFileInfo['complete_status'] != 0){
+                                    $fileQueueRow.find(" td.status").text('Конвертация: ' + dbFileInfo['complete_status'] + ' %');
+                                }
+                            }
+                        })
+                    }
+                });
+
+                setTimeout(PollFilesToMonitor, 2*1000);
+            }
+
+            PollFilesToMonitor();
+
+            var uploader = new plupload.Uploader({
+                runtimes : 'html5,flash',
+                browse_button : 'UploadFileButton',
+                container : 'FileQueueContainer',
+                max_file_size : '2gb',
+                url : '/?module=upload&is_ajax=1',
+                flash_swf_url       : '{$_template}/js/plupload/plupload.flash.swf',
+                filters : [
+                    { title : "Video files", extensions : "mp4,avi,mkv" }
+                ]
+            });
+
+            uploader.bind('Init', function(up, params) {
+                $('#filelist').html("<div>Current runtime: " + params.runtime + "</div>");
+            });
+
+            $('#uploadfiles').click(function(e) {
+                uploader.start();
+                e.preventDefault();
+            });
+
+            uploader.init();
+
+            uploader.bind('FilesAdded', function(up, files) {
+                $.each(files, function(i, file) {
+                    $('<tr id="'+file.id+'"><td>'+file.name+'</td><td>'+getBytesWithUnit(file.size)+'</td><td class="status">В очереди на загрузку</td><td class="uploadSpeed"></td></tr>').appendTo('#FileQueue');
+                });
+
+                up.refresh(); // Reposition Flash/Silverlight
+                up.start();
+            });
+
+            uploader.bind('UploadProgress', function(up, file) {
+                var $fileRow = $('#' + file.id)
+                $fileRow.find(" td.uploadSpeed").text(getBytesWithUnit(up.total.bytesPerSec) + "/s");
+                $fileRow.find(" td.status").text("Загружается");
+            });
+
+            uploader.bind('Error', function(up, err) {
+                console.log(err)
+
+                up.refresh(); // Reposition Flash/Silverlight
+            });
+
+            uploader.bind('FileUploaded', function(up, file, response) {
+                var r = jQuery.parseJSON(response.response);
+                var $fileRow = $('#' + file.id);
+                AddFileToMonitor(r.id, $fileRow);
+                $fileRow.find(" td.uploadSpeed").text("");
+                $fileRow.find(" td.status").text("В очереди на конвертацию");
+            });
         });
     </script>
 
@@ -45,7 +145,7 @@
 
         <h2>Менеджер видео</h2>
 
-        <a href="javascript:;" class="button">Загрузить файл</a>
+        <a href="javascript:;" class="button" id="UploadFileButton">Загрузить файл</a>
         <a href="javascript:;" class="button" id="newDir">Создать папку</a>
 
         <div class="manager">
@@ -96,7 +196,7 @@
 
             <div class="cleaner"></div>
 
-            <div class="loading-panel">
+            <div class="loading-panel" id="FileQueueContainer">
                 <table width="100%" cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
@@ -106,7 +206,7 @@
                         <td width="140">Скорость</td>
                     </tr>
                     </thead>
-                    <tbody id="uploading-files">
+                    <tbody id="FileQueue">
                         <tr>
                             <td>Dexter_s1_e1.mp4</td>
                             <td>292 MB</td>
