@@ -107,7 +107,13 @@ function convert_with_progress($command, $progressCallback, &$errors = null){
 
 function sentFileToStorage($file_path, $storage_url)
 {
-    $post = array('filename' => '@' . $file_path);
+    if (PHP_VERSION_ID < 50500) {
+        $post = array('filename' => '@' . $file_path);
+    }
+    else {
+        $post = array('file' => new CURLFile($file_path));
+    }
+
     $storage_url = $storage_url . '/api/uploadFile';
 
     $ch = curl_init();
@@ -118,7 +124,7 @@ function sentFileToStorage($file_path, $storage_url)
     $result = curl_exec ($ch);
     curl_close ($ch);
 
-    $result = (array) json_decode($result);
+    $result = json_decode($result, true);
 
     return $result['fileURL'];
 }
