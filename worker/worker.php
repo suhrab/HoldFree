@@ -18,11 +18,15 @@ function convert_with_progress($command, $progressCallback, &$errors = null){
     $line = '';
     $lines = [];
     $totalDurationSeconds = 0.0;
+    $completePercentLastSendTime = 0;
+    $conversionWasSuccessful = false;
 
     try{
         // стартовая информация ffmpeg
         while(!feof($process)){
             $line = trim(fgets($process));
+            if(count($lines) > 5)
+                array_shift($lines);
             $lines[] = $line;
 
             if($totalDurationSeconds == 0.0 && preg_match('/^Duration: ([0-9]+:[0-9]+:[0-9]+.[0-9]+), start:/', $line, $matches) == 1){
@@ -37,15 +41,17 @@ function convert_with_progress($command, $progressCallback, &$errors = null){
             throw new Exception('totalDurationSeconds is zero');
 
         $line = '';
-        $completePercentLastSendTime = 0;
+
         while (false !== ($char = fgetc($process)))
         {
             if ($char == "\r")
             {
                 $line = trim($line);
+                if(count($lines) > 5)
+                    array_shift($lines);
                 $lines[] = $line;
                 // progress information
-                if(preg_match('/^frame=\s+[0-9]+\s+fps=\s*[0-9.]+ q=.+time=([0-9]+:[0-9]+:[0-9]+\.[0-9]+) bitrate=/', $line, $matches) == 1){
+                if(preg_match('/^frame=\s*[0-9]+\s+fps=\s*[0-9.]+\s+q=.+time=([0-9]+:[0-9]+:[0-9]+\.[0-9]+) bitrate=/', $line, $matches) == 1){
                     list($completeHours, $completeMinutes, $completeSeconds) = explode(':', $matches[1]);
                     list($completeSeconds, $completeMilliseconds) = explode('.', $completeSeconds);
                     $totalCompleteSeconds = $completeHours * 60*60 + $completeMinutes * 60 + $completeSeconds + $completeMilliseconds / 100;
@@ -62,21 +68,20 @@ function convert_with_progress($command, $progressCallback, &$errors = null){
             }
             else if($char == "\n"){
                 // progress info end
+                if(count($lines) > 5)
+                    array_shift($lines);
                 $lines[] = $line;
-                break;
+
+                $lines[] = $line;
+                if(preg_match('/^\[libx264 @ \w+\] kb\/s:[0-9.]+$/', $line ) == 1){
+                    $conversionWasSuccessful = true;
+                    break;
+                }
+
+                $line = "";
             }
             else {
                 $line .= $char;
-            }
-        }
-
-        $conversionWasSuccessful = false;
-        while(!feof($process)){
-            $line = trim(fgets($process));
-            $lines[] = $line;
-            if(preg_match('/^\[libx264 @ \w+\] kb\/s:[0-9.]+$/', $line ) == 1){
-                $conversionWasSuccessful = true;
-                break;
             }
         }
 
@@ -219,14 +224,13 @@ function convertJob(GearmanJob $job)
 
         $first_command = array_shift($commands);
 
-        $r = convert_with_progress($first_command['cmd'], function($completePercent) use ($pdo, $payload) {
-            $sth = $pdo->prepare('UPDATE hf_file SET complete_status = :complete_status WHERE id = :row_id');
-
+        $updateCompleteStmt = $pdo->prepare('UPDATE hf_file SET complete_status = :complete_status WHERE id = :row_id');
+        $r = convert_with_progress($first_command['cmd'], function($completePercent) use ($updateCompleteStmt, $payload) {
             if ($completePercent == 100) {
                 $completePercent = mt_rand(95, 99);
             }
 
-            $sth->execute(array('complete_status' => $completePercent, 'row_id' => $payload['row_id']));
+            $updateCompleteStmt->execute(array('complete_status' => $completePercent, 'row_id' => $payload['row_id']));
         }, $convert_errors);
 
         if (!$r) {
