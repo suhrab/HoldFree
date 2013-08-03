@@ -43,6 +43,11 @@
                 filesToMonitor[dbFileId] = $fileQueueRow;
             }
 
+            function RemoveFileFromMonitor(dbFileId){
+                if(filesToMonitor.hasOwnProperty(dbFileId))
+                    delete filesToMonitor[dbFileId]
+            }
+
             function PollFilesToMonitor(){
                 var fileIds = []
                 for(var key in filesToMonitor){
@@ -69,6 +74,11 @@
                                         $fileQueueRow.find('td.status').html('<div class="progress-bar"><div class="progress-status-yellow" style="width: 0%"></div></div><div class="progress-text">Конвертация: <i class="progress-percent">0</i>%</div>');
                                         $fileQueueRow.find('td.status').find("div.progress-status-yellow").css("width", dbFileInfo['complete_status'] + "%");
                                         $fileQueueRow.find('i.progress-percent').text(dbFileInfo['complete_status']);
+
+                                        if(dbFileInfo['complete_status'] == 100){
+                                            RemoveFileFromMonitor(dbFileInfo['id'])
+                                            $fileQueueRow.css('opacity', '0.6')
+                                        }
                                     }
                                 }
                             })

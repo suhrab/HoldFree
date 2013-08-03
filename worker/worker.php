@@ -4,7 +4,7 @@ require_once(__DIR__ . '/config.php');
 
 $worker = new GearmanWorker();
 $worker->addServer('91.213.233.143');
-$worker->addFunction('convert_v1', 'convertJob');
+$worker->addFunction('convert_v2', 'convertJob');
 
 set_error_handler(function($errno , $errstr ,$errfile, $errline, $errcontext) {
     throw new ErrorException($errstr, $errno, E_ALL | E_STRICT, $errfile, $errline);

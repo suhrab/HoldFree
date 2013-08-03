@@ -26,7 +26,7 @@ $payload = [
 
 $gearman_client = new GearmanClient();
 $gearman_client->addServer('91.213.233.143');
-$task = $gearman_client->addTaskBackground('convert_v1', serialize($payload));
+$task = $gearman_client->addTaskBackground('convert_v2', serialize($payload));
 $gearman_client->runTasks();
 
 echo json_encode([
