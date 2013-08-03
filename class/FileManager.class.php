@@ -19,10 +19,10 @@ class FileManager
         $this->pdo = $pdo;
     }
 
-    public function addFile($file_name, $user_id)
+    public function addFile($system_defined_name, $user_defined_name, $user_id)
     {
-        $file_data['system_defined_name']    = 'system_name';
-        $file_data['user_defined_name']      = $file_name;
+        $file_data['system_defined_name']    = $system_defined_name;
+        $file_data['user_defined_name']      = $user_defined_name;
         $file_data['created']                = time();
         $file_data['file_size']              = 7480;
         $file_data['parent']                 = 0;
@@ -31,13 +31,23 @@ class FileManager
         $file_data['complete_status']        = 0;
         $file_data['status_message']         = '';
 
+        $sth = $this->pdo->prepare('SELECT id FROM hf_file WHERE user_defined_name = :user_defined_name AND user_id = :user_id LIMIT 1');
+        $sth->bindParam(':user_defined_name', $file_data['user_defined_name']);
+        $sth->bindParam(':user_id', $file_data['user_id']);
+        $sth->execute();
+
+        if ($sth->rowCount()) {
+            $file_path_info = pathinfo($file_data['user_defined_name']);
+            $file_data['user_defined_name'] = $file_path_info['filename'] . '_' . date('d-m-Y_H-i-s') . '.' . $file_path_info['extension'];
+        }
+
         $sth = $this->pdo->prepare('INSERT INTO hf_file SET system_defined_name = :system_defined_name, user_defined_name = :user_defined_name, created = :created, file_size = :file_size, parent = :parent, user_id = :user_id, files = :files, complete_status = :complete_status, status_message = :status_message');
         $sth->execute($file_data);
 
         return $this->pdo->lastInsertId();
     }
 
-    public function getFileById($file_id)
+    public function getFileInfo($file_id)
     {
         $file_data['file_id'] = $file_id;
 
@@ -48,9 +58,33 @@ class FileManager
         return $received_file_data ? $received_file_data : array();
     }
 
+    public function getFilesInfoByUserId($user_id)
+    {
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id');
+        $sth->bindParam(':user_id', $user_id);
+        $sth->execute();
+        $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
+
+        return $files_info;
+    }
+
     public function deleteFile($file_id)
     {
-        $file_data['file_id'] = $file_id;
+        $file_data['file_id'] = (int) $file_id;
+
+        $file_info = $this->getFileInfo($file_data['file_id']);
+
+        if ($file_info['type'] == 'file' && ($file_info['complete_status'] != 100 && empty($file_info['status_message']))) {
+            throw new Exception('Файл “'. $file_info['user_defined_name'] .'” не может быть удален так как находится в процессе обрабатывания.');
+        }
+
+        if ($file_info['type'] == 'dir' && !$this->isEmptyDir($file_data['file_id'])) {
+            throw new Exception('Директория “'. $file_info['user_defined_name'] .'” не может быть удалена, так как содержит файлы или папки.');
+        }
+
+        if ($file_info['files'] && $file_info['type'] == 'file') {
+            // TODO нужно удалять файл физически
+        }
 
         $sth = $this->pdo->prepare('DELETE FROM hf_file WHERE id = :file_id');
         $sth->execute($file_data);
@@ -66,7 +100,12 @@ class FileManager
         $file_data['user_id']                = $user_id;
         $file_data['type']                   = 'dir';
 
-        if ($this->isDirExists($file_data['user_defined_name'], $user_id)) {
+        $sth = $this->pdo->prepare('SELECT id FROM hf_file WHERE user_defined_name = :user_defined_name AND user_id = :user_id');
+        $sth->bindParam(':user_defined_name', $file_data['user_defined_name']);
+        $sth->bindParam(':user_id', $file_data['user_id']);
+        $sth->execute();
+
+        if ($sth->rowCount()) {
             throw new Exception('The name “'. $file_data['user_defined_name'] .'” is already taken. Please choose a different name.');
         }
 
@@ -76,27 +115,16 @@ class FileManager
         return $this->pdo->lastInsertId();
     }
 
-    public function deleteDir($dir_name, $user_id)
+    public function deleteDir($dir_id)
     {
-        $file_data['user_defined_name'] = $dir_name;
-        $file_data['user_id'] = (int) $user_id;
-
-        if (!$this->isDirExists($file_data['user_defined_name'], $user_id)) {
-            throw new Exception('A directory “'. $file_data['user_defined_name'] .'” is not exists.');
-        }
-
-        $sth = $this->pdo->prepare('DELETE FROM hf_file WHERE user_defined_name = :user_defined_name AND user_id = :user_id');
-        $sth->execute($file_data);
-
-        return $sth->rowCount();
+        $this->deleteFile($dir_id);
     }
 
-    public function isDirExists($dir_name, $user_id)
+    public function isDirExists($dir_id)
     {
-        $file_data['user_defined_name'] = $dir_name;
-        $file_data['user_id'] = (int) $user_id;
+        $file_data['dir_id'] = $dir_id;
 
-        $sth = $this->pdo->prepare('SELECT id FROM hf_file WHERE user_defined_name = :user_defined_name AND user_id = :user_id');
+        $sth = $this->pdo->prepare('SELECT id FROM hf_file WHERE id = :dir_id');
         $sth->execute($file_data);
 
         return $sth->rowCount() ? true : false;
@@ -110,6 +138,26 @@ class FileManager
         $sth->execute($file_data);
 
         return $sth->rowCount() ? false : true;
+    }
+
+    public function moveFile($file_id, $target_dir_id)
+    {
+        $file_data['file_id'] = (int) $file_id;
+        $file_data['target_dir_id'] = (int) $target_dir_id;
+
+        if (!$this->isDirExists($file_data['target_dir_id'])) {
+            throw new Exception('Directory not exists');
+        }
+
+        $sth = $this->pdo->prepare('UPDATE hf_file SET parent = :target_dir_id WHERE id = :file_id');
+        $sth->execute($file_data);
+
+        return $sth->rowCount();
+    }
+
+    public function moveDir($dir_id, $target_dir_id)
+    {
+        $this->moveFile($dir_id, $target_dir_id);
     }
 
     public function __destruct()
