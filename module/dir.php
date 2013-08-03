@@ -18,19 +18,13 @@ if ($action == 'add')
     }
 
     $parent = 0;
-    $created = time();
     $owner = $_user->getId();
 
-    $sth = $pdo->prepare('INSERT INTO hf_dir SET name = :dir_name, parent = :parent, created = :created, owner = :owner');
-    $sth->bindParam(':dir_name', $dir_name);
-    $sth->bindParam(':parent', $parent);
-    $sth->bindParam(':created', $created);
-    $sth->bindParam(':owner', $owner);
-    $sth->execute();
+    $dir_id = $_fileManager->addDir($dir_name, $_user->getId(), $parent);
 
     die('{
         "success": 1,
-        "dir_id": "'. $pdo->lastInsertId() .'",
+        "dir_id": '. $dir_id .',
         "dir_name": "'. $dir_name .'",
         "parent": "'. $parent .'"
     }');

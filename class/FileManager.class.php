@@ -60,7 +60,7 @@ class FileManager
 
     public function getFilesInfoByUserId($user_id)
     {
-        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id');
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id ORDER BY created DESC');
         $sth->bindParam(':user_id', $user_id);
         $sth->execute();
         $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
