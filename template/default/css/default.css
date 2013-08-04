@@ -571,10 +571,10 @@ h2 {
 .page-manager .dir-tree a {
     text-decoration: none;
 }
+
 .page-manager .dir-tree li.dir-root {
     line-height: 24px;
     background: url("../img/icon_24_logo.png") no-repeat;
-    margin-bottom: 20px;
 }
 .page-manager .dir-tree a.parent {
     font-weight: bold;
@@ -584,7 +584,8 @@ h2 {
     margin-top: 5px;
 }
 .page-manager .dir-tree li.dir-root ul {
-    margin-left: 10px;
+    margin-left: 15px;
+    margin-bottom: 8px;
 }
 .page-manager .dir-tree li.dir {
     background: url("../img/icon_16_dir.png") no-repeat left 3px;

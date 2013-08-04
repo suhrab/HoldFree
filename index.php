@@ -1,6 +1,7 @@
 <?php
 session_start();
-//phpinfo();die;
+
+$_SERVER['REMOTE_ADDR'] = '92.245.100.83'; // TODO Это удалить
 
 define('CHECK', TRUE);
 
