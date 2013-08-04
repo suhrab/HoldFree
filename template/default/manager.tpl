@@ -188,11 +188,15 @@
                 <ul>
                     <li class="dir-root">
                         <a href="#" class="parent">Менеджер файлов</a>
+
                         <ul>
-                            <li class="dir"><a href="#">Dexter</a></li>
-                            <li class="dir"><a href="#">House M.D.</a></li>
-                            <li class="dir"><a href="#">How to make it in America</a></li>
+                            {if count($dirs)}
+                                {foreach from=$dirs item=dir}
+                                    <li class="dir"><a href="#">{$dir.user_defined_name}</a></li>
+                                {/foreach}
+                            {/if}
                         </ul>
+
                     </li>
 
                     <li class="dir-trash">
@@ -212,16 +216,17 @@
                         </tr>
                     </thead>
                     <tbody id="fileList">
-                        {foreach from=$files item=file}
+                        {foreach from=$files_and_dirs item=file}
                             {if $file.type == 'dir'}
                             <tr id="row_dir_{$file.id}">
-                                <td colspan="3"><a href="javascript:;" class="dir" id="dir_{$file.id}" data-id="{$file.id}">{$file.user_defined_name}</a></td>
-                                <td><a href="#"><img src="{$_template}/img/icon_24_chain.png" width="24" height="24" alt="URL" /></a></td>
+                                <td colspan="2"><a href="javascript:;" class="dir" id="dir_{$file.id}" data-id="{$file.id}">{$file.user_defined_name}</a></td>
                                 <td>{$file.created}</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             {elseif $file.type == 'file'}
                                 <tr>
-                                    <td><a href="#" class="file">{$file.user_defined_name}</a></td>
+                                    <td><a href="#" class="file" title="{$file.user_defined_name}">{$file.cut_user_defined_name}</a></td>
                                     <td>{$file.file_size}</td>
                                     <td>{$file.created}</td>
 
@@ -236,13 +241,6 @@
                                 </tr>
                             {/if}
                         {/foreach}
-
-                        <!--tr>
-                            <td><a href="#" class="file">Dexter_s1_e1.mp4</a></td>
-                            <td>347.1 MB</td>
-                            <td>17.09.2012, 18:01</td>
-                            <td><a href="#"><img src="{$_template}/img/icon_24_chain.png" width="24" height="24" alt="URL" /></a></td>
-                        </tr-->
                     </tbody>
                 </table>
             </div>

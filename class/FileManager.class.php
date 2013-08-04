@@ -71,7 +71,7 @@ class FileManager
         foreach ($files_info as &$file)
         {
             $file['created'] = date('d.m.y');
-            $file['user_defined_name'] = mb_strlen($file['user_defined_name']) > 40 ? mb_substr($file['user_defined_name'], 0, 15) . '...' . mb_substr($file['user_defined_name'], -10, 10) : $file['user_defined_name'];
+            $file['cut_user_defined_name'] = mb_strlen($file['user_defined_name']) > 40 ? mb_substr($file['user_defined_name'], 0, 15) . '...' . mb_substr($file['user_defined_name'], -10, 10) : $file['user_defined_name'];
             $file['file_size'] = $this->formatFileSize($file['file_size']);
         }
 
@@ -135,7 +135,6 @@ class FileManager
         $file_data['created']                = time();
         $file_data['parent']                 = $parent;
         $file_data['user_id']                = $user_id;
-        $file_data['type']                   = 'dir';
 
         $sth = $this->pdo->prepare('SELECT id FROM hf_file WHERE user_defined_name = :user_defined_name AND user_id = :user_id');
         $sth->bindParam(':user_defined_name', $file_data['user_defined_name']);
@@ -146,10 +145,27 @@ class FileManager
             throw new Exception('The name “'. $file_data['user_defined_name'] .'” is already taken. Please choose a different name.');
         }
 
-        $sth = $this->pdo->prepare('INSERT INTO hf_file SET user_defined_name = :user_defined_name, created = :created, parent = :parent, user_id = :user_id, type = :type');
+        $sth = $this->pdo->prepare('INSERT INTO hf_file SET user_defined_name = :user_defined_name, created = :created, parent = :parent, user_id = :user_id, type = "dir", complete_status = 100');
         $sth->execute($file_data);
 
         return $this->pdo->lastInsertId();
+    }
+
+    public function getDirsInfoByUserId($user_id)
+    {
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id AND type = "dir" ORDER BY created DESC');
+        $sth->bindParam(':user_id', $user_id);
+        $sth->execute();
+        $dirs_info = $sth->rowCount() ? $sth->fetchAll() : array();
+
+        foreach ($dirs_info as &$dir)
+        {
+            $dir['created'] = date('d.m.y');
+            $dir['user_defined_name'] = mb_strlen($dir['user_defined_name']) > 40 ? mb_substr($dir['user_defined_name'], 0, 15) . '...' . mb_substr($dir['user_defined_name'], -10, 10) : $dir['user_defined_name'];
+            $dir['file_size'] = $this->formatFileSize($dir['file_size']);
+        }
+
+        return $dirs_info;
     }
 
     public function deleteDir($dir_id)

@@ -79,7 +79,7 @@ elseif ($action == 'dump')
         $backup_filepath = $backup_filepath . '.gz';
 
     $command = <<<CMD
-mysqldump --opt -h "$DB_HOST" --port="$DB_PORT" -u "$DB_USER" $MYSQLDUMP_PASS_ARG "$DB_NAME" $MYSQLDUMP_GZIP_ARG > $backup_filepath  2>&1
+functimysqldump -h "$DB_HOST" --port="$DB_PORT" -u "$DB_USER" $MYSQLDUMP_PASS_ARG "$DB_NAME" $MYSQLDUMP_GZIP_ARG > $backup_filepath  2>&1
 CMD;
 
     ob_start();
@@ -95,7 +95,7 @@ CMD;
         die;
     }
     else {
-        throw new Exception('Ошибка mysqlcheck: ' . $mysqlcheck_output);
+        throw new Exception('Ошибка mysqldump: ' . $mysqldump_output . $return_code);
     }
 }
 elseif ($action == 'load')

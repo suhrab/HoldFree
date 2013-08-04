@@ -44,9 +44,8 @@ if ($action == 'upload')
 }
 else
 {
-    $files = $_fileManager->getFilesInfoByUserId($_user->getId());
-    $smarty->assign('files', $files);
-
+    $smarty->assign('dirs', $_fileManager->getDirsInfoByUserId($_user->getId()));
+    $smarty->assign('files_and_dirs', $_fileManager->getFilesInfoByUserId($_user->getId()));
     $smarty->assign('filesInProgress', $_fileManager->getFilesInfoInProgressByUserId($_user->getId()));
 }
 
