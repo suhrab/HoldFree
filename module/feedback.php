@@ -8,38 +8,38 @@ if ($action == 'send')
     $message = isset($_POST['message']) ? trim($_POST['message']) : '';
 
     if (!$captcha) {
-        throw new ExceptionImproved ('Введите код безопасности, пожалуйста');
+        throw new ExceptionImproved (gettext('Введите код безопасности, пожалуйста'));
     }
 
     if (!isset($_SESSION['captcha_keystring']) || $_SESSION['captcha_keystring'] !== $captcha) {
-        throw new Exception ('Неверный код безопасности');
+        throw new Exception (gettext('Неверный код безопасности'));
     }
 
     if (!$topic) {
-        throw new ExceptionImproved ('Введите тему сообщения, пожалуйста');
+        throw new ExceptionImproved (gettext('Введите тему сообщения, пожалуйста'));
     }
 
     if (!$email) {
-        throw new ExceptionImproved ('Введите корректный email, пожалуйста');
+        throw new ExceptionImproved (gettext('Введите корректный email, пожалуйста'));
     }
 
     if (!$message) {
-        throw new ExceptionImproved ('Введите текст сообщения, пожалуйста');
+        throw new ExceptionImproved (gettext('Введите текст сообщения, пожалуйста'));
     }
 
     switch ($topic)
     {
         case 1:
-            $topic = 'Техническая поддержка';
+            $topic = gettext('Техническая поддержка');
             break;
         case 2:
-            $topic = 'Правообладатель';
+            $topic = gettext('Правообладатель');
             break;
         case 3:
-            $topic = 'Пресса';
+            $topic = gettext('Пресса');
             break;
         case 4:
-            $topic = 'Сообщение об ошибке';
+            $topic = gettext('Сообщение об ошибке');
             break;
     }
 

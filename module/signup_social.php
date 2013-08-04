@@ -27,7 +27,7 @@ try
                     preg_match('/(.+)@(.+)/i', $user_profile['emailVerified'], $matches);
 
                     if (in_array($matches[2], $config['email_filter'])) {
-                        throw new Exception('Регистрация через почтовый провайдер '. $matches[2] .' запрещена!', 100);
+                        throw new Exception($matches[2] . ': ' . gettext('Регистрация через этот почтовый провайдер запрещена!'), 100);
                     }
                 }
 
@@ -50,7 +50,7 @@ try
             }
         }
     } else {
-        throw new ExceptionImproved('Ошибка авторизации');
+        throw new ExceptionImproved(gettext('Ошибка авторизации'));
     }
 }
 catch(Exception $e)

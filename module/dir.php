@@ -7,14 +7,14 @@ if (!defined('CHECK')) {
 if ($action == 'add')
 {
     if (!$_user->isLogged()) {
-        throw new ExceptionImproved('Данная операция доступна только для зарегистрированных пользователей');
+        throw new ExceptionImproved(gettext('Данная операция доступна только для зарегистрированных пользователей'));
     }
 
     $dir_name = isset($_POST['dir_name']) ? trim($_POST['dir_name']) : '';
     $dir_name = filter_var($dir_name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     if (!$dir_name) {
-        throw new ExceptionImproved('Введите корректное имя папки');
+        throw new ExceptionImproved(gettext('Введите корректное имя папки'));
     }
 
     $parent = 0;
@@ -32,20 +32,20 @@ if ($action == 'add')
 elseif ($action == 'rename')
 {
     if (!$_user->isLogged()) {
-        throw new ExceptionImproved('Данная операция доступна только для зарегистрированных пользователей');
+        throw new ExceptionImproved(gettext('Данная операция доступна только для зарегистрированных пользователей'));
     }
 
     $dir_name = isset($_POST['dir_name']) ? trim($_POST['dir_name']) : '';
     $dir_name = filter_var($dir_name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     if (!$dir_name) {
-        throw new ExceptionImproved('Введите корректное имя папки');
+        throw new ExceptionImproved(gettext('Введите корректное имя папки'));
     }
 
     $dir_id = isset($_POST['id']) ? filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT) : 0;
 
     if (!$dir_id) {
-        throw new ExceptionImproved('Необходимо передать ID дериктории!');
+        throw new ExceptionImproved(gettext('Необходимо передать ID дериктории!'));
     }
 
     $owner = $_user->getId();
@@ -66,7 +66,7 @@ elseif ($action == 'rename')
 elseif ($action == 'delete')
 {
     if (!$_user->isLogged()) {
-        throw new ExceptionImproved('Данная операция доступна только для зарегистрированных пользователей');
+        throw new ExceptionImproved(gettext('Данная операция доступна только для зарегистрированных пользователей'));
     }
 
     $dir_id = isset($_POST['id']) ? filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT) : 0;
