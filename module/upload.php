@@ -40,7 +40,7 @@ $payload = [
 ];
 
 $gearman_client = new GearmanClient();
-$gearman_client->addServer('91.213.233.143');
+$gearman_client->addServer(GEARMAN_JOB_SERVER_HOST);
 $task = $gearman_client->addTaskBackground('convert_v3', serialize($payload));
 $gearman_client->runTasks();
 

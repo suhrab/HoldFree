@@ -52,3 +52,5 @@ define('DIR_MODULE', DIR_ROOT . 'module/');
  * Путь к директории куда сохраняются загружаемые файлы
  */
 define('DIR_UPLOAD', DIR_ROOT . 'upload/');
+
+define('GEARMAN_JOB_SERVER_HOST', 'localhost');

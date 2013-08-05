@@ -3,7 +3,7 @@
 require_once(__DIR__ . '/config.php');
 
 $worker = new GearmanWorker();
-$worker->addServer('91.213.233.143');
+$worker->addServer(GEARMAN_JOB_SERVER_HOST);
 $worker->addFunction('convert_v3', 'convertJob');
 
 set_error_handler(function($errno , $errstr ,$errfile, $errline, $errcontext) {
