@@ -13,40 +13,40 @@ if ($action == 'signup')
     $password = isset($_POST['password']) ? filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : ''; // TODO Обработать
 
     if (!$captcha) {
-        throw new Exception ('Введите код безопасности, пожалуйста');
+        throw new Exception (gettext('Введите код безопасности, пожалуйста'));
     }
 
     if (!isset($_SESSION['captcha_keystring']) || $_SESSION['captcha_keystring'] !== $captcha) {
-        throw new Exception ('Неверный код безопасности');
+        throw new Exception (gettext('Неверный код безопасности'));
     }
 
     if (!$first_name) {
-        throw new ExceptionImproved ('Введите Ваше имя, пожалуйста');
+        throw new ExceptionImproved (gettext('Введите Ваше имя, пожалуйста'));
     }
 
     if (!$email) {
-        throw new ExceptionImproved ('Введите корректный email, пожалуйста');
+        throw new ExceptionImproved (gettext('Введите корректный email, пожалуйста'));
     }
 
     if (!$password) {
-        throw new ExceptionImproved ('Введите пароль, пожалуйста');
+        throw new ExceptionImproved (gettext('Введите пароль, пожалуйста'));
     }
 
     if (!$country) {
-        throw new ExceptionImproved ('Укажите Вашу страну, пожалуйста');
+        throw new ExceptionImproved (gettext('Укажите Вашу страну, пожалуйста'));
     }
 
     $user_data = $_user->getByEmail($email);
 
     if ($user_data) {
-        throw new ExceptionImproved('Пользователь с таким email адресом уже зарегестрирован.');
+        throw new ExceptionImproved(gettext('Пользователь с таким email адресом уже зарегестрирован.'));
     }
 
     if ($config['email_filter']) {
         preg_match('/(.+)@(.+)/i', $email, $matches);
 
         if (in_array($matches[2], $config['email_filter'])) {
-            throw new Exception('Регистрация через почтовый провайдер '. $matches[2] .' запрещена!');
+            throw new Exception($matches[2] . ': ' . gettext('Регистрация через этот почтовый провайдер запрещена!'));
         }
     }
 
@@ -60,11 +60,11 @@ elseif ($action == 'signin')
     $password = isset($_POST['password']) ? filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : '';
 
     if (!$email) {
-        throw new Exception ('Введите корректный email, пожалуйста');
+        throw new Exception (gettext('Введите корректный email, пожалуйста'));
     }
 
     if (!$password) {
-        throw new Exception ('Введите пароль, пожалуйста');
+        throw new Exception (gettext('Введите пароль, пожалуйста'));
     }
 
     $_user->signIn($email, $password);
@@ -76,13 +76,13 @@ elseif ($action == 'profile')
     $user_id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT) : 0;
 
     if (!$user_id) {
-        throw new ExceptionImproved('Такой страницы не существует!', 'Ошибка 404', 404);
+        throw new ExceptionImproved(gettext('Такой страницы не существует!'), gettext('Ошибка 404'), 404);
     }
 
     $user_data = $_user->get($user_id);
 
     if (!$user_data) {
-        throw new ExceptionImproved('Такой страницы не существует!', 'Ошибка 404', 404);
+        throw new ExceptionImproved(gettext('Такой страницы не существует!'), gettext('Ошибка 404'), 404);
     }
 
     $qh = $pdo->query('SELECT id, code, name FROM hf_country');
@@ -97,21 +97,21 @@ elseif ($action == 'profile')
 elseif ($action == 'edit')
 {
     if (!$_user->isLogged()) {
-        throw new ExceptionImproved('Для совершения данной операции необходима авторизация');
+        throw new ExceptionImproved(gettext('Для совершения данной операции необходима авторизация'));
     }
 
     // User ID
     $user_id = isset($_POST['id']) ? filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT) : 0;
 
     if ($_user->getId() !== $user_id) {
-        throw new ExceptionImproved('Для совершения данной операции необходима авторизация');
+        throw new ExceptionImproved(gettext('Для совершения данной операции необходима авторизация'));
     }
 
     // Email
     $email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) : '';
 
     if (!$email) {
-        throw new ExceptionImproved ('Введите корректный email, пожалуйста');
+        throw new ExceptionImproved (gettext('Введите корректный email, пожалуйста'));
     }
 
     $_user->setEmail($email);
@@ -142,13 +142,13 @@ elseif ($action == 'edit')
 elseif ($action == 'upload_photo')
 {
     if (!$_user->isLogged()) {
-        throw new ExceptionImproved('Для совершения данной операции необходима авторизация');
+        throw new ExceptionImproved(gettext('Для совершения данной операции необходима авторизация'));
     }
 
     $uid = isset($_POST['uid']) ? filter_var($_POST['uid'], FILTER_SANITIZE_NUMBER_INT) : 0;
 
     if ($_user->getId() !== $uid) {
-        throw new ExceptionImproved('Нет :-)');
+        throw new ExceptionImproved(gettext('Нет :-)'));
     }
 
     if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) {

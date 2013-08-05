@@ -19,7 +19,7 @@ if(empty($_POST['fileIds'])){
 
 $fileIds = $_POST['fileIds'];
 if(!is_array($fileIds))
-    throw new Exception('fileIds не массив');
+    throw new Exception(gettext('fileIds не массив'));
 
 
 if(empty($fileIds)){

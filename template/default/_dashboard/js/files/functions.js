@@ -1034,6 +1034,43 @@ $(function() {
             });
         }
     });
+
+    $("#storageDeleteDialog").dialog({
+        autoOpen: false,
+        width: 400,
+        buttons: {
+            "Да": function () {
+                var serverId = $(this).data("storage_id");
+
+                $.post('/index.php?module=storage_server&dashboard=1&is_ajax=1', { serverId: serverId, action: "delete" }, function(response) {
+                    if (response.success) {
+                        $.jGrowl("Сервер удален", {
+                            header: 'Успешно!',
+                            position: 'bottom-right'
+                        });
+
+                        $("#server_" + serverId).slideUp("slow");
+                    }
+                    if (response.error) {
+                        $.jGrowl(response.message, {
+                            header: 'Ошибка!',
+                            position: 'bottom-right'
+                        });
+                    }
+                }, "json");
+
+                $(this).dialog("close");
+            },
+            "Нет": function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+
+    $(".removeStorageButton").on("click", function() {
+        $('#storageDeleteDialog').data("storage_id", $(this).data("id")).dialog('open');
+        return false;
+    });
 });
 
 	

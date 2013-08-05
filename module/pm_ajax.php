@@ -18,7 +18,7 @@ if(!$_user->isLogged()){
 
 
 if(empty($_POST['action']))
-    throw new Exception ('Действие не определено');
+    throw new Exception (gettext('Действие не определено'));
 
 $action = $_POST['action'];
 
@@ -145,7 +145,7 @@ SQL;
         $pm_json['success'] = 'true';
         break;
     default:
-        throw new Exception ('Неизвестное действие');
+        throw new Exception (gettext('Неизвестное действие'));
 }
 
 echo json_encode($pm_json);

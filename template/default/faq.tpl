@@ -2,7 +2,7 @@
 
 {block name="content"}
     <div class="content page-faq">
-        <h1>Часто задаваемые вопросы?</h1>
+        <h1>{"Часто задаваемые вопросы?"|gettext}</h1>
 
         <ul>
             {foreach from=$faqs item=faq}

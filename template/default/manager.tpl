@@ -77,7 +77,7 @@
                                     $fileQueueRow.find(" td.status").text(dbFileInfo['status_message']);
                                 } else {
                                     if(dbFileInfo['complete_status'] != 0){
-                                        $fileQueueRow.find('td.status').html('<div class="progress-bar"><div class="progress-status-yellow" style="width: 0%"></div></div><div class="progress-text">Конвертация: <i class="progress-percent">0</i>%</div>');
+                                        $fileQueueRow.find('td.status').html('<div class="progress-bar"><div class="progress-status-yellow" style="width: 0%"></div></div><div class="progress-text">{"Конвертация:"|gettext} <i class="progress-percent">0</i>%</div>');
                                         $fileQueueRow.find('td.status').find("div.progress-status-yellow").css("width", dbFileInfo['complete_status'] + "%");
                                         $fileQueueRow.find('i.progress-percent').text(dbFileInfo['complete_status']);
 
@@ -120,7 +120,13 @@
                 flash_swf_url       : '{$_template}/js/plupload/plupload.flash.swf',
                 filters : [
                     { title : "Video files", extensions : "mp4,avi,mkv" }
-                ]
+                ],
+                init: {
+                    Error: function(up, err) {
+                        console.log(err)
+                        up.refresh();
+                    }
+                }
             });
 
             uploader.bind('Init', function(up, params) {
@@ -148,12 +154,6 @@
                 var $fileRow = $('#' + file.id)
                 $fileRow.find(" td.uploadSpeed").text(getBytesWithUnit(up.total.bytesPerSec) + "/s");
                 $fileRow.find(" td.status").html('<div class="progress-bar"><div class="progress-status-green" style="width: '+ file.percent +'%"></div></div><div class="progress-text">Загружено: <i class="progress-percent">'+ file.percent +'</i>%</div>');
-            });
-
-            uploader.bind('Error', function(up, err) {
-                console.log(err)
-
-                up.refresh(); // Reposition Flash/Silverlight
             });
 
             uploader.bind('FileUploaded', function(up, file, response) {

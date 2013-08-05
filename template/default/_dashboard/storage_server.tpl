@@ -19,6 +19,7 @@
                 <td width="150">Доступного места</td>
                 <td width="150">Общее места</td>
                 <td width="150">Количество файлов</td>
+                <td width="100">Действие</td>
             </tr>
             </thead>
             <tfoot>
@@ -30,13 +31,16 @@
             </tfoot>
             <tbody>
             {foreach from=$servers item=server}
-            <tr id="user_{$user.id}">
+            <tr id="server_{$server.id}">
                 <td>{$server.id}</td>
                 <td>{$server.name}</td>
                 <td>{$server.url}</td>
                 <td>{$server.free_space}</td>
                 <td>{$server.total_space}</td>
                 <td>{$server.num_files}</td>
+                <td>
+                    <a href="#" class="tablectrl_small bDefault tipS removeStorageButton" title="Удалить" data-id="{$server.id}"><span class="iconb" data-icon="&#xe136;"></span></a>
+                </td>
             </tr>
             {/foreach}
             </tbody>
@@ -65,4 +69,6 @@
             <input type="hidden" name="action" value="add" />
         </form>
     </div>
+
+    <div id="storageDeleteDialog" class="dialog" title="Удалить сервер хранения">Вы уверены, что хотите удалить этот сервер?</div>
 {/block}

@@ -19,7 +19,7 @@ if(!$_user->isLogged()){
 $messageFolder = isset($_GET['messageFolder']) ? $_GET['messageFolder']: '';
 
 if(empty($_GET['messageId']) || !is_numeric($_GET['messageId']))
-    throw new ErrorException('Сообщение с таким ID не найдено');
+    throw new ErrorException(gettext('Сообщение с таким ID не найдено'));
 $messageId = intval($_GET['messageId']);
 
 switch($messageFolder){
@@ -34,7 +34,7 @@ WHERE PM_TABLE.id = {$messageId} AND PM_TABLE.`to` = {$_user->getId()}
 SQL;
         $selectMessageStmt = $pdo->query($selectMessageSql);
         if($selectMessageStmt->rowCount() != 1)
-            throw new ErrorException('Сообщение с таким ID не найдено');
+            throw new ErrorException(gettext('Сообщение с таким ID не найдено'));
         $message = $selectMessageStmt->fetch(PDO::FETCH_ASSOC);
         $message['to_string'] = $message['first_name'] . ' ' . $message['last_name'];
         break;
@@ -48,7 +48,7 @@ WHERE id = {$messageId} AND `from` = {$_user->getId()}
 SQL;
         $selectMessageStmt = $pdo->query($selectMessageSql);
         if($selectMessageStmt->rowCount() != 1)
-            throw new ErrorException('Сообщение с таким ID не найдено');
+            throw new ErrorException(gettext('Сообщение с таким ID не найдено'));
         $message = $selectMessageStmt->fetch(PDO::FETCH_ASSOC);
         break;
     default:
