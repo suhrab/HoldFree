@@ -206,6 +206,10 @@ $(function(){
 
             if(response.success)
             {
+                location.reload();
+
+                return true;
+
                 $('#formDir').trigger('reset');
 
                 $dir = '<tr id="row_dir_'+ response.dir_id +'">' +
@@ -246,6 +250,33 @@ $(function(){
         }, 'json');
 
         return false;
+    });
+
+
+
+
+    $.contextMenu({
+        selector: "a.dir",
+        items: {
+            delete      : {name: "Удалить", icon: "delete", callback: function () {
+                var dirId = $(this).data("id");
+                var dir = $(this);
+
+                $.post('index.php?module=dir&action=move_to_trash&is_ajax=1', { "dir_id": dirId }, function(response)
+                {
+                    if (response.success) {
+//                        dir.parent().parent().remove();
+                        location.reload();
+                    }
+
+                    if (response.error) {
+                        alert(response.error);
+                    }
+                }, 'json');
+            }},
+            separator   : "-----",
+            rename      : {name: "Переименовать", icon: "rename", callback: function(key, opt){ alert("Clicked on " + key); } }
+        }
     });
 
 

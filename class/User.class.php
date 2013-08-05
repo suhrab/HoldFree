@@ -46,7 +46,12 @@ class User
         }
 
         if ($password) {
-            $hash = $this->passwordLib->createPasswordHash($password);
+            if (function_exists('password_hash')) {
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+            }
+            else {
+                $hash = $this->passwordLib->createPasswordHash($password);
+            }
         }
         else {
             $hash = '';
@@ -89,7 +94,15 @@ class User
             throw new \ExceptionImproved('Не верный email или пароль');
         }
 
-        if ($password && !$this->passwordLib->verifyPasswordHash($password, $user_data['password'])) {
+        if (function_exists('password_verify')) {
+            $password_verify = password_verify($password, $user_data['password']);
+        }
+        else {
+            $password_verify = $this->passwordLib->verifyPasswordHash($password, $user_data['password']);
+        }
+
+
+        if ($password && !$password_verify) {
             throw new \ExceptionImproved('Не верный email или пароль');
         }
 
@@ -105,8 +118,12 @@ class User
         $this->avatar = $user_data['avatar'];
         $this->group = (int) $user_data['group'];
 
-
-        $hash = $this->passwordLib->createPasswordHash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . uniqid());
+        if (function_exists('password_hash')) {
+            $hash = password_hash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . uniqid(), PASSWORD_DEFAULT);
+        }
+        else {
+            $hash = $this->passwordLib->createPasswordHash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . uniqid());
+        }
         setcookie('hash', $hash, time() + (60 * 60 * 24 * 365));
 
         $sth = $this->pdo->prepare('UPDATE hf_user SET hash = :hash WHERE id = :id LIMIT 1');
