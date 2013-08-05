@@ -120,13 +120,7 @@
                 flash_swf_url       : '{$_template}/js/plupload/plupload.flash.swf',
                 filters : [
                     { title : "Video files", extensions : "mp4,avi,mkv" }
-                ],
-                init: {
-                    Error: function(up, err) {
-                        console.log(err)
-                        up.refresh();
-                    }
-                }
+                ]
             });
 
             uploader.bind('Init', function(up, params) {
