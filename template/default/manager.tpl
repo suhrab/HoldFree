@@ -187,12 +187,12 @@
             <div class="dir-tree">
                 <ul>
                     <li class="dir-root">
-                        <a href="#" class="parent">Менеджер файлов</a>
+                        <a href="/" class="parent">Менеджер файлов</a>
 
                         <ul>
                             {if count($dirs)}
                                 {foreach from=$dirs item=dir}
-                                    <li class="dir"><a href="#">{$dir.user_defined_name}</a></li>
+                                    <li class="dir"><a href="/index.php?dir={$dir.id}">{$dir.user_defined_name}</a></li>
                                 {/foreach}
                             {/if}
                         </ul>
@@ -200,7 +200,7 @@
                     </li>
 
                     <li class="dir-trash">
-                        <a href="#" class="parent">Удаленные файлы</a>
+                        <a href="/index.php?trash=1" class="parent">Удаленные файлы</a>
                     </li>
                 </ul>
             </div>
@@ -219,9 +219,8 @@
                         {foreach from=$files_and_dirs item=file}
                             {if $file.type == 'dir'}
                             <tr id="row_dir_{$file.id}">
-                                <td colspan="2"><a href="javascript:;" class="dir" id="dir_{$file.id}" data-id="{$file.id}">{$file.user_defined_name}</a></td>
+                                <td colspan="2"><a href="/index.php?dir={$file.id}" class="dir" id="dir_{$file.id}" data-id="{$file.id}">{$file.user_defined_name}</a></td>
                                 <td>{$file.created}</td>
-                                <td></td>
                                 <td></td>
                             </tr>
                             {elseif $file.type == 'file'}
@@ -241,6 +240,12 @@
                                 </tr>
                             {/if}
                         {/foreach}
+
+                        {if count($file) == 0}
+                            <tr>
+                                <td colspan="4" class="dark-blue" align="center">В данной директории файлов нет.</td>
+                            </tr>
+                        {/if}
                     </tbody>
                 </table>
             </div>

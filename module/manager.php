@@ -44,8 +44,21 @@ if ($action == 'upload')
 }
 else
 {
+    $current_dir = isset($_GET['dir']) ? intval($_GET['dir']) : 0;
+    $trash = isset($_GET['trash']) ? true : false;
+
+    if ($current_dir) {
+        $smarty->assign('files_and_dirs', $_fileManager->getFilesInfoFromDir($current_dir));
+    }
+    else {
+        $smarty->assign('files_and_dirs', $_fileManager->getFilesInfoByUserId($_user->getId()));
+    }
+
+    if ($trash) {
+        $smarty->assign('files_and_dirs', $_fileManager->getTrashFilesInfoByUserId($_user->getId()));
+    }
+
     $smarty->assign('dirs', $_fileManager->getDirsInfoByUserId($_user->getId()));
-    $smarty->assign('files_and_dirs', $_fileManager->getFilesInfoByUserId($_user->getId()));
     $smarty->assign('filesInProgress', $_fileManager->getFilesInfoInProgressByUserId($_user->getId()));
 }
 

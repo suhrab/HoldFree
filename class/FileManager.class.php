@@ -63,7 +63,7 @@ class FileManager
 
     public function getFilesInfoByUserId($user_id)
     {
-        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id AND complete_status = 100 ORDER BY created DESC');
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id AND complete_status = 100 AND trash = 0 ORDER BY created DESC');
         $sth->bindParam(':user_id', $user_id);
         $sth->execute();
         $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
@@ -88,6 +88,40 @@ class FileManager
         foreach ($files_info as &$file)
         {
             $file['user_defined_name'] = mb_strlen($file['user_defined_name']) > 40 ? mb_substr($file['user_defined_name'], 0, 15) . '...' . mb_substr($file['user_defined_name'], -10, 10) : $file['user_defined_name'];
+            $file['file_size'] = $this->formatFileSize($file['file_size']);
+        }
+
+        return $files_info;
+    }
+
+    public function getFilesInfoFromDir($dir_id)
+    {
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE parent = :parent AND trash = 0 ORDER BY created DESC');
+        $sth->bindParam(':parent', $dir_id);
+        $sth->execute();
+        $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
+
+        foreach ($files_info as &$file)
+        {
+            $file['created'] = date('d.m.y');
+            $file['cut_user_defined_name'] = mb_strlen($file['user_defined_name']) > 40 ? mb_substr($file['user_defined_name'], 0, 15) . '...' . mb_substr($file['user_defined_name'], -10, 10) : $file['user_defined_name'];
+            $file['file_size'] = $this->formatFileSize($file['file_size']);
+        }
+
+        return $files_info;
+    }
+
+    public function getTrashFilesInfoByUserId($user_id)
+    {
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id AND trash = 1 ORDER BY created DESC');
+        $sth->bindParam(':user_id', $user_id);
+        $sth->execute();
+        $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
+
+        foreach ($files_info as &$file)
+        {
+            $file['created'] = date('d.m.y');
+            $file['cut_user_defined_name'] = mb_strlen($file['user_defined_name']) > 40 ? mb_substr($file['user_defined_name'], 0, 15) . '...' . mb_substr($file['user_defined_name'], -10, 10) : $file['user_defined_name'];
             $file['file_size'] = $this->formatFileSize($file['file_size']);
         }
 
@@ -129,6 +163,26 @@ class FileManager
         return $sth->rowCount();
     }
 
+    public function moveToTrash($file_id)
+    {
+        $sth = $this->pdo->prepare('UPDATE hf_file SET trash = 1 WHERE id = :file_id LIMIT 1');
+        $sth->bindParam(':file_id', $file_id);
+        $sth->execute();
+
+        $file_info = $this->getFileInfo($file_id);
+
+        if ($file_info['type'] == 'dir') {
+            if (!$this->isEmptyDir($file_info['id'])) {
+                $files_from_dir = $this->getFilesInfoFromDir($file_info['id']);
+                foreach ($files_from_dir as $file) {
+                    $this->moveToTrash($file['id']);
+                }
+            }
+        }
+
+        return $sth->rowCount();
+    }
+
     public function addDir($dir_name, $user_id, $parent = 0)
     {
         $file_data['user_defined_name']      = $dir_name;
@@ -153,7 +207,7 @@ class FileManager
 
     public function getDirsInfoByUserId($user_id)
     {
-        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id AND type = "dir" ORDER BY created DESC');
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id AND type = "dir" AND trash = 0 ORDER BY created DESC');
         $sth->bindParam(':user_id', $user_id);
         $sth->execute();
         $dirs_info = $sth->rowCount() ? $sth->fetchAll() : array();
