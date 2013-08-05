@@ -44,7 +44,6 @@ class KCAPTCHA{
 				}
 				if(!preg_match('/cp|cb|ck|c6|c9|rn|rm|mm|co|do|cl|db|qp|qb|dp|ww/', $this->keystring)) break;
 			}
-		
 			$font_file=$fonts[mt_rand(0, count($fonts)-1)];
 			$font=imagecreatefrompng($font_file);
 			imagealphablending($font, true);
@@ -212,7 +211,9 @@ class KCAPTCHA{
 				imagesetpixel($img2, $x, $y, imagecolorallocate($img2, $newred, $newgreen, $newblue));
 			}
 		}
-		
+
+        $_SESSION['captcha_keystring'] = $this->keystring;
+
 		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); 
 		header('Cache-Control: no-store, no-cache, must-revalidate'); 
 		header('Cache-Control: post-check=0, pre-check=0', FALSE); 
