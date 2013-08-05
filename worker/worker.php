@@ -234,6 +234,7 @@ function convertJob(GearmanJob $job)
         }, $convert_errors);
 
         if (!$r) {
+            $convert_errors = $convert_errors['error'] . ': ' . implode(', ', $convert_errors);
             throw new Exception(implode(', ', $convert_errors));
         }
 
@@ -251,7 +252,7 @@ function convertJob(GearmanJob $job)
             $sth->execute(['files_urls' => json_encode($files_urls), 'row_id' => $payload['row_id']]);
 
             if (!$r) {
-                $convert_errors = implode(', ', $convert_errors);
+                $convert_errors = $convert_errors['error'] . ': ' . implode(', ', $convert_errors);
                 throw new Exception($convert_errors);
             }
         }
