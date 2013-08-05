@@ -107,6 +107,9 @@
                         }
                     });
                 }
+                else {
+                    setTimeout(PollFilesToMonitor, 2*1000);
+                }
             }
 
             PollFilesToMonitor();
