@@ -10,8 +10,7 @@ class User
     {
         $this->pdo = $pdo;
 
-        require_once(DIR_CLASS . 'passwordLib/bootstrap.php');
-        $this->passwordLib = new \PasswordLib\PasswordLib();
+        require_once(DIR_CLASS . 'password.php');
 
         $this->updateLastSignIn();
 
