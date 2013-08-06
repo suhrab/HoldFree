@@ -2,6 +2,10 @@
 
 {block name="content"}
     {if isset($_user.id)}
+        <script type="text/javascript" src="{$_template}/js/context-menu/jquery.contextMenu.js"></script>
+        <script type="text/javascript" src="{$_template}/js/context-menu/jquery.ui.position.js"></script>
+        <link type="text/css" href="{$_template}/js/context-menu/jquery.contextMenu.css" rel="stylesheet" />
+        
     <script type="text/javascript" src="{$_dashboard}/js/plugins/uploader/plupload.js"></script>
     <script type="text/javascript" src="{$_dashboard}/js/plugins/uploader/plupload.html4.js"></script>
     <script type="text/javascript" src="{$_dashboard}/js/plugins/uploader/plupload.html5.js"></script>
