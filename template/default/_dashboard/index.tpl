@@ -182,10 +182,10 @@
                 <div class="titleOpt">
                     <a href="#" data-toggle="dropdown"><span class="icos-cog3"></span><span class="clear"></span></a>
                     <ul class="dropdown-menu pull-right">
-                            <li><a href="#"><span class="icos-add"></span>Add</a></li>
-                            <li><a href="#"><span class="icos-trash"></span>Remove</a></li>
-                            <li><a href="#" class=""><span class="icos-pencil"></span>Edit</a></li>
-                            <li><a href="#" class=""><span class="icos-heart"></span>Do whatever you like</a></li>
+                        <li><a href="#"><span class="icos-add"></span>Add</a></li>
+                        <li><a href="#"><span class="icos-trash"></span>Remove</a></li>
+                        <li><a href="#" class=""><span class="icos-pencil"></span>Edit</a></li>
+                        <li><a href="#" class=""><span class="icos-heart"></span>Do whatever you like</a></li>
                     </ul>
                 </div>
                 <div class="clear"></div>

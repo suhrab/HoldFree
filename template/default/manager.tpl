@@ -18,6 +18,8 @@
     <script type="text/javascript" src="{$_template}/js/plupload/plupload.html4.js"></script>
     <script type="text/javascript" src="{$_template}/js/plupload/plupload.html5.js"></script>
 
+    <script type="text/javascript" src="{$_template}/js/manager.js"></script>
+
     <script type="text/javascript">
 
         function getBytesWithUnit (bytes)
@@ -164,17 +166,6 @@
     </script>
 
     <div class="content page-manager">
-        <style type="text/css">
-            .swfupload {
-                display: inline-block;
-                padding: 5px 20px 7px 20px;
-                font: bold 14px Roboto, arial, helvetica, sans-serif;
-                text-decoration: none;
-                background-color: #293640;
-                border-radius: 2px;
-            }
-        </style>
-
         <h2>Менеджер видео</h2>
 
         <a href="javascript:;" class="button" id="UploadFileButton">Загрузить файл</a>
@@ -184,20 +175,12 @@
             <div class="dir-tree">
                 <ul>
                     <li class="dir-root">
-                        <a href="/" class="parent">Менеджер файлов</a>
-
-                        <ul>
-                            {if count($dirs)}
-                                {foreach from=$dirs item=dir}
-                                    <li class="dir"><a href="/index.php?dir={$dir.id}">{$dir.user_defined_name}</a></li>
-                                {/foreach}
-                            {/if}
-                        </ul>
-
+                        <a href="javascript:;" class="parent dir" data-id="0">Менеджер файлов</a>
+                        <ul id="dirList"></ul>
                     </li>
-
                     <li class="dir-trash">
-                        <a href="/index.php?trash=1" class="parent">Удаленные файлы</a>
+                        <a href="javascript:;" class="parent dir" data-id="-1">Удаленные файлы</a>
+                        <ul id="dirListTrash"></ul>
                     </li>
                 </ul>
             </div>
@@ -207,69 +190,17 @@
                     <thead>
                         <tr>
                             <td>Имя</td>
-                            <td width="140">Размер</td>
-                            <td width="140">Дата</td>
-                            <td>URL</td>
+                            <td width="100">Размер</td>
+                            <td width="100">Дата</td>
+                            <td width="50">URL</td>
                         </tr>
                     </thead>
-                    <tbody id="fileList">
-                        {foreach from=$files_and_dirs item=file}
-                            {if $file.type == 'dir'}
-                            <tr id="row_dir_{$file.id}">
-                                <td colspan="2"><a href="/index.php?dir={$file.id}" class="dir" id="dir_{$file.id}" data-id="{$file.id}">{$file.user_defined_name}</a></td>
-                                <td>{$file.created}</td>
-                                <td></td>
-                            </tr>
-                            {elseif $file.type == 'file'}
-                                <tr>
-                                    <td><a href="#" class="file" title="{$file.user_defined_name}">{$file.cut_user_defined_name}</a></td>
-                                    <td>{$file.file_size}</td>
-                                    <td>{$file.created}</td>
-
-                                    <td>
-                                        {if !empty($file.files)}
-                                            {assign 'convertedFileUrls' $file.files|json_decode:true}
-                                            {foreach $convertedFileUrls as $size => $convertedFileUrl}
-                                                <a href="{$convertedFileUrl}"><img src="{$_template}/img/icon_24_chain.png" width="24" height="24" alt="{$size}" title="{$size}" /></a>
-                                            {/foreach}
-                                        {/if}
-                                    </td>
-                                </tr>
-                            {/if}
-                        {/foreach}
-
-                        {if count($file) == 0}
-                            <tr>
-                                <td colspan="4" class="dark-blue" align="center">В данной директории файлов нет.</td>
-                            </tr>
-                        {/if}
-                    </tbody>
+                    <tbody id="fileList"></tbody>
                 </table>
             </div>
 
             <div class="cleaner"></div>
-            <style type="text/css">
-                .progress-bar {
-                    width: 90%;
-                    height: 6px;
-                    border: solid 1px #183e5e;
-                    padding: 1px;
-                    position: relative;
-                }
-                .progress-status-yellow {
-                    background-color: #FFCC00;
-                    height: 6px;
-                }
-                .progress-status-green {
-                    background-color: #006400;
-                    height: 6px;
-                }
-                .progress-text {
-                    width: 90%;
-                    text-align: center;
-                    font-size: 11px;
-                }
-            </style>
+
             <div class="loading-panel" id="FileQueueContainer" style="{if empty($filesInProgress)}display:none;{/if}">
                 <table width="100%" cellspacing="0" cellpadding="0">
                     <thead>
@@ -302,11 +233,11 @@
             </form>
         </div>
 
-        <div class="dialog dialog-dir-rename" title="Переименовать папку">
+        <div class="dialog dialog-dir-rename" title="Переименовать файл">
             <div class="place-holder-message"></div>
-            <form action="index.php?module=dir&action=rename" method="post" id="formDirRename">
-                <input name="dir_name" type="text" class="input-text" placeholder="Имя папки" />
-                <input name="id" type="hidden" value="0" id="dir_id" />
+            <form action="" method="post" id="formRename">
+                <input name="name" type="text" class="input-text" placeholder="Имя" />
+                <input name="id" type="hidden" value="0" id="id" />
                 <input type="submit" value="Переименовать" class="submit" />
             </form>
         </div>

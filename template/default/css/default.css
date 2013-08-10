@@ -572,6 +572,10 @@ h2 {
     text-decoration: none;
 }
 
+#dirList, #dirListTrash {
+    margin-top: 10px;
+}
+
 .page-manager .dir-tree li.dir-root {
     line-height: 24px;
     background: url("../img/icon_24_logo.png") no-repeat;
@@ -580,11 +584,11 @@ h2 {
     font-weight: bold;
     padding-left: 35px;
 }
-.page-manager .dir-tree li.dir-root ul:first-of-type {
+.page-manager .dir-tree li ul:first-of-type {
     margin-top: 5px;
 }
-.page-manager .dir-tree li.dir-root ul {
-    margin-left: 15px;
+.page-manager .dir-tree li ul {
+    margin-left: 20px;
     margin-bottom: 8px;
 }
 .page-manager .dir-tree li.dir {
@@ -649,6 +653,14 @@ h2 {
     -ms-user-select: none;
     user-select: none;
 }
+.page-manager .file-panel tbody td a.file {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: moz-none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 .page-manager .loading-panel {
     margin-top: 40px;
@@ -669,6 +681,27 @@ h2 {
 }
 .page-manager .dark-blue {
     color: #606c78;
+}
+
+.progress-bar {
+    width: 90%;
+    height: 6px;
+    border: solid 1px #183e5e;
+    padding: 1px;
+    position: relative;
+}
+.progress-status-yellow {
+    background-color: #FFCC00;
+    height: 6px;
+}
+.progress-status-green {
+    background-color: #006400;
+    height: 6px;
+}
+.progress-text {
+    width: 90%;
+    text-align: center;
+    font-size: 11px;
 }
 
 .cleaner {

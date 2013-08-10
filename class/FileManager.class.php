@@ -94,10 +94,11 @@ class FileManager
         return $files_info;
     }
 
-    public function getFilesInfoFromDir($dir_id)
+    public function getFilesInfoFromDir($dir_id, $user_id)
     {
-        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE parent = :parent AND trash = 0 ORDER BY created DESC');
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE parent = :parent AND trash = 0 AND user_id = :user_id ORDER BY created DESC');
         $sth->bindParam(':parent', $dir_id);
+        $sth->bindParam(':user_id', $user_id);
         $sth->execute();
         $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
 

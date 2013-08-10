@@ -255,29 +255,55 @@ $(function(){
 
 
 
-    $.contextMenu({
-        selector: "a.dir",
-        items: {
-            delete      : {name: "Удалить", icon: "delete", callback: function () {
-                var dirId = $(this).data("id");
-                var dir = $(this);
+//    $.contextMenu({
+//        selector: "a.dir",
+//        items: {
+//            delete      : {name: "Удалить", icon: "delete", callback: function () {
+//                var dirId = $(this).data("id");
+//                var dir = $(this);
+//
+//                $.post('index.php?module=dir&action=move_to_trash&is_ajax=1', { "dir_id": dirId }, function(response)
+//                {
+//                    if (response.success) {
+////                        dir.parent().parent().remove();
+//                        location.reload();
+//                    }
+//
+//                    if (response.error) {
+//                        alert(response.error);
+//                    }
+//                }, 'json');
+//            }},
+//            separator   : "-----",
+//            rename      : {name: "Переименовать", icon: "rename", callback: function(key, opt){ alert("Clicked on " + key); } }
+//        }
+//    });
 
-                $.post('index.php?module=dir&action=move_to_trash&is_ajax=1', { "dir_id": dirId }, function(response)
-                {
-                    if (response.success) {
-//                        dir.parent().parent().remove();
-                        location.reload();
-                    }
 
-                    if (response.error) {
-                        alert(response.error);
-                    }
-                }, 'json');
-            }},
-            separator   : "-----",
-            rename      : {name: "Переименовать", icon: "rename", callback: function(key, opt){ alert("Clicked on " + key); } }
-        }
-    });
+//    $.contextMenu({
+//        selector: "a.file",
+//        items: {
+//            delete      : {name: "Удалить", icon: "delete", callback: function () {
+//                var fileId = $(this).data("id");
+//                var file = $(this);
+//
+//                $.post('index.php?module=dir&action=move_to_trash_file&is_ajax=1', { "file_id": fileId }, function(response)
+//                {
+//                    console.log(response);
+//                    if (response.success) {
+////                        file.parent().parent().remove();
+//                        location.reload();
+//                    }
+//
+//                    if (response.error) {
+//                        alert(response.error);
+//                    }
+//                }, 'json');
+//            }},
+//            separator   : "-----",
+//            rename      : {name: "Переименовать", icon: "rename", callback: function(key, opt){ alert("Clicked on " + key); } }
+//        }
+//    });
 
 
 

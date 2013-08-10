@@ -5,7 +5,7 @@
     <meta name="description" content="{$meta_description}" />
     <meta name="keywords" content="{$meta_keywords}" />
     <meta charset="{$meta_charset}">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css' />
+    <!--link href='http://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css' /-->
     <link href="{$_template}/js/jquery-ui/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
     <link href="{$_template}/js/select2/select2.css" rel="stylesheet" type="text/css" />
     <link href="{$_template}/css/default.css" rel="stylesheet" type="text/css" />

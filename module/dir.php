@@ -35,32 +35,32 @@ elseif ($action == 'rename')
         throw new ExceptionImproved(gettext('Данная операция доступна только для зарегистрированных пользователей'));
     }
 
-    $dir_name = isset($_POST['dir_name']) ? trim($_POST['dir_name']) : '';
-    $dir_name = filter_var($dir_name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $name = isset($_POST['name']) ? trim($_POST['name']) : '';
+    $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    if (!$dir_name) {
-        throw new ExceptionImproved(gettext('Введите корректное имя папки'));
+    if (!$name) {
+        throw new ExceptionImproved(gettext('Введите корректное имя'));
     }
 
-    $dir_id = isset($_POST['id']) ? filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT) : 0;
+    $id = isset($_POST['id']) ? filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT) : 0;
 
-    if (!$dir_id) {
+    if (!$id) {
         throw new ExceptionImproved(gettext('Необходимо передать ID дериктории!'));
     }
 
-    $owner = $_user->getId();
+    $user_id = $_user->getId();
 
-    $sth = $pdo->prepare('UPDATE hf_dir SET name = :dir_name WHERE id = :dir_id AND owner = :owner');
-    $sth->bindParam(':dir_name', $dir_name);
-    $sth->bindParam(':dir_id', $dir_id);
-    $sth->bindParam(':owner', $owner);
+    $sth = $pdo->prepare('UPDATE hf_file SET user_defined_name = :name WHERE id = :id AND user_id = :user_id');
+    $sth->bindParam(':name', $name);
+    $sth->bindParam(':id', $id);
+    $sth->bindParam(':user_id', $user_id);
     $sth->execute();
     $sth = null;
 
     die('{
         "success": 1,
-        "dir_id": "'. $dir_id .'",
-        "dir_name": "'. $dir_name .'"
+        "id": "'. $id .'",
+        "name": "'. $name .'"
     }');
 }
 elseif ($action == 'delete')
@@ -89,13 +89,21 @@ elseif ($action == 'move_to_trash') {
         throw new ExceptionImproved('Данная операция доступна только для зарегистрированных пользователей');
     }
 
-    $dir_id = isset($_POST['dir_id']) ? filter_var($_POST['dir_id'], FILTER_SANITIZE_NUMBER_INT) : 0;
+    $id = isset($_POST['id']) ? filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT) : 0;
 
-    if (!$dir_id) {
+    if (!$id) {
         throw new ExceptionImproved('Необходимо передать ID дериктории!');
     }
 
-    $_fileManager->moveToTrash($dir_id);
+    $_fileManager->moveToTrash($id);
 
     die('{"success": 1}');
+}
+elseif ($action == 'load_files') {
+    $cwd = isset($_POST['cwd']) ? intval($_POST['cwd']) : 0;
+
+    $files = ($cwd == -1) ? $_fileManager->getTrashFilesInfoByUserId($_user->getId()) : $_fileManager->getFilesInfoFromDir($cwd, $_user->getId());
+
+    $response = array('success' => 1, 'files' => $files);
+    die(json_encode($response));
 }
