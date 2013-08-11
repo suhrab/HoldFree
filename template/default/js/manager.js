@@ -78,13 +78,20 @@ $(function() {
         $.post("/index.php?module=dir&action=load_files&is_ajax=1", { "cwd": cwd }, function (response) {
             if (response.success) {
                 for (i = 0; i < response.files.length; i++) {
+                    var file = '';
+
+                    if (response.files[i].type == "file") {
+                        files = $.parseJSON(response.files[i].files);
+                        file = files["480p"];
+                    }
+
                     addFile(
                         response.files[i].id,
                         response.files[i].cut_user_defined_name,
                         response.files[i].user_defined_name,
                         response.files[i].file_size,
                         response.files[i].created,
-                        response.files[i].files[0],
+                        file,
                         response.files[i].type
                     );
                 }

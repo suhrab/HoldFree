@@ -242,5 +242,16 @@
                 <input type="submit" value="Переименовать" class="submit"/>
             </form>
         </div>
+
+        <!--div id="player">
+            <object id="" type="application/x-shockwave-flash" data="{$_template}/js/uppod/uppod.swf" width="500" height="375">
+                <param name="bgcolor" value="#ffffff" />
+                <param name="allowFullScreen" value="true" />
+                <param name="allowScriptAccess" value="always" />
+                <param name="wmode" value="window" />
+                <param name="movie" value="ссылка_на_плеер" />
+                <param name="flashvars" value="m=video&file=http://holdfree.com/1.mp4" id="fileSrc" />
+            </object>
+        </div-->
     </div>
     </div>{/block}

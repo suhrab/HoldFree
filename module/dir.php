@@ -104,6 +104,13 @@ elseif ($action == 'load_files') {
 
     $files = ($cwd == -1) ? $_fileManager->getTrashFilesInfoByUserId($_user->getId()) : $_fileManager->getFilesInfoFromDir($cwd, $_user->getId());
 
+    foreach ($files as &$file) {
+        if ($file['type'] == 'file') {
+            $file['files'] = stripslashes($file['files']);
+        }
+    }
+
+
     $response = array('success' => 1, 'files' => $files);
     die(json_encode($response));
 }

@@ -376,13 +376,16 @@ h2 {
     display: block;
     width: 181px;
     height: 47px;
-    background: url("../img/button_blue_big.png") no-repeat;
+    background: url("../img/button_blue_big.png") no-repeat top center;
     margin: 0 auto;
     font: 300 15px Roboto, arial, helvetica, sans-serif;
     color: #FFFFFF;
     padding-top: 0;
     text-shadow: none;
     margin-top: 20px;
+}
+.dialogBlue .submit:hover {
+    background: url("../img/button_blue_big.png") no-repeat bottom center;
 }
 
 
@@ -612,11 +615,6 @@ h2 {
     margin-right: 8px;
     background: url("../img/icon_16_dir.png") no-repeat left 3px;
 }
-/*.page-manager .dir-tree li i.dir {*/
-    /*background: url("../img/icon_16_dir.png") no-repeat left 3px;*/
-    /*line-height: 16px;*/
-    /*padding: 3px 0 3px 24px;*/
-/*}*/
 .page-manager .dir-tree li.dir ul {
     margin-left: 0;
 }
