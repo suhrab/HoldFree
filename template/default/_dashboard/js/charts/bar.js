@@ -20,7 +20,7 @@ $(function () {
         bars: {
             show: true, 
             barWidth: 0.2, 
-            order: 1,
+            order: 1
         }
     });
     ds.push({
@@ -61,7 +61,7 @@ $(function () {
         grid:{
             hoverable:true
         },
-			 legend: true,
+			 legend: true
                 
 
     });

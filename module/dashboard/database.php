@@ -79,7 +79,7 @@ elseif ($action == 'dump')
         $backup_filepath = $backup_filepath . '.gz';
 
     $command = <<<CMD
-functimysqldump -h "$DB_HOST" --port="$DB_PORT" -u "$DB_USER" $MYSQLDUMP_PASS_ARG "$DB_NAME" $MYSQLDUMP_GZIP_ARG > $backup_filepath  2>&1
+mysqldump -h "$DB_HOST" --port="$DB_PORT" -u "$DB_USER" $MYSQLDUMP_PASS_ARG "$DB_NAME" $MYSQLDUMP_GZIP_ARG > $backup_filepath  2>&1
 CMD;
 
     ob_start();
