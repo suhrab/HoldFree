@@ -66,8 +66,7 @@
 <script type="text/javascript" src="{$_dashboard}/js/files/bootstrap.js"></script>
 <script type="text/javascript" src="{$_dashboard}/js/files/functions.js"></script>
 
-<script type="text/javascript" src="{$_dashboard}/js/charts/chart.js"></script>
-<script type="text/javascript" src="{$_dashboard}/js/charts/hBar_side.js"></script>
+    <script type="text/javascript" src="{$_dashboard}/js/tinymce/tinymce.min.js"></script>
 
 </head>
 
@@ -146,6 +145,7 @@
             <li><a href="/index.php?module=option&dashboard=1" title="Настройки" {if $smarty.get.module == 'option'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/forms.png" alt="" /><span>Настройки</span></a></li>
             <li><a href="/index.php?module=database&dashboard=1" title="База данных" {if $smarty.get.module == 'database'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/tables.png" alt="" /><span>База данных</span></a></li>
             <li><a href="/index.php?module=faq&dashboard=1" title="FAQ" {if $smarty.get.module == 'faq'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/messages.png" alt="" /><span>FAQ</span></a></li>
+            <li><a href="/index.php?module=static_pages&dashboard=1" title="Статические страницы" {if $smarty.get.module == 'static_pages'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/statistics.png" alt="" /><span>Страницы</span></a></li>
             <li><a href="/index.php?module=storage_server&dashboard=1" title="Сервера хранения файлов" {if $smarty.get.module == 'storage_server'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/statistics.png" alt="" /><span>Сервера</span></a></li>
         </ul>
     </div>
@@ -176,6 +176,8 @@
     <!-- Main content -->
     <div class="wrapper">
     {block name="content"}
+    <script type="text/javascript" src="{$_dashboard}/js/charts/chart.js"></script>
+    <script type="text/javascript" src="{$_dashboard}/js/charts/hBar_side.js"></script>
     	<!-- Chart -->
         <div class="widget chartWrapper">
             <div class="whead"><h6>Статистика посещаемости</h6>
