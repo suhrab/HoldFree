@@ -1,6 +1,8 @@
 $(function() {
     var cwd = null;
     var fileListNode = $("#fileList");
+    var dirListNode = $("#dirList");
+    var dirListNodeTrash = $("#dirListTrash");
     var dialogOptionBlue = {
         autoOpen    : false,
         width       : 380,
@@ -9,9 +11,25 @@ $(function() {
         dialogClass : 'dialogBlue'
     };
     var renameDialog = $('.dialog-dir-rename').dialog(dialogOptionBlue);
+    var newDirDialog = $('.dialog-dir').dialog(dialogOptionBlue);
 
-    function addFile(id, shortName, fullName, size, created, url) {
-        fileListNode.append('<tr> <td><a href="#" data-id="'+ id +'" class="file" title="'+ fullName +'">'+ shortName +'</a></td> <td>'+ size +'</td> <td>'+ created +'</td> <td><a href="'+ url +'"><img src="/template/default/img/icon_24_chain.png" width="24" height="24" alt="Скачать"></a></td></tr>');
+    function addFile(id, shortName, fullName, size, created, url, type) {
+        fileListNode.append(
+            '<tr class="row_id_'+ id +'">' +
+                '<td><a href="javascript:;" data-id="'+ id +'" class="'+ type +' file_id_'+ id +'" title="'+ fullName +'">'+ shortName +'</a></td>' +
+                '<td>'+ (type == 'file' ? size : '&nbsp;') +'</td>' +
+                '<td>'+ created +'</td>' +
+                '<td><a href="'+ url +'"><img src="/template/default/img/icon_24_chain.png" width="24" height="24" alt="Скачать"></a></td>' +
+            '</tr>'
+        );
+
+        if (type == 'dir') {
+            if (cwd == -1) {
+                return true;
+            }
+
+            dirListNode.append('<li class="row_id_'+ id +' dir"><a href="javascript:;" class="file_id_'+ id +'">'+ shortName  +'</a></li>');
+        }
     }
 
     function renameFile(id, name) {
@@ -21,7 +39,7 @@ $(function() {
 
         $.post("/index.php?module=dir&action=rename", { "id": id, "name": name }, function (response) {
             if (response.success) {
-                $("#file_id_" + response.id).text(response.name);
+                $(".file_id_" + response.id).text(response.name);
             }
         }, "json");
     }
@@ -33,7 +51,7 @@ $(function() {
     function moveToTrash(id) {
         $.post("/index.php?module=dir&action=move_to_trash", { "id": id }, function (response) {
             if (response.success) {
-                $("#row_id_" + id).remove();
+                $(".row_id_" + id).remove();
             }
         }, "json");
     }
@@ -44,35 +62,41 @@ $(function() {
         }
 
         cwd = parseInt(dirId);
+        fileListNode.html("");
+
+        if (!cwd) {
+            dirListNode.html("");
+        }
+
+        if (cwd == -1) {
+            $(".buttons").append('<a href="javascript:;" class="button" id="emptyTrashLink">Очистить корзину</a>');
+        }
+        else {
+            $("#emptyTrashLink").remove();
+        }
 
         $.post("/index.php?module=dir&action=load_files&is_ajax=1", { "cwd": cwd }, function (response) {
-            var row = '';
-            var li = '';
             if (response.success) {
                 for (i = 0; i < response.files.length; i++) {
-                    if (response.files[i].type == 'dir') {
-                        row += '<tr id="row_id_'+ response.files[i].id +'"><td colspan="2"><a href="javascript:;" data-id="'+ response.files[i].id +'" class="dir" id="file_id_'+ response.files[i].id +'">'+ response.files[i].user_defined_name +'</a></td><td>'+ response.files[i].created +'</td><td></td></tr>';
-                        li += '<li class="dir" data-id="'+ response.files[i].id +'"><a href="javascript:;">'+ response.files[i].cut_user_defined_name +'</a></li>';
-                    }
-                    else {
-                        row += '<tr id="row_id_'+ response.files[i].id +'"><td><a href="javascript:;" data-id="'+ response.files[i].id +'" class="file" id="file_id_'+ response.files[i].id +'">'+ response.files[i].cut_user_defined_name +'</a></td><td>'+ response.files[i].file_size +'</td><td>'+ response.files[i].created +'</td><td><img src="/template/default/img/icon_24_chain.png" width="24" height="24" alt="" /></td></tr>';
-                    }
+                    addFile(
+                        response.files[i].id,
+                        response.files[i].cut_user_defined_name,
+                        response.files[i].user_defined_name,
+                        response.files[i].file_size,
+                        response.files[i].created,
+                        response.files[i].files[0],
+                        response.files[i].type
+                    );
                 }
 
-                $("#fileList").html(row);
-
-                if (cwd == -1) {
-                    $("#dirListTrash").html(li);
-                }
-                else {
-                    $("#dirList").html(li);
+                if (!response.files.length) {
+                    fileListNode.html('<tr><td colspan="4" class="dark-blue align-center">Пусто...</td></tr>');
                 }
             }
         }, "json");
     }
 
     loadFiles(0);
-//    addFile(45, "Dexter...mp4", "Dexter.S3E5.HD.mp4", "674 KB", "12.08.13", "http://s1.holdfree.com/sdloh32h.mp4");
 //    renameFile(68, "new_name_file_8.mp4");
 
     var fileRename = $.contextMenu({
@@ -138,4 +162,41 @@ $(function() {
         renameDialog.dialog("close");
         return false;
     });
+
+    $('#formDir').on('submit', function()
+    {
+        var formData = $("#formDir").serialize();
+
+        $.post('index.php?module=dir&action=add&is_ajax=1', formData, function(response)
+        {
+            if (response.error) {
+                $('.dialog-dir .place-holder-message').html('<div class="error-message">'+ response.message +'</div>');
+                $('#formDir').find('.submit').effect("shake", { distance:10, times:2 }, 700);
+            }
+
+            if(response.success)
+            {
+                $('#formDir').trigger('reset');
+                addFile(response.dir_id, response.dir_name, "", "", "", "", "dir");
+
+                newDirDialog.dialog('close');
+            }
+
+        }, 'json');
+
+        return false;
+    });
+
+    $('#newDir').click(function() {
+        newDirDialog.dialog('open');
+    });
+
+    $("#emptyTrashLink").on("click", function () {
+        $.post('/index.php?module=dir&action=empty_trash&is_ajax=1', null, function (response) {
+            if (response.success) {
+                loadFiles(-1);
+            }
+        }, 'json');
+    });
+
 });

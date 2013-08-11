@@ -290,11 +290,15 @@ h2 {
     display: block;
     width: 320px;
     height: 48px;
-    background: url("../img/button_big.png") no-repeat;
+    background: url("../img/button_big.png") no-repeat top center;
     margin: 0 auto;
     font-size: 18px;
     font-weight: 600;
     text-shadow: 0 1px #fbdb00;
+}
+.dialog .submit:hover {
+    background: url("../img/button_big.png") no-repeat bottom center;
+    cursor: pointer;
 }
 .dialog .line {
     line-height: 0px;
@@ -706,4 +710,7 @@ h2 {
 
 .cleaner {
     clear: both;
+}
+.align-center {
+    text-align: center;
 }

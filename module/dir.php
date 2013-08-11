@@ -107,3 +107,15 @@ elseif ($action == 'load_files') {
     $response = array('success' => 1, 'files' => $files);
     die(json_encode($response));
 }
+elseif ($action == 'empty_trash') {
+    if (! $_user->isLogged()) {
+        throw new ExceptionImproved(gettext('Данная операция доступна только для зарегистрированных пользователей'));
+    }
+
+    $_fileManager->emptyTrash($_user->getId());
+
+    $response = array('success' => 1);
+    $response = json_encode($response);
+
+    die($response);
+}

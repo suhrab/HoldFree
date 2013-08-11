@@ -94,11 +94,20 @@ class FileManager
         return $files_info;
     }
 
-    public function getFilesInfoFromDir($dir_id, $user_id)
+    public function getFilesInfoFromDir($dir_id, $user_id = 0)
     {
-        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE parent = :parent AND trash = 0 AND user_id = :user_id ORDER BY created DESC');
+        $select = $user_id ?
+            'SELECT * FROM hf_file WHERE parent = :parent AND trash = 0 AND user_id = :user_id ORDER BY created DESC':
+            'SELECT * FROM hf_file WHERE parent = :parent AND trash = 0 ORDER BY created DESC';
+
+
+        $sth = $this->pdo->prepare($select);
         $sth->bindParam(':parent', $dir_id);
-        $sth->bindParam(':user_id', $user_id);
+
+        if ($user_id) {
+            $sth->bindParam(':user_id', $user_id);
+        }
+
         $sth->execute();
         $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
 
@@ -114,7 +123,7 @@ class FileManager
 
     public function getTrashFilesInfoByUserId($user_id)
     {
-        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id AND trash = 1 ORDER BY created DESC');
+        $sth = $this->pdo->prepare('SELECT * FROM hf_file WHERE user_id = :user_id AND trash = 1 AND parent = 0 ORDER BY created DESC');
         $sth->bindParam(':user_id', $user_id);
         $sth->execute();
         $files_info = $sth->rowCount() ? $sth->fetchAll() : array();
@@ -272,6 +281,14 @@ class FileManager
         $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
         $power = $size > 0 ? floor(log($size, 1024)) : 0;
         return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
+    }
+
+    public function emptyTrash($user_id) {
+        $sth = $this->pdo->prepare('DELETE FROM hf_file WHERE user_id = :user_id AND trash = 1');
+        $sth->bindParam(':user_id', $user_id);
+        $sth->execute();
+
+        return $sth->rowCount();
     }
 
     public function __destruct()

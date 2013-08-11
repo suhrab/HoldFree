@@ -164,12 +164,13 @@
             });
         });
     </script>
-
     <div class="content page-manager">
-        <h2>Менеджер видео</h2>
+    <h2>Менеджер видео</h2>
 
+    <div class="buttons">
         <a href="javascript:;" class="button" id="UploadFileButton">Загрузить файл</a>
         <a href="javascript:;" class="button" id="newDir">Создать папку</a>
+    </div>
 
         <div class="manager">
             <div class="dir-tree">
@@ -188,12 +189,12 @@
             <div class="file-panel">
                 <table width="100%" cellspacing="0" cellpadding="0">
                     <thead>
-                        <tr>
-                            <td>Имя</td>
-                            <td width="100">Размер</td>
-                            <td width="100">Дата</td>
-                            <td width="50">URL</td>
-                        </tr>
+                    <tr>
+                        <td>Имя</td>
+                        <td width="100">Размер</td>
+                        <td width="100">Дата</td>
+                        <td width="50">URL</td>
+                    </tr>
                     </thead>
                     <tbody id="fileList"></tbody>
                 </table>
@@ -227,19 +228,19 @@
 
         <div class="dialog dialog-dir" title="Создать новую папку">
             <div class="place-holder-message"></div>
-            <form action="index.php?module=dir&action=add" method="post" id="formDir">
-                <input name="dir_name" type="text" class="input-text" placeholder="Имя новой папки" />
-                <input type="submit" value="Создать папку" class="submit" />
+            <form action="javascript:;" method="post" id="formDir">
+                <input name="dir_name" type="text" class="input-text" placeholder="Имя новой папки"/>
+                <input type="submit" value="Создать папку" class="submit"/>
             </form>
         </div>
 
         <div class="dialog dialog-dir-rename" title="Переименовать файл">
             <div class="place-holder-message"></div>
             <form action="" method="post" id="formRename">
-                <input name="name" type="text" class="input-text" placeholder="Имя" />
-                <input name="id" type="hidden" value="0" id="id" />
-                <input type="submit" value="Переименовать" class="submit" />
+                <input name="name" type="text" class="input-text" placeholder="Имя"/>
+                <input name="id" type="hidden" value="0" id="id"/>
+                <input type="submit" value="Переименовать" class="submit"/>
             </form>
         </div>
     </div>
-{/block}
+    </div>{/block}

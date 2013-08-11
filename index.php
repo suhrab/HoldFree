@@ -25,12 +25,15 @@ try
         $_user->signInByHash($_COOKIE['hash']);
     }
 
+    if (!$_user->isLogged() and ($module == 'manager' or $dashboard)) {
+        $module = 'index';
+    }
+
     // Извлекаем список стран для диалога регистрации
     if (!$_user->isLogged()) {
         $qh = $pdo->query('SELECT id, code, name FROM hf_country');
         $qh->execute();
         $countries = $qh->fetchAll();
-        $qh = null;
         $smarty->assign('countries', $countries);
         $smarty->assign('_user', ['currentCountryId' => $_user->currentCountryId]);
     }
