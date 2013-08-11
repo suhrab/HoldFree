@@ -12,7 +12,7 @@ try
         $_user->signInByHash($_COOKIE['hash']);
     }
 
-    $module     = isset($_REQUEST['module']) ? preg_replace('/[^a-z0-9_]/i', '', $_REQUEST['module']) : ($_user->isLogged() ? 'manager' : 'index');
+    $module     = isset($_REQUEST['module']) ? preg_replace('/[^a-z0-9_]/i', '', $_REQUEST['module']) : 'manager';
     $action     = isset($_REQUEST['action']) ? preg_replace('/[^a-z0-9_]/i', '', $_REQUEST['action']) : '';
     $is_ajax    = isset($_REQUEST['is_ajax']) ? abs($_REQUEST['is_ajax']) : 0;
     $dashboard  = isset($_REQUEST['dashboard']) ? abs($_REQUEST['dashboard']) : 0;
