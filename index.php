@@ -26,7 +26,7 @@ try
     }
 
     // Извлекаем список стран для диалога регистрации
-    if (!$_user->isLogged()) {
+    if ($_user->getGroup() == 0) {
         $qh = $pdo->query('SELECT id, code, name FROM hf_country');
         $qh->execute();
         $countries = $qh->fetchAll();
