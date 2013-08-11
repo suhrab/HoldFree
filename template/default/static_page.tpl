@@ -9,7 +9,7 @@
         </div>
 
         <div style="margin-top: 10px;">
-            <a href="/?module=user&action=profile&id={$staticPage.author_id}">{"Автор: "|gettext}{$staticPage.authorLastName} {$staticPage.authorFirstName}</a>
+            <a href="/?module=user&action=profile&id={$staticPage.author_id}">{"Автор: "|gettext}{$staticPage.authorLastName} {$staticPage.authorFirstName}</a> {$staticPage.update_time}
         </div>
     </div>
 {/block}
