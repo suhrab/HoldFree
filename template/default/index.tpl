@@ -60,45 +60,6 @@
         </div>
 
         {block name="content"}
-            <style type="text/css">
-                body {
-                    background: #101a22 url("/template/default/img/bg_index.png") no-repeat top center;
-                }
-                #uploadButton {
-                    display: block;
-                    width:  326px;
-                    height: 89px;
-                    margin: 300px auto 0 auto;
-                    text-align: center;
-                    font: bold 26px Arial, Helvetica, sans-serif;
-                    text-decoration: none;
-                    color: #16232f;
-                    padding-top: 55px;
-                    background: url("/template/default/img/button_upload.png") no-repeat top center;
-                }
-                #uploadButton:hover {
-                    background: url("/template/default/img/button_upload.png") no-repeat bottom center;
-                }
-                #moreInfo {
-                    display: block;
-                    width:  400px;
-                    text-align: center;
-                    font: bold 17px Arial, Helvetica, sans-serif;
-                    color: #FFCC00;
-                    margin: 50px auto 0 auto;
-                    border:  dashed 3px #4eb9ff;
-                    padding:  15px 0;
-                    border-radius: 30px;
-                    text-decoration: none;
-                }
-                #moreInfo:hover {
-                    color: #FFFFFF;
-                }
-            </style>
-            <div class="content">
-                <a href="javascript:;" id="uploadButton">Загрузить</a>
-                <a href="javascript:;" id="moreInfo">Узнать больше о бонусах регистрации</a>
-            </div>
         {/block}
     </div>
 

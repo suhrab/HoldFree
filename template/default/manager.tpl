@@ -20,6 +20,42 @@
 
     <script type="text/javascript" src="{$_template}/js/manager.js"></script>
 
+    <style type="text/css">
+        body.NotLoggedIn {
+            background: #101a22 url("/template/default/img/bg_index.png") no-repeat top center;
+        }
+        #UploadButtonNotLoggedIn {
+            display: block;
+            width:  326px;
+            height: 89px;
+            margin: 300px auto 0 auto;
+            text-align: center;
+            font: bold 26px Arial, Helvetica, sans-serif;
+            text-decoration: none;
+            color: #16232f;
+            padding-top: 55px;
+            background: url("/template/default/img/button_upload.png") no-repeat top center;
+        }
+        #UploadButtonNotLoggedIn:hover {
+            background: url("/template/default/img/button_upload.png") no-repeat bottom center;
+        }
+        #moreInfo {
+            display: block;
+            width:  400px;
+            text-align: center;
+            font: bold 17px Arial, Helvetica, sans-serif;
+            color: #FFCC00;
+            margin: 50px auto 0 auto;
+            border:  dashed 3px #4eb9ff;
+            padding:  15px 0;
+            border-radius: 30px;
+            text-decoration: none;
+        }
+        #moreInfo:hover {
+            color: #FFFFFF;
+        }
+    </style>
+
     <script type="text/javascript">
 
         function getBytesWithUnit (bytes)
@@ -49,8 +85,14 @@
                 delete filesToMonitor[dbFileId]
         }
 
+        var fileMonitorPollInterval = 5 * 1000;
+        var isLoggedIn = {if isset($_user.id)}true{else}false{/if};
         $(function()
         {
+            if(!isLoggedIn){
+                $('body').addClass('NotLoggedIn')
+            }
+
             $('#FileQueue tr.dbRow').each(function(i, el){
                 var dbFileId = $(el).data('id')
                 AddFileToMonitor(dbFileId, $(el))
@@ -102,15 +144,15 @@
                                 }
                             })
 
-                            setTimeout(PollFilesToMonitor, 2*1000);
+                            setTimeout(PollFilesToMonitor, fileMonitorPollInterval);
                         },
                         error: function(jqXHR){
-                            setTimeout(PollFilesToMonitor, 2*1000);
+                            setTimeout(PollFilesToMonitor, fileMonitorPollInterval);
                         }
                     });
                 }
                 else {
-                    setTimeout(PollFilesToMonitor, 2*1000);
+                    setTimeout(PollFilesToMonitor, fileMonitorPollInterval);
                 }
             }
 
@@ -128,47 +170,66 @@
                 ]
             });
 
-            uploader.bind('Init', function(up, params) {
-                $('#filelist').html("<div>Current runtime: " + params.runtime + "</div>");
-            });
+            $('.pickfiles').mouseenter(function(e)
+            {
+                var id = $(this).attr('id')
+                if(uploader.settings.browse_button == id){
+                    return;
+                }
 
-            $('#uploadfiles').click(function(e) {
-                uploader.start();
-                e.preventDefault();
-            });
+                uploader.destroy();
 
-            uploader.init();
+                uploader.settings.browse_button = id;
 
-            uploader.bind('FilesAdded', function(up, files) {
-                $('#FileQueueContainer').show()
-                $.each(files, function(i, file) {
-                    $('<tr id="'+file.id+'"><td>'+file.name+'</td><td>'+getBytesWithUnit(file.size)+'</td><td class="status">В очереди на загрузку</td><td class="uploadSpeed"></td></tr>').appendTo('#FileQueue');
+
+                uploader.bind('Init', function(up, params) {
+                    //$('#FileQueueContainer').html("<div>Current runtime: " + params.runtime + "</div>");
                 });
 
-                up.refresh(); // Reposition Flash/Silverlight
-                up.start();
+                $('#uploadfiles').click(function(e) {
+                    uploader.start();
+                    e.preventDefault();
+                });
+
+                uploader.init();
+
+                uploader.bind('FilesAdded', function(up, files) {
+                    $('#FileQueueContainer').show()
+                    $.each(files, function(i, file) {
+                        $('<tr id="'+file.id+'"><td>'+file.name+'</td><td>'+getBytesWithUnit(file.size)+'</td><td class="status">В очереди на загрузку</td><td class="uploadSpeed"></td></tr>').appendTo('#FileQueue');
+                    });
+
+                    up.refresh(); // Reposition Flash/Silverlight
+                    up.start();
+                });
+
+                uploader.bind('UploadProgress', function(up, file) {
+                    var $fileRow = $('#' + file.id)
+                    $fileRow.find(" td.uploadSpeed").text(getBytesWithUnit(up.total.bytesPerSec) + "/s");
+                    $fileRow.find(" td.status").html('<div class="progress-bar"><div class="progress-status-green" style="width: '+ file.percent +'%"></div></div><div class="progress-text">Загружено: <i class="progress-percent">'+ file.percent +'</i>%</div>');
+                });
+
+                uploader.bind('FileUploaded', function(up, file, response) {
+                    var r = jQuery.parseJSON(response.response);
+                    var $fileRow = $('#' + file.id);
+                    AddFileToMonitor(r.id, $fileRow);
+                    $fileRow.find(" td.uploadSpeed").text("");
+                    $fileRow.find(" td.status").html("В очереди на конвертацию");
+                });
             });
 
-            uploader.bind('UploadProgress', function(up, file) {
-                var $fileRow = $('#' + file.id)
-                $fileRow.find(" td.uploadSpeed").text(getBytesWithUnit(up.total.bytesPerSec) + "/s");
-                $fileRow.find(" td.status").html('<div class="progress-bar"><div class="progress-status-green" style="width: '+ file.percent +'%"></div></div><div class="progress-text">Загружено: <i class="progress-percent">'+ file.percent +'</i>%</div>');
-            });
-
-            uploader.bind('FileUploaded', function(up, file, response) {
-                var r = jQuery.parseJSON(response.response);
-                var $fileRow = $('#' + file.id);
-                AddFileToMonitor(r.id, $fileRow);
-                $fileRow.find(" td.uploadSpeed").text("");
-                $fileRow.find(" td.status").html("В очереди на конвертацию");
-            });
+            $('#UploadButtonNotLoggedIn').click(function(e){
+                $('body').removeClass('NotLoggedIn')
+                $('#content-NotLoggedIn').hide();
+                $('#content-LoggedIn').show();
+            })
         });
     </script>
-    <div class="content page-manager">
+    <div class="content page-manager" id="content-LoggedIn" style="display: {if isset($_user.id)}block{else}none{/if};">
     <h2>Менеджер видео</h2>
 
     <div class="buttons">
-        <a href="javascript:;" class="button" id="UploadFileButton">Загрузить файл</a>
+        <a href="javascript:;" class="button pickfiles" id="UploadFileButton">Загрузить файл</a>
         <a href="javascript:;" class="button" id="newDir">Создать папку</a>
     </div>
 
@@ -243,4 +304,9 @@
             </form>
         </div>
     </div>
-    </div>{/block}
+
+    <div class="content" id="content-NotLoggedIn" style="display: {if isset($_user.id)}none{else}block{/if};">
+        <a href="javascript:;" class="pickfiles" id="UploadButtonNotLoggedIn">Загрузить</a>
+        <a href="javascript:;" id="moreInfo">Узнать больше о бонусах регистрации</a>
+    </div>
+{/block}
