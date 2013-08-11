@@ -28,7 +28,7 @@ $(function() {
                 return true;
             }
 
-            dirListNode.append('<li class="row_id_'+ id +' dir"><a href="javascript:;" class="file_id_'+ id +'">'+ shortName  +'</a></li>');
+            dirListNode.append('<li class="row_id_'+ id +' dir" data-id="'+ id +'"><i class="icon-dir"></i><a href="javascript:;" class="file_id_'+ id +'">'+ shortName  +'</a></li>');
         }
     }
 
@@ -150,7 +150,7 @@ $(function() {
     });
 
     /* ===== Events ===== */
-    $(".dir").on("click", function() {
+    $(document).on("click", ".dir", function() {
         dirId = parseInt($(this).data("id"));
         loadFiles(dirId);
     });

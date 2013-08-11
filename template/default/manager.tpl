@@ -124,7 +124,7 @@
                 url : '/?module=upload&is_ajax=1',
                 flash_swf_url       : '{$_template}/js/plupload/plupload.flash.swf',
                 filters : [
-                    { title : "Video files", extensions : "mp4,avi,mkv" }
+                    { title : "Video files", extensions : "mp4,avi,mkv,flv" }
                 ]
             });
 

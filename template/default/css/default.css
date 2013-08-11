@@ -592,14 +592,31 @@ h2 {
     margin-top: 5px;
 }
 .page-manager .dir-tree li ul {
-    margin-left: 20px;
+    margin-left: 12px;
     margin-bottom: 8px;
+    background: url("../img/vline.png") repeat-y;
 }
-.page-manager .dir-tree li.dir {
+.page-manager .dir-tree li ul li {
+    line-height: 20px;
+    padding-left: 15px;
+    background: url("../img/node.png") no-repeat left center;
+}
+.page-manager .dir-tree li ul li:last-child {
+    background: #293640 url("../img/lastnode.png") no-repeat left top;
+}
+.page-manager .dir-tree li ul li i.icon-dir {
+    display: block;
+    width: 16px;
+    height: 20px;
+    float: left;
+    margin-right: 8px;
     background: url("../img/icon_16_dir.png") no-repeat left 3px;
-    line-height: 16px;
-    padding: 3px 0 3px 24px;
 }
+/*.page-manager .dir-tree li i.dir {*/
+    /*background: url("../img/icon_16_dir.png") no-repeat left 3px;*/
+    /*line-height: 16px;*/
+    /*padding: 3px 0 3px 24px;*/
+/*}*/
 .page-manager .dir-tree li.dir ul {
     margin-left: 0;
 }
