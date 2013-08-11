@@ -6,23 +6,23 @@ define('CHECK', TRUE);
 require_once('config.php');
 require_once('init.php');
 
-$module     = isset($_REQUEST['module']) ? preg_replace('/[^a-z0-9_]/i', '', $_REQUEST['module']) : ($_user->isLogged() ? 'manager' : 'index');
-$action     = isset($_REQUEST['action']) ? preg_replace('/[^a-z0-9_]/i', '', $_REQUEST['action']) : '';
-$is_ajax    = isset($_REQUEST['is_ajax']) ? abs($_REQUEST['is_ajax']) : 0;
-$dashboard  = isset($_REQUEST['dashboard']) ? abs($_REQUEST['dashboard']) : 0;
-
 try
 {
+    if (isset($_COOKIE['hash'])) {
+        $_user->signInByHash($_COOKIE['hash']);
+    }
+
+    $module     = isset($_REQUEST['module']) ? preg_replace('/[^a-z0-9_]/i', '', $_REQUEST['module']) : ($_user->isLogged() ? 'manager' : 'index');
+    $action     = isset($_REQUEST['action']) ? preg_replace('/[^a-z0-9_]/i', '', $_REQUEST['action']) : '';
+    $is_ajax    = isset($_REQUEST['is_ajax']) ? abs($_REQUEST['is_ajax']) : 0;
+    $dashboard  = isset($_REQUEST['dashboard']) ? abs($_REQUEST['dashboard']) : 0;
+
     if ($config['gzip']) {
         ob_start("ob_gzhandler");
     }
 
     if ($config['site_offline'] && !$dashboard) {
         throw new ExceptionImproved($config['offline_reason'], 'Сайт на реконструкции!');
-    }
-
-    if (isset($_COOKIE['hash'])) {
-        $_user->signInByHash($_COOKIE['hash']);
     }
 
     // Извлекаем список стран для диалога регистрации
