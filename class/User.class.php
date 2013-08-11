@@ -26,7 +26,7 @@ class User
      * @param string $first_name имя пользователя
      * @param string $last_name фамилия пользователя
      * @throws ExceptionImproved
-     * @return int идентификационный номер добавленого объявления
+     * @return int идентификационный номер добавленого или обновленно пользователя
      */
     public function signUp($first_name, $email, $country = 0, $password = '', $last_name = '')
     {
@@ -56,18 +56,50 @@ class User
             $hash = '';
         }
 
-        $sth = $this->pdo->prepare('INSERT INTO hf_user SET email = :email, country = :country, password = :password, first_name = :first_name, last_name = :last_name, reg_date = :reg_date');
-        $sth->bindParam(':email', $email);
-        $sth->bindParam(':country', $country);
-        $sth->bindParam(':password', $hash);
-        $sth->bindParam(':first_name', $first_name);
-        $sth->bindParam(':last_name', $last_name);
-        $sth->bindParam(':reg_date', $reg_date);
-        $sth->execute();
+
+        if($this->isLogged() && $this->group == 0){
+            $updateSql = <<<SQL
+UPDATE
+  hf_user
+SET
+  email = :email,
+  country = :country,
+  password = :password,
+  first_name = :first_name,
+  last_name = :last_name,
+  reg_date = :reg_date,
+  `group` = 2
+WHERE
+  id = :id
+SQL;
+            $updateStmt = $this->pdo->prepare($updateSql);
+            $updateStmt->execute([
+                'email' => $email,
+                'country' => $country,
+                'password' => $hash,
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'reg_date' => $reg_date,
+                'id' => $this->id,
+            ]);
+
+            $ret =  $this->id;
+
+        } else {
+            $sth = $this->pdo->prepare('INSERT INTO hf_user SET email = :email, country = :country, password = :password, first_name = :first_name, last_name = :last_name, reg_date = :reg_date');
+            $sth->bindParam(':email', $email);
+            $sth->bindParam(':country', $country);
+            $sth->bindParam(':password', $hash);
+            $sth->bindParam(':first_name', $first_name);
+            $sth->bindParam(':last_name', $last_name);
+            $sth->bindParam(':reg_date', $reg_date);
+            $sth->execute();
+
+            $ret = $this->pdo->lastInsertId();
+        }
 
         $this->signIn($email, $password);
-
-        return $this->pdo->lastInsertId();
+        return $ret;
     }
 
     /**
@@ -118,7 +150,7 @@ class User
         $this->group = (int) $user_data['group'];
 
         if (function_exists('password_hash')) {
-            $hash = password_hash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . uniqid(), PASSWORD_DEFAULT);
+            $hash = password_hash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . uniqid() . $this->getId(), PASSWORD_DEFAULT);
         }
         else {
             $hash = $this->passwordLib->createPasswordHash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . uniqid());
@@ -560,7 +592,7 @@ class User
     private $group = 0;
 
     /**
-     * @var PDO
+     * @var \PDO
      */
     private $pdo = null;
 
@@ -601,5 +633,38 @@ SQL;
         } else {
             return 1;
         }
+    }
+
+    public static function createGuestAccount(&$createdHash = null){
+        global $pdo;
+
+        $createGuestSql = <<<SQL
+INSERT INTO
+  hf_user
+SET
+  reg_date = UNIX_TIMESTAMP()
+SQL;
+        $pdo->exec($createGuestSql);
+        $newGuestId = $pdo->lastInsertId();
+
+        $updateHashSql = <<<SQL
+UPDATE
+  hf_user
+SET
+  hash = :hash
+WHERE
+  id = :id
+SQL;
+        $updateHashStmt = $pdo->prepare($updateHashSql);
+        $updateHashStmt->execute([
+            'hash' => ($createdHash = password_hash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . uniqid() . $newGuestId, PASSWORD_DEFAULT)),
+            'id' => $newGuestId
+        ]);
+
+        setcookie('hash', $createdHash, time() + (60 * 60 * 24 * 365));
+    }
+
+    public function getGroup(){
+        return $this->group;
     }
 }

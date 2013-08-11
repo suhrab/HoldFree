@@ -73,6 +73,7 @@ elseif ($action == 'signin')
 }
 elseif ($action == 'profile')
 {
+
     $user_id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT) : 0;
 
     if (!$user_id) {
@@ -83,6 +84,10 @@ elseif ($action == 'profile')
 
     if (!$user_data) {
         throw new ExceptionImproved(gettext('Такой страницы не существует!'), gettext('Ошибка 404'), 404);
+    }
+
+    if($_user->getGroup() == 0){
+        throw new Exception(gettext('Профиль только для зарегистрированных'));
     }
 
     $qh = $pdo->query('SELECT id, code, name FROM hf_country');

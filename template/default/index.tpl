@@ -32,14 +32,14 @@
     <div class="page">
         <div class="header">
             <a href="{$_url}" class="logo"></a>
-            {if isset($_user.id)}
+            {if isset($_user.id) && isset($_user.group) && $_user.group != 0}
                 <ul class="user_bar">
                     <li class="avatar" style="background: url('{$_url}/upload/avatar/_thumb/{$_user.avatar}') no-repeat;"></li>
                     <li>{$_user.first_name}</li>
                 </ul>
             {/if}
             <ul class="menu">
-                {if isset($_user.id)}
+                {if isset($_user.id) && isset($_user.group) && $_user.group != 0}
                     <li><i class="data"></i> <a href="{$_url}/?module=user&action=profile&id={$_user.id}">{"Личные данные"|gettext}</a></li>
                     {if $_user.group == 1}<li><i class="doc"></i> <a href="{$_url}/?module=dashboard&dashboard=1">{"Панель Управления"|gettext}</a></li>{/if}
                     <li><i class="doc"></i> <a href="{$_url}/?module=user&action=signout">{"Выход"|gettext}</a></li>

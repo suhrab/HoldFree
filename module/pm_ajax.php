@@ -16,6 +16,10 @@ if(!$_user->isLogged()){
     exit;
 }
 
+if($_user->getGroup() == 0){
+    throw new Exception(gettext('Личные сообщения только для зарегистрированных'));
+}
+
 
 if(empty($_POST['action']))
     throw new Exception (gettext('Действие не определено'));

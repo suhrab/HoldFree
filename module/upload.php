@@ -3,6 +3,12 @@ if (!defined('CHECK')) {
     exit;
 }
 
+if(!$_user->isLogged()){
+    // create new guest user
+    User\User::createGuestAccount($loginHash);
+    $_user->signInByHash($loginHash);
+}
+
 $file = isset($_FILES['file']['tmp_name']) ? $_FILES['file']['tmp_name'] : '';
 
 if (!is_uploaded_file($file)) {

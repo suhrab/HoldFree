@@ -16,6 +16,10 @@ if(!$_user->isLogged()){
     exit;
 }
 
+if($_user->getGroup() == 0){
+    throw new Exception(gettext('Личные сообщения только для зарегистрированных'));
+}
+
 $messageFolder = isset($_GET['messageFolder']) ? $_GET['messageFolder']: '';
 
 if(empty($_GET['messageId']) || !is_numeric($_GET['messageId']))

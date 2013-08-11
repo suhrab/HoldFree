@@ -16,6 +16,10 @@ if(!$_user->isLogged()){
     exit;
 }
 
+if($_user->getGroup() == 0){
+    throw new Exception(gettext('Личные сообщения только для зарегистрированных'));
+}
+
 $stmt = $pdo->query("
     SELECT
       PM_TABLE.id, PM_TABLE.subject, PM_TABLE.was_read, PM_TABLE.addTime, user_from.first_name as from_first_name, user_from.last_name as from_last_name
