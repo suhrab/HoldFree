@@ -198,7 +198,7 @@
                 uploader.bind('FilesAdded', function(up, files) {
                     $('#FileQueueContainer').show()
                     $.each(files, function(i, file) {
-                        $('<tr id="'+file.id+'"><td>'+file.name+'</td><td>'+getBytesWithUnit(file.size)+'</td><td class="status">В очереди на загрузку</td><td class="uploadSpeed"></td></tr>').appendTo('#FileQueue');
+                        $('<tr id="'+file.id+'"><td>'+file.name+'</td><td>'+getBytesWithUnit(file.size)+'</td><td class="status">{"В очереди на загрузку"|gettext}</td><td class="uploadSpeed"></td></tr>').appendTo('#FileQueue');
                     });
 
                     up.refresh(); // Reposition Flash/Silverlight
@@ -208,7 +208,7 @@
                 uploader.bind('UploadProgress', function(up, file) {
                     var $fileRow = $('#' + file.id)
                     $fileRow.find(" td.uploadSpeed").text(getBytesWithUnit(up.total.bytesPerSec) + "/s");
-                    $fileRow.find(" td.status").html('<div class="progress-bar"><div class="progress-status-green" style="width: '+ file.percent +'%"></div></div><div class="progress-text">Загружено: <i class="progress-percent">'+ file.percent +'</i>%</div>');
+                    $fileRow.find(" td.status").html('<div class="progress-bar"><div class="progress-status-green" style="width: '+ file.percent +'%"></div></div><div class="progress-text">{"Загружено"|gettext}: <i class="progress-percent">'+ file.percent +'</i>%</div>');
                 });
 
                 uploader.bind('FileUploaded', function(up, file, response) {
@@ -216,7 +216,7 @@
                     var $fileRow = $('#' + file.id);
                     AddFileToMonitor(r.id, $fileRow);
                     $fileRow.find(" td.uploadSpeed").text("");
-                    $fileRow.find(" td.status").html("В очереди на конвертацию");
+                    $fileRow.find(" td.status").html("{"В очереди на конвертацию"|gettext}");
                 });
             });
 
@@ -228,22 +228,22 @@
         });
     </script>
     <div class="content page-manager" id="content-LoggedIn" style="display: {if isset($_user.id)}block{else}none{/if};">
-    <h2>Менеджер видео</h2>
+    <h2>{"Менеджер видео"|gettext}</h2>
 
     <div class="buttons">
-        <a href="javascript:;" class="button pickfiles" id="UploadFileButton">Загрузить файл</a>
-        <a href="javascript:;" class="button" id="newDir">Создать папку</a>
+        <a href="javascript:;" class="button pickfiles" id="UploadFileButton">{"Загрузить файл"|gettext}</a>
+        <a href="javascript:;" class="button" id="newDir">{"Создать папку"|gettext}</a>
     </div>
 
         <div class="manager">
             <div class="dir-tree">
                 <ul>
                     <li class="dir-root">
-                        <a href="javascript:;" class="parent dir" data-id="0">Менеджер файлов</a>
+                        <a href="javascript:;" class="parent dir" data-id="0">{"Менеджер файлов"|gettext}</a>
                         <ul id="dirList"></ul>
                     </li>
                     <li class="dir-trash">
-                        <a href="javascript:;" class="parent dir" data-id="-1">Удаленные файлы</a>
+                        <a href="javascript:;" class="parent dir" data-id="-1">{"Удаленные файлы"|gettext}</a>
                         <ul id="dirListTrash"></ul>
                     </li>
                 </ul>
@@ -253,10 +253,10 @@
                 <table width="100%" cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
-                        <td>Имя</td>
-                        <td width="100">Размер</td>
+                        <td>{"Имя"|gettext}</td>
+                        <td width="100">{"Размер"|gettext}</td>
                         <td width="50">URL</td>
-                        <td width="100" class="align-center">Дата</td>
+                        <td width="100" class="align-center">{"Дата"|gettext}</td>
                     </tr>
                     </thead>
                     <tbody id="fileList"></tbody>
@@ -269,10 +269,10 @@
                 <table width="100%" cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
-                        <td>Имя</td>
-                        <td width="140">Размер</td>
-                        <td width="200">Статус</td>
-                        <td width="140">Скорость</td>
+                        <td>{"Имя"|gettext}</td>
+                        <td width="140">{"Размер"|gettext}</td>
+                        <td width="200">{"Статус"|gettext}</td>
+                        <td width="140">{"Скорость"|gettext}</td>
                     </tr>
                     </thead>
                     <tbody id="FileQueue">
@@ -289,20 +289,20 @@
             </div>
         </div>
 
-        <div class="dialog dialog-dir" title="Создать новую папку">
+        <div class="dialog dialog-dir" title="{"Создать новую папку"|gettext}">
             <div class="place-holder-message"></div>
             <form action="javascript:;" method="post" id="formDir">
-                <input name="dir_name" type="text" class="input-text" placeholder="Имя новой папки"/>
-                <input type="submit" value="Создать папку" class="submit"/>
+                <input name="dir_name" type="text" class="input-text" placeholder="{"Имя новой папки"|gettext}"/>
+                <input type="submit" value="{"Создать папку"|gettext}" class="submit"/>
             </form>
         </div>
 
-        <div class="dialog dialog-dir-rename" title="Переименовать файл">
+        <div class="dialog dialog-dir-rename" title="{"Переименовать файл"|gettext}">
             <div class="place-holder-message"></div>
             <form action="" method="post" id="formRename">
-                <input name="name" type="text" class="input-text" placeholder="Имя"/>
+                <input name="name" type="text" class="input-text" placeholder="{"Имя"|gettext}"/>
                 <input name="id" type="hidden" value="0" id="id"/>
-                <input type="submit" value="Переименовать" class="submit"/>
+                <input type="submit" value="{"Переименовать"|gettext}" class="submit"/>
             </form>
         </div>
 
@@ -316,7 +316,7 @@
                 <param name="flashvars" value="" class="fileSrc" />
             </object>
             <div class="cleaner"></div>
-            <label>HTML Код для вставки плеера в свой сайт</label>
+            <label>{"HTML Код для вставки плеера в свой сайт"|gettext}</label>
             <textarea name="embed_code">
                 <object id="" type="application/x-shockwave-flash" data="http://holdfree.com/template/default/js/uppod/uppod.swf" width="500" height="375">
                     <param name="bgcolor" value="#ffffff">
@@ -331,7 +331,7 @@
     </div>
 
     <div class="content" id="content-NotLoggedIn" style="display: {if isset($_user.id)}none{else}block{/if};">
-        <a href="javascript:;" class="pickfiles" id="UploadButtonNotLoggedIn">Загрузить</a>
-        <a href="javascript:;" id="moreInfo">Узнать больше о бонусах регистрации</a>
+        <a href="javascript:;" class="pickfiles" id="UploadButtonNotLoggedIn">{"Загрузить"|gettext}</a>
+        <a href="javascript:;" id="moreInfo">{"Узнать больше о бонусах регистрации"|gettext}</a>
     </div>
 {/block}
