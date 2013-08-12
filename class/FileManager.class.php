@@ -96,6 +96,10 @@ class FileManager
 
     public function getFilesInfoFromDir($dir_id, $user_id = 0)
     {
+        if (!$user_id) {
+            return array();
+        }
+
         $select = $user_id ?
             'SELECT * FROM hf_file WHERE parent = :parent AND trash = 0 AND complete_status = 100 AND user_id = :user_id ORDER BY created DESC':
             'SELECT * FROM hf_file WHERE parent = :parent AND trash = 0 AND complete_status = 100 ORDER BY created DESC';
