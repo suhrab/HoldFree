@@ -407,7 +407,7 @@ h2 {
 .page-faq ul {
     margin-top: 40px;
 }
-.page-faq li {
+.page-faq ul li {
     background: url('../img/icon_16_arrow.png') no-repeat;
     padding-left:  30px;
     margin-bottom: 15px;
@@ -424,8 +424,17 @@ h2 {
     color: #ffffff;
     padding: 20px 0 5px 20px;
 }
-.page-faq li div p {
-    margin-bottom: 10px;
+.page-faq p {
+    margin-bottom: 15px;
+    line-height: 20px;
+}
+.page-faq ol {
+    margin-left: 40px;
+    list-style-type: disc;
+}
+.page-faq ol li {
+    margin: 10px 0;
+    list-style-type: decimal;
 }
 
 

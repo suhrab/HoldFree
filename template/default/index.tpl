@@ -73,8 +73,8 @@
             </ul>
             <ul class="menu">
                 <li><i class="phone"></i> <a href="javascript:;" id="feedback">{"Обратная связь"|gettext}</a></li>
-                <li><i class="info"></i> <a href="#">{"Информация"|gettext}</a></li>
-                <li><i class="doc"></i> <a href="#">{"Соглашение"|gettext}</a></li>
+                <li><i class="info"></i> <a href="/index.php?module=static_page&staticPageId=2">{"Информация"|gettext}</a></li>
+                <li><i class="doc"></i> <a href="/index.php?module=static_page&staticPageId=3">{"Соглашение"|gettext}</a></li>
                 <li><i class="comment"></i> <a href="{$_url}/index.php?module=faq">{"FAQ"|gettext}</a></li>
                 <li><i class="tool"></i> <a href="javascript:;" id="error">{"Нашли ошибку?"|gettext}</a></li>
             </ul>
