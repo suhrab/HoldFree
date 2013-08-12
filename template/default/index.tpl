@@ -9,13 +9,17 @@
     <link href="{$_template}/js/jquery-ui/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
     <link href="{$_template}/js/select2/select2.css" rel="stylesheet" type="text/css" />
     <link href="{$_template}/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="{$_template}/js/jgrowl/jquery.jgrowl.min.css" rel="stylesheet" type="text/css" />
+
     <script src="{$_template}/js/jquery-2.0.2.min.js" type="text/javascript"></script>
     <script src="{$_template}/js/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
     <script src="{$_template}/js/select2/select2.min.js" type="text/javascript"></script>
     <script src="{$_template}/js/default.js" type="text/javascript"></script>
+    <script src="{$_template}/js/jgrowl/jquery.jgrowl.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var socialUserProfile = {if isset($social_user_profile)}{$social_user_profile|json_encode}{else}false{/if};
         var currentCountryId = {$_user.currentCountryId};
+        var emailWarning = {if !empty($_user.id) && empty($_user.email)}true{else}false{/if};
         $(function() {
             if (socialUserProfile) {
                 $("#formSignUp input[name=first_name]").val(socialUserProfile.firstName);
@@ -25,6 +29,10 @@
             }
 
             $('select.country').select2('val', currentCountryId+"")
+
+            if(emailWarning){
+                $.jGrowl("<a href='/?module=user&action=profile&id={$_user.id}&OpenEditProfileOnLoad'>{"Не указан Email адрес. Нажмите здесь чтобы заполнить"|gettext|escape}</a>", { sticky: true })
+            }
         });
     </script>
 </head>

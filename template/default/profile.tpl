@@ -17,6 +17,7 @@
 
         <script type="text/javascript">
         var profileUpdatedMessage = "{"Профиль успешно обновлен, через пару мгновений страница будет обновлена."|gettext}";
+        var OpenEditProfileOnLoad = {if isset($smarty.get.OpenEditProfileOnLoad)}true{else}false{/if};
         $(document).ready(function()
         {
             var uploader = new plupload.Uploader({
@@ -78,6 +79,10 @@
 
                 return false;
             });
+
+            if(OpenEditProfileOnLoad){
+                $('#edit-profile').trigger('click')
+            }
         });
     </script>
     {/if}

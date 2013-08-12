@@ -16,39 +16,18 @@ try
     if($adapter->isUserConnected()){
         $user_profile = (array) $adapter->getUserProfile();
 
-        if (empty($user_profile['emailVerified']) || empty($user_profile['firstName'])) {
-            $smarty->assign('social_user_profile', $user_profile);
-        }
-        else {
-            $user_found = $_user->getByEmail($user_profile['emailVerified']);
+        $userFound = User\User::GetByProvider($provider, $user_profile);
+        if(empty($userFound)){
+            if ($config['email_filter']) {
+                preg_match('/(.+)@(.+)/i', $user_profile['emailVerified'], $matches);
 
-            if(empty($user_found)) {
-                if ($config['email_filter']) {
-                    preg_match('/(.+)@(.+)/i', $user_profile['emailVerified'], $matches);
-
-                    if (in_array($matches[2], $config['email_filter'])) {
-                        throw new Exception($matches[2] . ': ' . gettext('Регистрация через этот почтовый провайдер запрещена!'), 100);
-                    }
-                }
-
-                $user_found = $_user->signUp($user_profile['firstName'], $user_profile['emailVerified'], \User\User::get_countryId_by_code2(\User\User::get_geoip_country()), '', $user_profile['lastName']);
-
-                if ($user_profile['photoURL']) {
-                    $photo = file_get_contents($user_profile['photoURL']);
-                    $tmp_name = uniqid();
-                    file_put_contents(DIR_UPLOAD . '/tmp/' . $tmp_name, $photo);
-                    require_once DIR_CLASS . 'phpthumb/ThumbLib.inc.php';
-                    $phpThumb = PhpThumbFactory::create(DIR_UPLOAD . '/tmp/' . $tmp_name);
-                    $phpThumb->adaptiveResize(150, 150)->save(DIR_UPLOAD . 'avatar/avatar-' . $_user->getId() . '.jpg', 'jpg');
-                    $phpThumb->adaptiveResize(32, 32)->save(DIR_UPLOAD . 'avatar/_thumb/avatar-' . $_user->getId() . '.jpg', 'jpg');
-                    $_user->setAvatar('avatar-' . $_user->getId() . '.jpg');
-                    unlink(DIR_UPLOAD . '/tmp/' . $tmp_name);
+                if (in_array($matches[2], $config['email_filter'])) {
+                    throw new Exception($matches[2] . ': ' . gettext('Регистрация через этот почтовый провайдер запрещена!'), 100);
                 }
             }
-            else {
-                $_user->signIn($user_profile['emailVerified']);
-            }
         }
+        $userFound = User\User::SignUpOrGetByProvider($provider, $user_profile);
+        $r = $_user->SignInByProvider($provider, $user_profile);
     } else {
         throw new ExceptionImproved(gettext('Ошибка авторизации'));
     }

@@ -32,7 +32,7 @@ return
 
             "Vkontakte" => array (
                 "enabled" => true,
-                "keys"    => array ( "id" => "3563220", "secret" => "GDcl9FkWmG4klnKn2oAm" )
+                "keys"    => array ( "id" => "3817938", "secret" => "8VuCwFEXuGoKCpPoL0xX" )
             ),
 		),
 
