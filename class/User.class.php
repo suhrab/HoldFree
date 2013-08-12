@@ -86,7 +86,7 @@ SQL;
             $ret =  $this->id;
 
         } else {
-            $sth = $this->pdo->prepare('INSERT INTO hf_user SET email = :email, country = :country, password = :password, first_name = :first_name, last_name = :last_name, reg_date = :reg_date');
+            $sth = $this->pdo->prepare('INSERT INTO hf_user SET email = :email, country = :country, password = :password, first_name = :first_name, last_name = :last_name, reg_date = :reg_date, group = 2');
             $sth->bindParam(':email', $email);
             $sth->bindParam(':country', $country);
             $sth->bindParam(':password', $hash);
