@@ -112,7 +112,7 @@ SELECT
   hf_static_pages.*, hf_user.first_name, hf_user.last_name
 FROM
   hf_static_pages
-INNER JOIN hf_user ON hf_user.id = hf_static_pages.author_id
+LEFT JOIN hf_user ON hf_user.id = hf_static_pages.author_id
 SQL;
 
 $selectAllStmt = $pdo->query($selectAllSql);

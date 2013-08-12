@@ -21,7 +21,7 @@ SELECT
   hf_static_pages.*, hf_user.first_name as authorFirstName, hf_user.last_name as authorLastName
 FROM
   hf_static_pages
-INNER JOIN hf_user ON hf_user.id = hf_static_pages.author_id
+LEFT JOIN hf_user ON hf_user.id = hf_static_pages.author_id
 WHERE
   hf_static_pages.id = $staticPageId
 SQL;
