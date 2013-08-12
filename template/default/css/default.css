@@ -608,10 +608,13 @@ h2 {
     margin-bottom: 8px;
     background: url("../img/vline.png") repeat-y;
 }
+#dirList li ul.child_dir {
+    margin-left: 7px;
+}
 .page-manager .dir-tree li ul li {
     line-height: 20px;
     padding-left: 15px;
-    background: url("../img/node.png") no-repeat left center;
+    background: url("../img/node.png") no-repeat left 7px;
 }
 .page-manager .dir-tree li ul li:last-child {
     background: #293640 url("../img/lastnode.png") no-repeat left top;
@@ -658,30 +661,30 @@ h2 {
 .page-manager .file-panel tbody tr:nth-child(even) {
     background: #23303b;
 }
+.page-manager .file-panel tbody tr:hover {
+    background: #183e5e;
+}
 .page-manager .file-panel tbody tr td {
     padding: 7px 0 7px 10px;
 }
 .page-manager .file-panel tbody td a {
     text-decoration: none;
 }
-.page-manager .file-panel tbody td a.file {
+.page-manager .file-panel tbody td.file, .page-manager .file-panel tbody td.dir {
+    cursor: pointer;
+}
+.page-manager .file-panel tbody td.file a {
     background: url("../img/icon_16_file.png") no-repeat left 3px;
     line-height: 16px;
     padding: 3px 0 3px 24px;
     color: #ffffff;
 }
-.page-manager .file-panel tbody td a.dir {
+.page-manager .file-panel tbody td.dir a {
     background: url("../img/icon_16_dir.png") no-repeat left 3px;
     line-height: 16px;
     padding: 3px 0 3px 24px;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: moz-none;
-    -ms-user-select: none;
-    user-select: none;
 }
-.page-manager .file-panel tbody td a.file {
+.page-manager .file-panel tbody td.file, .page-manager .file-panel tbody td.dir {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -709,6 +712,21 @@ h2 {
 }
 .page-manager .dark-blue {
     color: #606c78;
+}
+.page-manager .move-file {
+    background-color: #FFF;
+    padding: 7px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+    color: #000000;
+}
+.page-manager .move-file .icon-allow-drop {
+    display: block;
+    width: 18px;
+    height: 18px;
+    background: url("../img/icon_circle_arrow.png") no-repeat left center;
+    float: left;
+    margin-right: 8px;
 }
 
 /* Video Info */

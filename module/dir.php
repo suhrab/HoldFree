@@ -13,11 +13,13 @@ if ($action == 'add')
     $dir_name = isset($_POST['dir_name']) ? trim($_POST['dir_name']) : '';
     $dir_name = filter_var($dir_name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+    $dir_parent = isset($_POST['parent']) ? abs($_POST['parent']) : 0;
+
     if (!$dir_name) {
         throw new ExceptionImproved(gettext('Введите корректное имя папки'));
     }
 
-    $parent = 0;
+    $parent = $dir_parent;
     $owner = $_user->getId();
 
     $dir_id = $_fileManager->addDir($dir_name, $_user->getId(), $parent);
@@ -84,6 +86,21 @@ elseif ($action == 'delete')
 
     die('{"success": 1}');
 }
+elseif ($action == 'move') {
+    if (!$_user->isLogged()) {
+        throw new ExceptionImproved('Данная операция доступна только для зарегистрированных пользователей');
+    }
+
+    $sourceId = isset($_POST['sourceId']) ? filter_var($_POST['sourceId'], FILTER_SANITIZE_NUMBER_INT) : 0;
+    $targetId = isset($_POST['targetId']) ? filter_var($_POST['targetId'], FILTER_SANITIZE_NUMBER_INT) : 0;
+
+    $_fileManager->moveFile($sourceId, $targetId);
+
+    $response = array('success' => 1);
+    $response = json_encode($response);
+
+    die($response);
+}
 elseif ($action == 'move_to_trash') {
     if (!$_user->isLogged()) {
         throw new ExceptionImproved('Данная операция доступна только для зарегистрированных пользователей');
@@ -113,6 +130,18 @@ elseif ($action == 'load_files') {
 
     $response = array('success' => 1, 'files' => $files);
     die(json_encode($response));
+}
+elseif ($action == 'load_all_dirs') {
+    if (!$_user->isLogged()) {
+        throw new ExceptionImproved('Данная операция доступна только для зарегистрированных пользователей');
+    }
+
+    $dirs = $_fileManager->getDirsInfoByUserId($_user->getId());
+
+    $response = array('success' => 1, 'dirs' => $dirs);
+    $response = json_encode($response);
+
+    die($response);
 }
 elseif ($action == 'empty_trash') {
     if (! $_user->isLogged()) {

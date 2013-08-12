@@ -139,7 +139,9 @@
                                                     break;
                                                 }
 
-                                                $('<tr><td><a href="#" class="file">'+dbFileInfo['user_defined_name']+'</a></td><td>'+dbFileInfo['file_size']+'</td><td>'+dbFileInfo['created']+'</td><td>'+convertedFileLinks[0].outerHTML+'</td></tr>').appendTo('#fileList')
+                                                loadFiles(cwd);
+
+//                                                $('<tr><td><a href="#" class="file">'+dbFileInfo['user_defined_name']+'</a></td><td>'+dbFileInfo['file_size']+'</td><td>'+dbFileInfo['created']+'</td><td>'+convertedFileLinks[0].outerHTML+'</td></tr>').appendTo('#fileList')
                                             }
                                         }
                                     }
@@ -293,6 +295,7 @@
             <div class="place-holder-message"></div>
             <form action="javascript:;" method="post" id="formDir">
                 <input name="dir_name" type="text" class="input-text" placeholder="{"Имя новой папки"|gettext}"/>
+                <input type="hidden" name="parent" value="0" id="parentDirId" />
                 <input type="submit" value="{"Создать папку"|gettext}" class="submit"/>
             </form>
         </div>
