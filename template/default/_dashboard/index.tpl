@@ -147,6 +147,7 @@
             <li><a href="/index.php?module=faq&dashboard=1" title="FAQ" {if $smarty.get.module == 'faq'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/messages.png" alt="" /><span>FAQ</span></a></li>
             <li><a href="/index.php?module=static_pages&dashboard=1" title="Статические страницы" {if $smarty.get.module == 'static_pages'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/statistics.png" alt="" /><span>Страницы</span></a></li>
             <li><a href="/index.php?module=storage_server&dashboard=1" title="Сервера хранения файлов" {if $smarty.get.module == 'storage_server'}class="active"{/if}><img src="{$_dashboard}/images/icons/mainnav/statistics.png" alt="" /><span>Сервера</span></a></li>
+            <li><a href="http://cacti.holdfree.tv/graph_view.php?action=tree&tree_id=1&leaf_id=9" title="Монитор загруженности"><img src="{$_dashboard}/images/icons/mainnav/loadMonitor.png" alt="" /><span style="line-height: 15px;">Монитор загруженности</span></a></li>
         </ul>
     </div>
 </div>
