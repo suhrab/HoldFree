@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: HoldFree\n"
-"POT-Creation-Date: 2013-08-12 18:25+0600\n"
-"PO-Revision-Date: 2013-08-12 18:26+0600\n"
+"POT-Creation-Date: 2013-08-12 21:53+0600\n"
+"PO-Revision-Date: 2013-08-12 21:54+0600\n"
 "Last-Translator: Anton Anisimov <masterpersi@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,7 @@ msgstr ""
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:103
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:225
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:103
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:103
 #: tmp/poedit_smarty_temp.php:21 tmp/poedit_smarty_temp.php:82
 msgid "Личные данные"
 msgstr ""
@@ -31,6 +32,7 @@ msgstr ""
 #: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:106
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:106
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:106
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:106
 #: tmp/poedit_smarty_temp.php:22
 msgid "Панель Управления"
 msgstr ""
@@ -41,6 +43,7 @@ msgstr ""
 #: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:109
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:109
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:109
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:109
 #: tmp/poedit_smarty_temp.php:23
 msgid "Выход"
 msgstr ""
@@ -52,11 +55,13 @@ msgstr ""
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:107
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:197
 #: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:113
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:562
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:637
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:113
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:412
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:113
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:286
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:113
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:221
 #: tmp/poedit_smarty_temp.php:24 tmp/poedit_smarty_temp.php:38
 msgid "Авторизация"
 msgstr ""
@@ -68,11 +73,13 @@ msgstr ""
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:109
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:152
 #: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:115
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:517
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:592
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:115
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:367
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:115
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:241
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:115
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:176
 #: tmp/poedit_smarty_temp.php:25 tmp/poedit_smarty_temp.php:31
 msgid "Регистрация"
 msgstr ""
@@ -83,12 +90,14 @@ msgstr ""
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:246
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:137
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:219
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:502
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:584
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:577
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:659
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:352
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:434
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:226
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:308
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:161
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:243
 #: tmp/poedit_smarty_temp.php:26 tmp/poedit_smarty_temp.php:42
 msgid "Обратная связь"
 msgstr ""
@@ -96,9 +105,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:157
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:166
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:139
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:504
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:579
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:354
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:228
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:163
 #: tmp/poedit_smarty_temp.php:27
 msgid "Информация"
 msgstr ""
@@ -106,9 +116,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:159
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:168
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:141
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:506
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:581
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:356
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:230
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:165
 #: tmp/poedit_smarty_temp.php:28
 msgid "Соглашение"
 msgstr ""
@@ -116,9 +127,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:162
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:171
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:144
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:509
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:584
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:359
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:233
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:168
 #: tmp/poedit_smarty_temp.php:29
 msgid "FAQ"
 msgstr ""
@@ -126,9 +138,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:164
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:173
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:146
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:511
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:586
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:361
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:235
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:170
 #: tmp/poedit_smarty_temp.php:30
 msgid "Нашли ошибку?"
 msgstr ""
@@ -139,13 +152,15 @@ msgstr ""
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:250
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:156
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:223
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:521
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:588
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:596
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:663
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:289
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:371
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:438
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:245
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:312
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:180
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:247
 #: tmp/poedit_smarty_temp.php:32 tmp/poedit_smarty_temp.php:43
 #: tmp/poedit_smarty_temp.php:95
 msgid "Введите Ваше имя"
@@ -163,10 +178,10 @@ msgstr ""
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:201
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:225
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:257
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:523
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:566
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:590
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:622
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:598
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:641
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:665
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:697
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:310
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:373
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:416
@@ -176,6 +191,10 @@ msgstr ""
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:290
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:314
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:346
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:182
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:225
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:249
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:281
 #: tmp/poedit_smarty_temp.php:33 tmp/poedit_smarty_temp.php:39
 #: tmp/poedit_smarty_temp.php:44 tmp/poedit_smarty_temp.php:52
 #: tmp/poedit_smarty_temp.php:98
@@ -188,12 +207,14 @@ msgstr ""
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:230
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:160
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:203
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:525
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:568
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:600
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:643
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:375
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:418
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:249
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:292
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:184
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:227
 #: tmp/poedit_smarty_temp.php:34 tmp/poedit_smarty_temp.php:40
 msgid "Пароль"
 msgstr ""
@@ -201,10 +222,11 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:182
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:191
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:164
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:529
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:604
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:297
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:379
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:253
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:188
 #: tmp/poedit_smarty_temp.php:35 tmp/poedit_smarty_temp.php:97
 msgid "Выберите страну"
 msgstr ""
@@ -218,15 +240,18 @@ msgstr ""
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:178
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:241
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:263
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:543
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:606
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:628
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:618
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:681
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:703
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:393
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:456
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:478
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:267
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:330
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:352
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:202
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:265
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:287
 #: tmp/poedit_smarty_temp.php:36 tmp/poedit_smarty_temp.php:49
 #: tmp/poedit_smarty_temp.php:54
 msgid "Введите код"
@@ -235,9 +260,11 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:203
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:212
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:185
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:550
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:560
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:625
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:400
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:274
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:209
 #: tmp/poedit_smarty_temp.php:37
 msgid "Зарегистрироваться"
 msgstr ""
@@ -245,9 +272,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:225
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:234
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:207
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:572
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:647
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:422
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:296
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:231
 #: tmp/poedit_smarty_temp.php:41
 msgid "Войти"
 msgstr ""
@@ -255,9 +283,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:247
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:256
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:229
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:594
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:669
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:444
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:318
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:253
 #: module/feedback.php:33 tmp/poedit_smarty_temp.php:45
 msgid "Техническая поддержка"
 msgstr ""
@@ -265,9 +294,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:249
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:258
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:231
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:596
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:671
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:446
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:320
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:255
 #: module/feedback.php:36 tmp/poedit_smarty_temp.php:46
 msgid "Правообладатель"
 msgstr ""
@@ -275,9 +305,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:251
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:260
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:233
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:598
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:673
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:448
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:322
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:257
 #: module/feedback.php:39 tmp/poedit_smarty_temp.php:47
 msgid "Пресса"
 msgstr ""
@@ -285,9 +316,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:255
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:264
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:237
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:602
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:677
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:452
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:326
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:261
 #: tmp/poedit_smarty_temp.php:48
 msgid "Ваше сообщение"
 msgstr ""
@@ -298,13 +330,15 @@ msgstr ""
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:297
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:248
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:270
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:613
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:635
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:688
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:710
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:336
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:463
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:485
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:337
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:359
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:272
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:294
 #: tmp/poedit_smarty_temp.php:50 tmp/poedit_smarty_temp.php:55
 #: tmp/poedit_smarty_temp.php:104 tmp/poedit_smarty_temp.php:129
 msgid "Отправить"
@@ -313,9 +347,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:271
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:280
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:253
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:618
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:693
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:468
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:342
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:277
 #: tmp/poedit_smarty_temp.php:51
 msgid "Заметили ошибку?"
 msgstr ""
@@ -323,9 +358,10 @@ msgstr ""
 #: class/smarty/template_c/002d0c14c791695eb11ef9dcf8d14dbe1782c114.file.error.tpl.php:277
 #: class/smarty/template_c/351d9a317c8edd0f0a02294b2916f32496ca2ef1.file.faq.tpl.php:286
 #: class/smarty/template_c/35fc40c7e027eb18c0cf7fd196d14a8fa6c2bf71.file.index.tpl.php:259
-#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:624
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:699
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:474
 #: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:348
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:283
 #: module/feedback.php:42 tmp/poedit_smarty_temp.php:53
 msgid "Сообщение об ошибке"
 msgstr ""
@@ -338,6 +374,162 @@ msgstr ""
 #: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:267
 #: tmp/poedit_smarty_temp.php:56
 msgid "Конвертация:"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:344
+#: tmp/poedit_smarty_temp.php:57
+msgid "В очереди на загрузку"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:355
+#: tmp/poedit_smarty_temp.php:58
+msgid "Загружено"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:364
+#: tmp/poedit_smarty_temp.php:59
+msgid "В очереди на конвертацию"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:391
+#: tmp/poedit_smarty_temp.php:60
+msgid "Менеджер видео"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:395
+#: tmp/poedit_smarty_temp.php:61
+msgid "Загрузить файл"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:397
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:477
+#: tmp/poedit_smarty_temp.php:62 tmp/poedit_smarty_temp.php:74
+msgid "Создать папку"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:405
+#: tmp/poedit_smarty_temp.php:63
+msgid "Менеджер файлов"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:410
+#: tmp/poedit_smarty_temp.php:64
+msgid "Удаленные файлы"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:421
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:440
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:486
+#: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:247
+#: tmp/poedit_smarty_temp.php:65 tmp/poedit_smarty_temp.php:68
+#: tmp/poedit_smarty_temp.php:76 tmp/poedit_smarty_temp.php:87
+msgid "Имя"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:423
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:442
+#: tmp/poedit_smarty_temp.php:66 tmp/poedit_smarty_temp.php:69
+msgid "Размер"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:426
+#: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:186
+#: tmp/poedit_smarty_temp.php:67 tmp/poedit_smarty_temp.php:112
+#: tmp/poedit_smarty_temp.php:119
+msgid "Дата"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:444
+#: tmp/poedit_smarty_temp.php:70
+msgid "Статус"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:446
+#: tmp/poedit_smarty_temp.php:71
+msgid "Скорость"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:471
+#: tmp/poedit_smarty_temp.php:72
+msgid "Создать новую папку"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:475
+#: tmp/poedit_smarty_temp.php:73
+msgid "Имя новой папки"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:482
+#: tmp/poedit_smarty_temp.php:75
+msgid "Переименовать файл"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:489
+#: tmp/poedit_smarty_temp.php:77
+msgid "Переименовать"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:506
+#: tmp/poedit_smarty_temp.php:78
+msgid "HTML Код для вставки плеера в свой сайт"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:522
+#: tmp/poedit_smarty_temp.php:79
+msgid "Загрузить"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:524
+#: tmp/poedit_smarty_temp.php:80
+msgid "Узнать больше о бонусах регистрации"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:530
+msgid "Не зарегистрированный"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:532
+msgid "Зарегистрированный"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:535
+msgid "Максимальный объем файлов до 2гб"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:537
+msgid "Ограниченная скорость загрузки"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:539
+msgid "Большая очередь на конвертацию"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:541
+msgid "Срок хранения файлов 30 дней"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:543
+msgid "Скорость отдачи 1 мб"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:546
+msgid "Размер файлов до 10 гб"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:548
+msgid "Неограниченная скорость загрузки"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:550
+msgid "Конвертация происходит по приоритету"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:552
+msgid "Возможность создавать категории"
+msgstr ""
+
+#: class/smarty/template_c/654c5e8c3313bca54eda3c7815ceb3f00f71572f.file.manager.tpl.php:554
+msgid "Возможность создавать плейлисты"
 msgstr ""
 
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:155
@@ -367,12 +559,6 @@ msgstr ""
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:322
 #: tmp/poedit_smarty_temp.php:86 tmp/poedit_smarty_temp.php:100
 msgid "Написать сообщение"
-msgstr ""
-
-#: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:247
-#: tmp/poedit_smarty_temp.php:65 tmp/poedit_smarty_temp.php:68
-#: tmp/poedit_smarty_temp.php:76 tmp/poedit_smarty_temp.php:87
-msgid "Имя"
 msgstr ""
 
 #: class/smarty/template_c/965fac37cf966533d3fd913ef2d9322af32c44d1.file.profile.tpl.php:249
@@ -455,10 +641,9 @@ msgstr ""
 msgid "Заголовок"
 msgstr ""
 
-#: class/smarty/template_c/cab67b0392e68828dbd8d3724b3c18428ee02c14.file.user_pm_inbox.tpl.php:186
-#: tmp/poedit_smarty_temp.php:67 tmp/poedit_smarty_temp.php:112
-#: tmp/poedit_smarty_temp.php:119
-msgid "Дата"
+#: class/smarty/template_c/cf40730cfdf300f8507515a0ab1ff6e07c0c65ed.file.static_page.tpl.php:141
+#: tmp/poedit_smarty_temp.php:105
+msgid "Автор: "
 msgstr ""
 
 #: module/dir.php:10 module/dir.php:35 module/dir.php:69 module/dir.php:119
@@ -642,82 +827,6 @@ msgstr ""
 #: module/user_pm_show.php:26 module/user_pm_show.php:41
 #: module/user_pm_show.php:55
 msgid "Сообщение с таким ID не найдено"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:57
-msgid "В очереди на загрузку"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:58
-msgid "Загружено"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:59
-msgid "В очереди на конвертацию"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:60
-msgid "Менеджер видео"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:61
-msgid "Загрузить файл"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:62 tmp/poedit_smarty_temp.php:74
-msgid "Создать папку"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:63
-msgid "Менеджер файлов"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:64
-msgid "Удаленные файлы"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:66 tmp/poedit_smarty_temp.php:69
-msgid "Размер"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:70
-msgid "Статус"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:71
-msgid "Скорость"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:72
-msgid "Создать новую папку"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:73
-msgid "Имя новой папки"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:75
-msgid "Переименовать файл"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:77
-msgid "Переименовать"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:78
-msgid "HTML Код для вставки плеера в свой сайт"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:79
-msgid "Загрузить"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:80
-msgid "Узнать больше о бонусах регистрации"
-msgstr ""
-
-#: tmp/poedit_smarty_temp.php:105
-msgid "Автор: "
 msgstr ""
 
 #: tmp/poedit_smarty_temp.php:117
