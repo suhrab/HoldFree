@@ -18,8 +18,8 @@ $(function() {
             '<tr class="row_id_'+ id +'">' +
                 '<td><a href="javascript:;" data-id="'+ id +'" class="'+ type +' file_id_'+ id +'" title="'+ fullName +'">'+ shortName +'</a></td>' +
                 '<td>'+ (type == 'file' ? size : '&nbsp;') +'</td>' +
-                '<td>'+ created +'</td>' +
-                '<td><a href="javascript:;" data-url="'+ url +'" class="playVideo"><img src="/template/default/img/icon_24_chain.png" width="24" height="24" alt="Скачать"></a></td>' +
+                '<td><a href="javascript:;" data-url="'+ url +'" class="playVideo">'+ (type == 'file' ? '<img src="/template/default/img/icon_24_chain.png" width="24" height="24" alt="Скачать">' : '&nbsp;') +'</a></td>' +
+                '<td class="align-center">'+ created +'</td>' +
             '</tr>'
         );
 

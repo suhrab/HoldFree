@@ -235,76 +235,76 @@
         <a href="javascript:;" class="button" id="newDir">Создать папку</a>
     </div>
 
-    <div class="manager">
-        <div class="dir-tree">
-            <ul>
-                <li class="dir-root">
-                    <a href="javascript:;" class="parent dir" data-id="0">Менеджер файлов</a>
-                    <ul id="dirList"></ul>
-                </li>
-                <li class="dir-trash">
-                    <a href="javascript:;" class="parent dir" data-id="-1">Удаленные файлы</a>
-                    <ul id="dirListTrash"></ul>
-                </li>
-            </ul>
-        </div>
+        <div class="manager">
+            <div class="dir-tree">
+                <ul>
+                    <li class="dir-root">
+                        <a href="javascript:;" class="parent dir" data-id="0">Менеджер файлов</a>
+                        <ul id="dirList"></ul>
+                    </li>
+                    <li class="dir-trash">
+                        <a href="javascript:;" class="parent dir" data-id="-1">Удаленные файлы</a>
+                        <ul id="dirListTrash"></ul>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="file-panel">
-            <table width="100%" cellspacing="0" cellpadding="0">
-                <thead>
-                <tr>
-                    <td>Имя</td>
-                    <td width="100">Размер</td>
-                    <td width="100">Дата</td>
-                    <td width="50">URL</td>
-                </tr>
-                </thead>
-                <tbody id="fileList"></tbody>
-            </table>
-        </div>
-
-        <div class="cleaner"></div>
-
-        <div class="loading-panel" id="FileQueueContainer" style="{if empty($filesInProgress)}display:none;{/if}">
-            <table width="100%" cellspacing="0" cellpadding="0">
-                <thead>
-                <tr>
-                    <td>Имя</td>
-                    <td width="140">Размер</td>
-                    <td width="200">Статус</td>
-                    <td width="140">Скорость</td>
-                </tr>
-                </thead>
-                <tbody id="FileQueue">
-                {foreach $filesInProgress as $file}
-                    <tr class="dbRow" data-id="{$file.id}">
-                        <td>{$file.user_defined_name}</td>
-                        <td>{$file.file_size}</td>
-                        <td class="status"></td>
-                        <td class="uploadSpeed"></td>
+            <div class="file-panel">
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <thead>
+                    <tr>
+                        <td>Имя</td>
+                        <td width="100">Размер</td>
+                        <td width="50">URL</td>
+                        <td width="100" class="align-center">Дата</td>
                     </tr>
-                {/foreach}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="fileList"></tbody>
+                </table>
+            </div>
+
+            <div class="cleaner"></div>
+
+            <div class="loading-panel" id="FileQueueContainer" style="{if empty($filesInProgress)}display:none;{/if}">
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <thead>
+                    <tr>
+                        <td>Имя</td>
+                        <td width="140">Размер</td>
+                        <td width="200">Статус</td>
+                        <td width="140">Скорость</td>
+                    </tr>
+                    </thead>
+                    <tbody id="FileQueue">
+                    {foreach $filesInProgress as $file}
+                        <tr class="dbRow" data-id="{$file.id}">
+                            <td>{$file.user_defined_name}</td>
+                            <td>{$file.file_size}</td>
+                            <td class="status"></td>
+                            <td class="uploadSpeed"></td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-    <div class="dialog dialog-dir" title="Создать новую папку">
-        <div class="place-holder-message"></div>
-        <form action="javascript:;" method="post" id="formDir">
-            <input name="dir_name" type="text" class="input-text" placeholder="Имя новой папки"/>
-            <input type="submit" value="Создать папку" class="submit"/>
-        </form>
-    </div>
+        <div class="dialog dialog-dir" title="Создать новую папку">
+            <div class="place-holder-message"></div>
+            <form action="javascript:;" method="post" id="formDir">
+                <input name="dir_name" type="text" class="input-text" placeholder="Имя новой папки"/>
+                <input type="submit" value="Создать папку" class="submit"/>
+            </form>
+        </div>
 
-    <div class="dialog dialog-dir-rename" title="Переименовать файл">
-        <div class="place-holder-message"></div>
-        <form action="" method="post" id="formRename">
-            <input name="name" type="text" class="input-text" placeholder="Имя"/>
-            <input name="id" type="hidden" value="0" id="id"/>
-            <input type="submit" value="Переименовать" class="submit"/>
-        </form>
-    </div>
+        <div class="dialog dialog-dir-rename" title="Переименовать файл">
+            <div class="place-holder-message"></div>
+            <form action="" method="post" id="formRename">
+                <input name="name" type="text" class="input-text" placeholder="Имя"/>
+                <input name="id" type="hidden" value="0" id="id"/>
+                <input type="submit" value="Переименовать" class="submit"/>
+            </form>
+        </div>
 
         <div id="videoInfo">
             <object id="" type="application/x-shockwave-flash" data="{$_template}/js/uppod/uppod.swf" width="500" height="375">
@@ -324,10 +324,11 @@
                     <param name="allowScriptAccess" value="always">
                     <param name="wmode" value="window">
                     <param name="movie" value="http://holdfree.com/template/default/js/uppod/uppod.swf">
-                    <param name="flashvars" value="m=video&amp;file=http://holdfreestorage.com/getFile/d349b78a-679f-4b0e-82ac-b4b4a177ee8d" class="fileSrc">
+                    <param name="flashvars" value="" class="fileSrc">
                 </object>
             </textarea>
         </div>
+    </div>
 
     <div class="content" id="content-NotLoggedIn" style="display: {if isset($_user.id)}none{else}block{/if};">
         <a href="javascript:;" class="pickfiles" id="UploadButtonNotLoggedIn">Загрузить</a>
