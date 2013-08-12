@@ -667,4 +667,212 @@ SQL;
     public function getGroup(){
         return $this->group;
     }
+
+    /**
+     * @param $provider
+     * @param $userProfile
+     * @param bool $wasCreated
+     * @return mixed
+     * @throws \Exception|\PDOException
+     */
+    public static function SignUpOrGetByProvider($provider, $userProfile, &$wasInserted = false){
+        global $pdo, $_user;
+
+        $selectByProviderSql = <<<SQL
+SELECT
+  *
+FROM
+  hf_user
+WHERE
+  provider = :provider AND provider_identifier = :provider_identifier
+SQL;
+
+        $emailDbValue = !empty($userProfile['emailVerified']) ? $pdo->quote(trim($userProfile['emailVerified'])) : 'NULL';
+        $insertSql = <<<SQL
+INSERT INTO
+  hf_user
+SET
+  email = $emailDbValue,
+  first_name = :first_name,
+  last_name = :last_name,
+  reg_date = UNIX_TIMESTAMP(),
+  `group` = 2,
+  country = :country,
+  provider = :provider,
+  provider_identifier = :provider_identifier
+SQL;
+        $insertStmt = $pdo->prepare($insertSql);
+
+        if($_user->isLogged() && $_user->group == 0){
+
+            // убедимся что в базе нет пользователя с такими данными провайдера
+            $userFound = self::GetByProvider($provider, $userProfile);
+            if(!empty($userFound))
+                return $userFound;
+
+            $updateSql = <<<SQL
+UPDATE
+  hf_user
+SET
+  email = $emailDbValue,
+  country = :country,
+  first_name = :first_name,
+  last_name = :last_name,
+  reg_date = UNIX_TIMESTAMP(),
+  `group` = 2,
+  provider = :provider,
+  provider_identifier = :provider_identifier
+WHERE
+  id = :id
+SQL;
+            $updateStmt = $pdo->prepare($updateSql);
+            $updateStmt->execute([
+                'country' => self::get_countryId_by_code2(self::get_geoip_country()),
+                'first_name' => !empty($userProfile['firstName']) ? trim($userProfile['firstName']) : '',
+                'last_name' => !empty($userProfile['lastName']) ? trim($userProfile['lastName']) : '',
+                'provider' => $provider,
+                'provider_identifier' => $userProfile['identifier'],
+                'id' => $_user->getId(),
+            ]);
+
+            if (!empty($userProfile['photoURL'])) {
+                $photo = file_get_contents($userProfile['photoURL']);
+                $tmp_name = uniqid();
+                file_put_contents(DIR_UPLOAD . '/tmp/' . $tmp_name, $photo);
+                require_once DIR_CLASS . 'phpthumb/ThumbLib.inc.php';
+                $phpThumb = \PhpThumbFactory::create(DIR_UPLOAD . '/tmp/' . $tmp_name);
+                $phpThumb->adaptiveResize(150, 150)->save(DIR_UPLOAD . 'avatar/avatar-' . $_user->getId() . '.jpg', 'jpg');
+                $phpThumb->adaptiveResize(32, 32)->save(DIR_UPLOAD . 'avatar/_thumb/avatar-' . $_user->getId() . '.jpg', 'jpg');
+
+                $setAvatarStmt = $pdo->prepare('UPDATE hf_user SET avatar = :file_name WHERE id = :uid LIMIT 1');
+                $setAvatarStmt->execute([
+                    'file_name' => 'avatar-' . $_user->getId() . '.jpg',
+                    'uid' => $_user->getId()
+                ]);
+                unlink(DIR_UPLOAD . '/tmp/' . $tmp_name);
+            }
+
+            $selectByIdStmt = $pdo->query("SELECT * FROM hf_user WHERE id = " . $_user->getId());
+            return $selectByIdStmt->fetch();
+
+        } else {
+            try{
+                $insertStmt->execute([
+                    'first_name' => !empty($userProfile['firstName']) ? trim($userProfile['firstName']) : '',
+                    'last_name' => !empty($userProfile['lastName']) ? trim($userProfile['lastName']) : '',
+                    'country' => self::get_countryId_by_code2(self::get_geoip_country()),
+                    'provider' => $provider,
+                    'provider_identifier' => $userProfile['identifier'],
+                ]);
+
+                $newUserId = $pdo->lastInsertId();
+                $wasInserted = true;
+
+                if (!empty($userProfile['photoURL'])) {
+                    $photo = file_get_contents($userProfile['photoURL']);
+                    $tmp_name = uniqid();
+                    file_put_contents(DIR_UPLOAD . '/tmp/' . $tmp_name, $photo);
+                    require_once DIR_CLASS . 'phpthumb/ThumbLib.inc.php';
+                    $phpThumb = \PhpThumbFactory::create(DIR_UPLOAD . '/tmp/' . $tmp_name);
+                    $phpThumb->adaptiveResize(150, 150)->save(DIR_UPLOAD . 'avatar/avatar-' . $newUserId . '.jpg', 'jpg');
+                    $phpThumb->adaptiveResize(32, 32)->save(DIR_UPLOAD . 'avatar/_thumb/avatar-' . $newUserId . '.jpg', 'jpg');
+
+                    $setAvatarStmt = $pdo->prepare('UPDATE hf_user SET avatar = :file_name WHERE id = :uid LIMIT 1');
+                    $setAvatarStmt->execute([
+                        'file_name' => 'avatar-' . $newUserId . '.jpg',
+                        'uid' => $newUserId
+                    ]);
+                    unlink(DIR_UPLOAD . '/tmp/' . $tmp_name);
+                }
+
+                $selectByIdSql = <<<SQL
+SELECT * FROM hf_user WHERE id = $newUserId
+SQL;
+                $selectByIdStmt = $pdo->query($selectByIdSql);
+                return $selectByIdStmt->fetch();
+
+            }catch(\PDOException $e){
+                if($e->errorInfo[1] != 1062) // Duplicate entry code
+                throw $e;
+            }
+        }
+
+        $selectByProviderStmt = $pdo->prepare($selectByProviderSql);
+        $selectByProviderStmt->execute([
+            'provider' => $provider,
+            'provider_identifier' => $userProfile['identifier']
+        ]);
+
+        return $selectByProviderStmt->fetch();
+    }
+
+    public function SignInByProvider($provider, $userProfile){
+        $selectByProviderSql = <<<SQL
+SELECT
+  *
+FROM
+  hf_user
+WHERE
+  provider = :provider AND provider_identifier = :provider_identifier
+SQL;
+        $selectByProviderStmt = $this->pdo->prepare($selectByProviderSql);
+        $selectByProviderStmt->execute([
+            'provider' => $provider,
+            'provider_identifier' => $userProfile['identifier']
+        ]);
+
+        $user_data = $selectByProviderStmt->fetch();
+        if(empty($user_data))
+            return false;
+
+        if ($this->isBanned($user_data['id'])) {
+            throw new \ExceptionImproved('Вы забанены!');
+        }
+
+        $this->id = $user_data['id'];
+        $this->first_name = $user_data['first_name'];
+        $this->last_name = $user_data['last_name'];
+        $this->email = $user_data['email'];
+        $this->country = $user_data['country'];
+        $this->avatar = $user_data['avatar'];
+        $this->group = (int) $user_data['group'];
+
+        if (function_exists('password_hash')) {
+            $hash = password_hash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . uniqid() . $this->getId(), PASSWORD_DEFAULT);
+        }
+        else {
+            $hash = $this->passwordLib->createPasswordHash($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . uniqid());
+        }
+        setcookie('hash', $hash, time() + (60 * 60 * 24 * 365));
+
+        $sth = $this->pdo->prepare('UPDATE hf_user SET hash = :hash WHERE id = :id LIMIT 1');
+        $sth->bindParam(':id', $this->id);
+        $sth->bindParam(':hash', $hash);
+        $sth->execute();
+        $sth = null;
+
+        $this->updateLastSignIn();
+
+        return true;
+    }
+
+    public static function GetByProvider($provider, $userProfile){
+        global $pdo;
+
+        $selectByProviderSql = <<<SQL
+SELECT
+  *
+FROM
+  hf_user
+WHERE
+  provider = :provider AND provider_identifier = :provider_identifier
+SQL;
+        $selectByProviderStmt = $pdo->prepare($selectByProviderSql);
+        $selectByProviderStmt->execute([
+            'provider' => $provider,
+            'provider_identifier' => $userProfile['identifier']
+        ]);
+
+        return $selectByProviderStmt->fetch();
+    }
 }

@@ -377,12 +377,11 @@ h2 {
     width: 181px;
     height: 47px;
     background: url("../img/button_blue_big.png") no-repeat top center;
-    margin: 0 auto;
     font: 300 15px Roboto, arial, helvetica, sans-serif;
     color: #FFFFFF;
     padding-top: 0;
     text-shadow: none;
-    margin-top: 20px;
+    margin: 20px auto 0;
 }
 .dialogBlue .submit:hover {
     background: url("../img/button_blue_big.png") no-repeat bottom center;
@@ -777,4 +776,19 @@ h2 {
 }
 .align-center {
     text-align: center;
+}
+
+.blueButton296x56{
+    display: block;
+    width: 296px;
+    height: 56px;
+    background: url("../img/button_blue_296x56.png") no-repeat top center;
+    font: 300 21px Roboto, arial, helvetica, sans-serif;
+    color: #FFFFFF;
+    text-shadow: none;
+    margin: 20px auto 0;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 56px;
 }
