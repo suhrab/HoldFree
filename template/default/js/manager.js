@@ -19,7 +19,7 @@ $(function() {
                 '<td><a href="javascript:;" data-id="'+ id +'" class="'+ type +' file_id_'+ id +'" title="'+ fullName +'">'+ shortName +'</a></td>' +
                 '<td>'+ (type == 'file' ? size : '&nbsp;') +'</td>' +
                 '<td>'+ created +'</td>' +
-                '<td><a href="'+ url +'"><img src="/template/default/img/icon_24_chain.png" width="24" height="24" alt="Скачать"></a></td>' +
+                '<td><a href="javascript:;" data-url="'+ url +'" class="playVideo"><img src="/template/default/img/icon_24_chain.png" width="24" height="24" alt="Скачать"></a></td>' +
             '</tr>'
         );
 
@@ -198,12 +198,22 @@ $(function() {
         newDirDialog.dialog('open');
     });
 
-    $("#emptyTrashLink").on("click", function () {
+    $(document).on("click", "#emptyTrashLink", function() {
         $.post('/index.php?module=dir&action=empty_trash&is_ajax=1', null, function (response) {
             if (response.success) {
                 loadFiles(-1);
             }
         }, 'json');
     });
+
+    $(document).on("click", ".playVideo", function() {
+        var videoUrl = $(this).data("url");
+        $(".fileSrc").val("m=video&file=" + videoUrl);
+        $("#videoInfo").modal({
+            opacity: 80,
+            overlayCss: { backgroundColor:"#121d27" },
+            modal: true
+        });
+    })
 
 });
