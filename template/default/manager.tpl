@@ -162,7 +162,7 @@
 
             var uploader = new plupload.Uploader({
                 runtimes : 'html5,flash',
-                browse_button : 'UploadFileButton',
+                browse_button : '0',
                 container : 'FileQueueContainer',
                 max_file_size : '2gb',
                 url : '/?module=upload&is_ajax=1',
